@@ -8,3 +8,40 @@
   font-style: normal;
   direction: rtl;
 }
+
+@layer base {
+  :root {
+    --color-black: #0C0C0C;
+    --color-white: #FFFFFF;
+    --color-primary-25: #F0F2EF;
+    --color-primary-50: #D1D9CF;
+    --color-primary-100: #B2BFAF;
+    --color-primary-200: #A2B39F;
+    --color-primary-300: #93A690;
+    --color-primary-400: #839980;
+    --color-primary: #748C70;
+    --color-primary-600: #5A6D57;
+    --color-primary-700: #404E3E;
+    --color-primary-750: #343E32;
+    --color-primary-800: #272F25;
+    --color-primary-900: #0D100C;
+    /* neutral */
+    --color-neutral-1: #F9F9F9;
+    --color-neutral-2: #EDEDED;
+    --color-neutral-3: #DFDFDF;
+    --color-neutral-4: #CBCBCB;
+    --color-neutral-5: #ADADAD;
+    --color-neutral-6: #868686;
+    --color-neutral-7: #606060;
+    --color-neutral-8: #404040;
+    --color-neutral-9: #202020;
+    /* state colors */
+    --color-success-bg: #F3FDFA;
+    --color-success-light: #00BA88;
+    --color-success: #00966D;
+    --color-warning-light: #E09126;
+    --color-warning: #E09126;
+    --color-error-bg: #FFF2F2;
+    --color-error-light: #ED2E2E;
+    --color-error: #C30000;   
+  } }
