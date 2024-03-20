@@ -39,6 +39,10 @@ export default {
         "error-bg": "var(--color-error-bg)",
         "error-light": "var(--color-error-light)",
         "error": "var(--color-error)",
+        // black & white
+        "black": "var(--color-black)",
+        "white": "var(--color-white)",
+        
       },
     },
   },
