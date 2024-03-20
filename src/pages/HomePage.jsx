@@ -1,5 +1,8 @@
+// images
 import mainHomePageImg from "../assets/images/mainLandingImg.png";
+// cart box components
 import CartBox from "../components/cart/CartBox";
+// elements
 import Button from "../components/elements/Button";
 
 const HomePage = () => {
