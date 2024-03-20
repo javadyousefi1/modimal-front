@@ -2,7 +2,7 @@ import productImg from "../../assets/images/productImg(1).png";
 const CartBox = ({ title, desc, price, colors }) => {
   return (
     <div>
-      <div className="flex flex-col w-[152px] relative">
+      <div className="flex flex-col w-[152px] md:w-[392px]  relative">
         {/* wish list icon */}
         <span className="absolute right-3 top-3">
           <svg
@@ -21,7 +21,7 @@ const CartBox = ({ title, desc, price, colors }) => {
           </svg>
         </span>
         {/* cart image */}
-        <img src={productImg} alt="" className="h-[213px] object-cover" />
+        <img src={productImg} alt=" " className="object-cover " />
         {/* title */}
         <p className="font-semibold text-black text-md">{title}</p>
         {/* desc */}

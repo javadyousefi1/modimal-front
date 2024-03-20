@@ -12,6 +12,7 @@ import "swiper/css";
 // import required modules
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -37,16 +38,29 @@ const HomePage = () => {
         </section>
 
         {/* Best Sellers */}
-        <section className="px-5 mt-5">
-          <h1 className="text-xl font-bold">Best Sellers</h1>
+        <section className="px-5 mt-5 md:px-[108px]">
+          <div className="flex justify-between">
+            <h1 className="text-xl font-bold">Best Sellers</h1>
+            <Link to="">
+              <button>
+                <span className="hidden text-xs md:block text-primary-600">
+                  View All
+                </span>
+              </button>
+            </Link>
+          </div>
           <div className="mt-2">
             <Swiper
+              breakpoints={{
+                // when window width is >= 600px
+                600: {
+                  slidesPerView: 3,
+                },
+              }}
               pagination={{ clickable: true }}
               modules={[Pagination, Autoplay]}
               spaceBetween={68}
               slidesPerView={2}
-              onSlideChange={() => console.log("slide change")}
-              // onSwiper={(swiper) => console.log(swiper)}
               style={{
                 "--swiper-pagination-color": "var(--color-primary)", //custome style for pagination bullet
               }}
