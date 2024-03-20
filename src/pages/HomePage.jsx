@@ -1,12 +1,13 @@
 import mainHomePageImg from "../assets/images/mainLandingImg.png";
+import CartBox from "../components/cart/CartBox";
 import Button from "../components/elements/Button";
 
 const HomePage = () => {
   return (
     <>
-      <section className="">
+      <main className="">
         {/* first section */}
-        <div className="relative">
+        <section className="relative">
           {/* main header img */}
           <div className="w-full h-dvh md:h-[600px]">
             <img
@@ -22,8 +23,23 @@ const HomePage = () => {
             </h2>
             <Button>New In</Button>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* Best Sellers */}
+        <section className="px-5 mt-5">
+          <h1 className="text-xl font-bold">Best Sellers</h1>
+          <div className="mt-2">
+            <CartBox
+              title="tailored stretch"
+              desc="turn it up pants"
+              price={180}
+              colors={["#748C70", "#7DC3EB", "#0C0C0C"]}
+            />
+          </div>
+        </section>
+      </main>
+
+      <div className="h-[400px]"></div>
     </>
   );
 };
