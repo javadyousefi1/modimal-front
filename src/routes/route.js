@@ -4,6 +4,6 @@ import NotFound from "../pages/NotFound";
 
 // array of routes
 export const routes = [
-  { id: 0, path: "*", title: "صفحه ای یافت نشد", component: NotFound },
-  { id: 1, path: "/", title: "صفحه اصلی", component: HomePage },
+  { id: 0, path: "*", title: "404", component: NotFound },
+  { id: 1, path: "/", title: "main page", component: HomePage },
 ];
