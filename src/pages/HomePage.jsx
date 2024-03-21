@@ -36,7 +36,7 @@ const HomePage = () => {
             />
           </div>
           {/* text & button */}
-          <div className="absolute left-0 flex flex-col items-start p-2 md:left bottom-10 gap-y-8 md:left-[108px]">
+          <div className="absolute left-0 flex flex-col items-start p-2 md:left bottom-10 gap-y-8 md:left-[108px] ">
             <h2 className="font-normal w-[210px] md:w-[300px] md:text-2xl text-xl italic">
               Elegance in simplicity, Earth’s harmony
             </h2>
@@ -45,7 +45,7 @@ const HomePage = () => {
         </section>
 
         {/* Best Sellers */}
-        <section className="px-5 mt-5 md:px-[108px]">
+        <section className="px-5 mt-5 md:px-[108px] container">
           <div className="flex justify-between">
             <h1 className="text-xl font-bold">Best Sellers</h1>
             <Link to="">
@@ -56,7 +56,7 @@ const HomePage = () => {
               </button>
             </Link>
           </div>
-          <div className="mt-2">
+          <div className="w-full mt-2">
             <Swiper
               breakpoints={{
                 // when window width is >= 600px
@@ -109,7 +109,7 @@ const HomePage = () => {
         </section>
 
         {/* Collection */}
-        <section className="px-5 mt-5 md:px-[108px]">
+        <section className="px-5 mt-5 md:px-[108px] container">
           <h1 className="mb-2 text-xl font-bold">Collection</h1>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col justify-between md:gap-y-11 gap-y-4">
@@ -170,7 +170,7 @@ const HomePage = () => {
         </section>
 
         {/* modi week */}
-        <section className="px-5 mt-[88px] md:px-[108px]">
+        <section className="px-5 mt-[88px] md:px-[108px] container">
           <h1 className="mb-4 text-xl font-bold">Modiweek </h1>
           <ModiWeekSlider />
         </section>
