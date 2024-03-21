@@ -32,7 +32,7 @@ const HomePage = () => {
         {/* first section */}
         <section className="relative">
           {/* main header img */}
-          <div className="w-full h-dvh md:h-[600px]">
+          <div className="w-full h-screen md:h-[600px]">
             <img
               src={mainHomePageImg}
               alt="main-home-page-image"
@@ -70,7 +70,7 @@ const HomePage = () => {
               }}
               pagination={{ clickable: true }}
               modules={[Pagination, Autoplay]}
-              spaceBetween={68}
+              spaceBetween={50}
               slidesPerView={2}
               style={{
                 "--swiper-pagination-color": "var(--color-primary)", //custome style for pagination bullet
