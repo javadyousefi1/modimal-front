@@ -18,6 +18,7 @@ import collection1 from "../assets/images/collection1.jfif";
 import collection2 from "../assets/images/collection2.png";
 import collection3 from "../assets/images/collection3.png";
 import collection4 from "../assets/images/collection4.png";
+import ModiWeekSlider from "../components/cart/ModiWeekSlider";
 
 const HomePage = () => {
   return (
@@ -115,7 +116,7 @@ const HomePage = () => {
                 <img
                   src={collection3}
                   alt=""
-                  className="h-[15vh] md:h-[40vh] w-full object-cover"
+                  className="h-[15vh] md:h-[60vh] w-full object-cover"
                 />
                 <div className="md:absolute bottom-2 right-2">
                   <Link to="">
@@ -128,7 +129,7 @@ const HomePage = () => {
                 <img
                   src={collection2}
                   alt=""
-                  className="h-[55vh] md:h-[100vh] w-full object-cover"
+                  className="h-[55vh] md:h-[120vh] w-full object-cover"
                 />
                 <div className="md:absolute bottom-2 right-2">
                   <Link to="">
@@ -142,7 +143,7 @@ const HomePage = () => {
                 <img
                   src={collection4}
                   alt=""
-                  className="h-[55vh] md:h-[100vh] w-full object-cover"
+                  className="h-[55vh] md:h-[120vh] w-full object-cover"
                 />
                 <div className="md:absolute bottom-2 left-2">
                   <Link to="">
@@ -155,7 +156,7 @@ const HomePage = () => {
                 <img
                   src={collection1}
                   alt=""
-                  className="h-[15vh] md:h-[40vh] w-full object-cover"
+                  className="h-[15vh] md:h-[60vh] w-full object-cover"
                 />
                 <div className="md:absolute bottom-2 right-2">
                   <Link to="">
@@ -165,6 +166,12 @@ const HomePage = () => {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* modi week */}
+        <section className="px-5 mt-[88px] md:px-[108px]">
+          <h1 className="mb-4 text-xl font-bold">Modiweek </h1>
+          <ModiWeekSlider />
         </section>
       </main>
 
