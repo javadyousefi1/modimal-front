@@ -1,6 +1,10 @@
 // images
 import mainHomePageImg from "../assets/images/mainLandingImg.png";
 import sustainability from "../assets/images/sustainability.jpg";
+import followUs1 from "../assets/images/followUs(1).jfif";
+import followUs2 from "../assets/images/followUs(2).jfif";
+import followUs3 from "../assets/images/followUs(3).jfif";
+import followUs4 from "../assets/images/followUs(4).jfif";
 // cart box components
 import CartBox from "../components/cart/CartBox";
 // elements
@@ -195,9 +199,50 @@ const HomePage = () => {
             </div>
           </div>
         </section>
-      </main>
 
-      <div className="h-[400px]"></div>
+        {/* follow us */}
+        <section className="px-5  md:px-[108px] container">
+          <h1 className="mt-4 mb-2 text-xl font-bold">Follow us @modimal </h1>
+
+          <div className="grid grid-cols-2 grid-rows-2 md:grid-cols-[minmax(100px,_1fr)_330px_330px] ">
+            <div className="hidden col-span-1 row-span-3 md:block">
+              <img
+                src={followUs1}
+                alt=""
+                className="object-cover w-full h-full "
+              />
+            </div>
+            <div>
+              <img
+                src={followUs1}
+                alt=""
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div>
+              <img
+                src={followUs4}
+                alt=""
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div>
+              <img
+                src={followUs2}
+                alt=""
+                className="object-cover w-full h-full"
+              />
+            </div>
+            <div>
+              <img
+                src={followUs3}
+                alt=""
+                className="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+        </section>
+      </main>
     </>
   );
 };
