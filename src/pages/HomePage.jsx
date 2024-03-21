@@ -1,5 +1,6 @@
 // images
 import mainHomePageImg from "../assets/images/mainLandingImg.png";
+import sustainability from "../assets/images/sustainability.jpg";
 // cart box components
 import CartBox from "../components/cart/CartBox";
 // elements
@@ -172,6 +173,27 @@ const HomePage = () => {
         <section className="px-5 mt-[88px] md:px-[108px]">
           <h1 className="mb-4 text-xl font-bold">Modiweek </h1>
           <ModiWeekSlider />
+        </section>
+
+        {/* sustainability */}
+        <section className="mt-[28px] overflow-hidden">
+          <div className="relative w-screen ">
+            <img
+              src={sustainability}
+              alt="sustainability"
+              className="object-cover object-right h-[360px] w-full"
+            />
+            {/* text */}
+            <div className="absolute flex flex-col items-center justify-center gap-y-4 md:gap-y-2 bottom-5 md:bottom-2 md:right-10">
+              <p className="text-sm text-center text-primary-800 md:text-lg md:w-[450px] md:text-left">
+                Stylish sustainability in clothing promotes eco-friendly choices
+                for a greater future
+              </p>
+              <Link to="" className="self-end mr-4">
+                <Button>sustainability</Button>
+              </Link>
+            </div>
+          </div>
         </section>
       </main>
 
