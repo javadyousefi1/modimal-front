@@ -4,7 +4,6 @@ import mainHomePageImg from "../assets/images/mainLandingImg.png";
 import CartBox from "../components/cart/CartBox";
 // elements
 import Button from "../components/elements/Button";
-
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
@@ -12,7 +11,13 @@ import "swiper/css";
 // import required modules
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css/pagination";
+// rrd
 import { Link } from "react-router-dom";
+
+import collection1 from "../assets/images/collection1.jfif";
+import collection2 from "../assets/images/collection2.png";
+import collection3 from "../assets/images/collection3.png";
+import collection4 from "../assets/images/collection4.png";
 
 const HomePage = () => {
   return (
@@ -66,7 +71,6 @@ const HomePage = () => {
               }}
             >
               <SwiperSlide>
-                {" "}
                 <CartBox
                   title="tailored stretch"
                   desc="turn it up pants"
@@ -75,7 +79,6 @@ const HomePage = () => {
                 />
               </SwiperSlide>
               <SwiperSlide>
-                {" "}
                 <CartBox
                   title="tailored stretch"
                   desc="turn it up pants"
@@ -84,7 +87,6 @@ const HomePage = () => {
                 />
               </SwiperSlide>
               <SwiperSlide>
-                {" "}
                 <CartBox
                   title="tailored stretch"
                   desc="turn it up pants"
@@ -93,7 +95,6 @@ const HomePage = () => {
                 />
               </SwiperSlide>
               <SwiperSlide>
-                {" "}
                 <CartBox
                   title="tailored stretch"
                   desc="turn it up pants"
@@ -102,6 +103,59 @@ const HomePage = () => {
                 />
               </SwiperSlide>
             </Swiper>
+          </div>
+        </section>
+
+        {/* Collection */}
+        <section className="px-5 mt-5 md:px-[108px]">
+          <h1 className="mb-2 text-xl font-bold">Collection</h1>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex flex-col justify-between gap-y-11">
+              <div className="w-full col-span-1 row-span-3 ">
+                <img
+                  src={collection3}
+                  alt=""
+                  className="h-[15vh] w-full object-cover"
+                />
+                <Link to="">
+                  <Button>Boluses</Button>
+                </Link>
+              </div>
+
+              <div className="w-full col-span-1 row-span-7">
+                <img
+                  src={collection2}
+                  alt=""
+                  className="h-[55vh] w-full object-cover"
+                />
+                <Link to="">
+                  <Button>dresses</Button>
+                </Link>
+              </div>
+            </div>
+            <div className="flex flex-col justify-between gap-y-11">
+              <div className="w-full col-span-1 row-span-3 ">
+                <img
+                  src={collection4}
+                  alt=""
+                  className="h-[55vh] w-full object-cover"
+                />
+                <Link to="">
+                  <Button>Pants</Button>
+                </Link>
+              </div>
+
+              <div className="w-full col-span-1 row-span-7">
+                <img
+                  src={collection1}
+                  alt=""
+                  className="h-[15vh] w-full object-cover"
+                />
+                <Link to="">
+                  <Button>outwears</Button>
+                </Link>
+              </div>
+            </div>
           </div>
         </section>
       </main>

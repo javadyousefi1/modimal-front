@@ -21,7 +21,7 @@ const CartBox = ({ title, desc, price, colors }) => {
           </svg>
         </span>
         {/* cart image */}
-        <img src={productImg} alt=" " className="object-cover " />
+        <img src={productImg} alt="" className="object-cover " />
         {/* title */}
         <p className="font-semibold text-black text-md">{title}</p>
         {/* desc */}
