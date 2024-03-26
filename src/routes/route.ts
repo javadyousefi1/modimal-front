@@ -1,5 +1,4 @@
-// type
-import { ReactNode } from "react";
+
 // page
 import HomePage from "../pages/HomePage";
 import NotFound from "../pages/NotFound";
@@ -9,7 +8,7 @@ interface RouteType {
   id: number;
   path: string;
   title: string;
-  component: ReactNode
+  component: () => JSX.Element
 }
 // array of routes
 export const routes: RouteType[] = [
