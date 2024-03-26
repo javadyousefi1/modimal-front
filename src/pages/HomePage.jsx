@@ -5,6 +5,7 @@ import followUs1 from "../assets/images/followUs(1).jfif";
 import followUs2 from "../assets/images/followUs(2).jfif";
 import followUs3 from "../assets/images/followUs(3).jfif";
 import followUs4 from "../assets/images/followUs(4).jfif";
+import followUs5 from "../assets/images/followUs(5).jfif";
 // cart box components
 import CartBox from "../components/cart/CartBox";
 // elements
@@ -214,7 +215,7 @@ const HomePage = () => {
             </div>
             <div>
               <img
-                src={followUs1}
+                src={followUs5}
                 alt=""
                 className="object-cover w-full h-full"
               />
