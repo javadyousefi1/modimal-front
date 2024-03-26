@@ -1,5 +1,6 @@
-// page
+// type
 import { ReactNode } from "react";
+// page
 import HomePage from "../pages/HomePage";
 import NotFound from "../pages/NotFound";
 
