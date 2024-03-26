@@ -37,9 +37,9 @@ const ModiWeekSlider = () => {
         modules={[Pagination, Autoplay]}
         spaceBetween={68}
         slidesPerView={2}
-        style={{
-          "--swiper-pagination-color": "var(--color-primary)", //custome style for pagination bullet
-        }}
+        // style={{
+        //   "--swiper-pagination-color": "var(--color-primary)", //custome style for pagination bullet
+        // }}
       >
         {ModiWeekSliderList.map(item => <SwiperSlide key={item.id}>
           <ModiWeekCart key={item.id} imgSrc={item.imgSrc} day={item.day} />

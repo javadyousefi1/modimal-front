@@ -22,9 +22,9 @@ const BestSellerSlider = () => {
                 modules={[Pagination, Autoplay]}
                 spaceBetween={50}
                 slidesPerView={2}
-                style={{
-                    "--swiper-pagination-color": "var(--color-primary)", //custome style for pagination bullet
-                }}
+                // style={{
+                //     "--swiper-pagination-color": "var(--color-primary)", //custome style for pagination bullet
+                // }}
             >
                 <SwiperSlide>
                     <CartBox
