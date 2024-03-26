@@ -29,6 +29,12 @@
       "@assets/*": [
         "./assets/*"
       ],
+      "@types/*": [
+        "./types/*"
+      ],
+      "@lib/*": [
+        "./lib/*"
+      ],
     }
   },
   "include": [
