@@ -30,7 +30,7 @@ const LoginForm = () => {
                 control={control}
                 defaultValue=""
                 render={({ field: { name, onChange, value } }) => (
-                    <Input value={value} name={name} type="text" error={!!errors.email} onChange={onChange} placeHolder="Email" className="mt-2" />
+                    <Input value={value} name={name} type="text" error={!!errors.email} onChange={onChange} placeHolder="Email" className="w-full mt-2" />
                 )}
             />
             <Controller
@@ -38,7 +38,7 @@ const LoginForm = () => {
                 control={control}
                 defaultValue=""
                 render={({ field: { name, onChange, value } }) => (
-                    <PasswordInput value={value} name={name} error={!!errors.password} onChange={onChange} placeHolder="Password" className="mt-2" />
+                    <PasswordInput value={value} name={name} error={!!errors.password} onChange={onChange} placeHolder="Password" className="w-full mt-2" />
                 )}
             />
 
