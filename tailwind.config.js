@@ -41,6 +41,9 @@ export default {
         "error": "var(--color-error)",
       },
     },
+    container: {
+      center: true,
+    },
   },
   plugins: [],
 }
