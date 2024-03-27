@@ -62,7 +62,7 @@ const RegisterForm = () => {
 
             <div className="flex justify-center gap-x-2 mt-7">
                 <p className="text-xs text-black">Already Have an account?</p>
-                <Link to="">
+                <Link to="/login">
                     <p className="text-xs text-primary-400">Log In</p>
                 </Link>
             </div>

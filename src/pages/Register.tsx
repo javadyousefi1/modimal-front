@@ -10,7 +10,7 @@ const Register = () => {
             <img src={RegisterImage} alt="regiser" className="h-[218px] w-full md:h-[80vh] md:w-[400px]  object-cover" />
             <div>
                 {/* title */}
-                <h1 className="mt-6 text-3xl font-bold text-center text-black">Create Account</h1>
+                <h1 className="mt-6 font-bold text-center text-black md:text-3xl">Create Account</h1>
                 <div className="px-5 mt-8 max-w-[392px]">
 
                     <RegisterForm />

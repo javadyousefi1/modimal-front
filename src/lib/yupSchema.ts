@@ -9,3 +9,11 @@ export const registerFormSchema = yup.object().shape({
       ),
     password: yup.string().required('password is required'),
 });
+
+export const loginFormSchema = yup.object().shape({
+  email: yup.string().email('Invalid email').required('Email is required').matches(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      'Invalid email format'
+    ),
+  password: yup.string().required('password is required'),
+});
