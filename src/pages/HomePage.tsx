@@ -3,7 +3,7 @@ import Button from "@components/elements/Button";
 // rrd
 import { Link } from "react-router-dom";
 // silder
-import ModiWeekSlider from "../components/sliders/ModiWeekSlider";
+import ModiWeekSlider from "@components/sliders/ModiWeekSlider";
 import BestSellerSlider from "@components/sliders/BestSellerSlider";
 // mainHomePage image
 import mainHomePageImg from "@assets/images/mainLandingImg.png";

@@ -21,22 +21,25 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "@components/*": [
-        "./components/*"
+        "src/components/*"
+      ],
+      "@assets": [
+        "src/assets/"
       ],
       "@assets/*": [
-        "./assets/*"
+        "src/assets/*"
       ],
       "@types*": [
-        "./types/"
+        "src/types/"
       ],
       "@types/*": [
-        "./types/*"
+        "src/types/*"
       ],
       "@lib/*": [
-        "./lib/*"
+        "src/lib/*"
       ],
     }
   },
