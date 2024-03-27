@@ -12,7 +12,7 @@ const Login = () => {
             <div className="w-full md:w-max">
                 {/* title */}
                 <h1 className="mt-6 font-bold text-center text-black md:text-3xl">Log In</h1>
-                <div className="px-5 mt-8 max-w-[392px]">
+                <div className="px-5 mt-8 max-w-[392px] md:w-[392px]">
 
                     <LoginForm />
 
