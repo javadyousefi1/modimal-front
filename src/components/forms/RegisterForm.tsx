@@ -8,7 +8,7 @@ import { useForm, Controller } from 'react-hook-form';
 // yup
 import { yupResolver } from '@hookform/resolvers/yup';
 // types 
-import { RegisterFormType } from "@types/index";
+import { RegisterFormType } from "@types";
 // schema
 import { registerFormSchema } from "@lib/yupSchema";
 // rrd

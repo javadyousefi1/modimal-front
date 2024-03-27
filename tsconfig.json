@@ -29,6 +29,9 @@
       "@assets/*": [
         "./assets/*"
       ],
+      "@types*": [
+        "./types/"
+      ],
       "@types/*": [
         "./types/*"
       ],
