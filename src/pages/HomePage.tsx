@@ -40,7 +40,7 @@ const HomePage = () => {
             <h2 className="font-normal w-[210px] md:w-[300px] md:text-2xl text-xl italic">
               Elegance in simplicity, Earth’s harmony
             </h2>
-            <Button>New In</Button>
+            <Button className="w-[100px]">New In</Button>
           </div>
         </section>
 

@@ -31,7 +31,7 @@ const PasswordInput = ({ onChange, name, placeHolder, className, value, error }:
 
     return (<div className="relative">
         <input placeholder={placeHolder} value={value} type={isPasswordVisible ? "text" : "password"} onChange={onChange} name={name} className={inputStyle} />
-        <button className="absolute right-3 top-[18px]" onClick={handleTogglePasswordVisibility}>
+        <button type="button" className="absolute right-3 top-[18px]" onClick={handleTogglePasswordVisibility}>
             {isPasswordVisible ? hideIcon : showIcon}
         </button>
     </div>);

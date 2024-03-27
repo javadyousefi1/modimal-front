@@ -2,6 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --color-black: #0c0c0c;
+    --color-white: #ffffff;
+    --color-primary-25: #f0f2ef;
+    --color-primary-50: #d1d9cf;
+    --color-primary-100: #b2bfaf;
+    --color-primary-200: #a2b39f;
+    --color-primary-300: #93a690;
+    --color-primary-400: #839980;
+    --color-primary: #748c70;
+    --color-primary-600: #5a6d57;
+    --color-primary-700: #404e3e;
+    --color-primary-750: #343e32;
+    --color-primary-800: #272f25;
+    --color-primary-900: #0d100c;
+    /* neutral */
+    --color-neutral-1: #f9f9f9;
+    --color-neutral-2: #ededed;
+    --color-neutral-3: #dfdfdf;
+    --color-neutral-4: #cbcbcb;
+    --color-neutral-5: #adadad;
+    --color-neutral-6: #868686;
+    --color-neutral-7: #606060;
+    --color-neutral-8: #404040;
+    --color-neutral-9: #202020;
+    /* state colors */
+    --color-success-bg: #f3fdfa;
+    --color-success-light: #00ba88;
+    --color-success: #00966d;
+    --color-warning-light: #e09126;
+    --color-warning: #e09126;
+    --color-error-bg: #fff2f2;
+    --color-error-light: #ed2e2e;
+    --color-error: #c30000;
+  }
+}
+
 :root {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
@@ -9,39 +47,13 @@
   direction: ltr;
 }
 
-@layer base {
-  :root {
-    --color-black: #0C0C0C;
-    --color-white: #FFFFFF;
-    --color-primary-25: #F0F2EF;
-    --color-primary-50: #D1D9CF;
-    --color-primary-100: #B2BFAF;
-    --color-primary-200: #A2B39F;
-    --color-primary-300: #93A690;
-    --color-primary-400: #839980;
-    --color-primary: #748C70;
-    --color-primary-600: #5A6D57;
-    --color-primary-700: #404E3E;
-    --color-primary-750: #343E32;
-    --color-primary-800: #272F25;
-    --color-primary-900: #0D100C;
-    /* neutral */
-    --color-neutral-1: #F9F9F9;
-    --color-neutral-2: #EDEDED;
-    --color-neutral-3: #DFDFDF;
-    --color-neutral-4: #CBCBCB;
-    --color-neutral-5: #ADADAD;
-    --color-neutral-6: #868686;
-    --color-neutral-7: #606060;
-    --color-neutral-8: #404040;
-    --color-neutral-9: #202020;
-    /* state colors */
-    --color-success-bg: #F3FDFA;
-    --color-success-light: #00BA88;
-    --color-success: #00966D;
-    --color-warning-light: #E09126;
-    --color-warning: #E09126;
-    --color-error-bg: #FFF2F2;
-    --color-error-light: #ED2E2E;
-    --color-error: #C30000;   
-  } }
+::-moz-selection {
+  /* Code for Firefox */
+  color: var(--color-primary);
+  background: var(--color-primary-900);
+}
+
+::selection {
+  color: var(--color-primary);
+  background: var(--color-primary-900);
+}
