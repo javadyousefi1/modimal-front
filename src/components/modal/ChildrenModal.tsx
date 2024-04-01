@@ -1,11 +1,15 @@
+// framer motion
 import { motion, AnimatePresence } from "framer-motion";
+// types
+import { ReactNode } from "react";
 
 interface ChildrenModalPropType {
     isVisible: boolean;
     handleCloseModal: () => void;
+    children: ReactNode
 }
 
-const ChildrenModal = ({ isVisible, handleCloseModal }: ChildrenModalPropType) => {
+const ChildrenModal = ({ isVisible, handleCloseModal, children }: ChildrenModalPropType) => {
     return (
         <AnimatePresence>
             {isVisible && (
@@ -36,7 +40,7 @@ const ChildrenModal = ({ isVisible, handleCloseModal }: ChildrenModalPropType) =
                                         <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#0C0C0C" />
                                     </svg>
                                 </button>
-                                <div className="min-w-[220px] mt-2">hello</div>
+                                <div className="min-w-[220px] mt-2">{children}ّ</div>
                             </div>
                         </motion.div>
                     </motion.div>
