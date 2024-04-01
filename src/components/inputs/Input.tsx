@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 interface InputPropType {
-    type: "text" | "email",
+    type: "text" | "email" | "checkbox",
     onChange: (event: ChangeEvent<HTMLInputElement>) => void,
     value: string | number
     name: string,
