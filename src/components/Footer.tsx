@@ -51,7 +51,7 @@ const Footer = () => {
               </p>
             </div>
           </div>
-          <div className="w-2/3 flex justify-center items-center flex-col mt-6 sm:flex-row sm:items-start">
+          <div className="w-full flex justify-center items-center flex-col mt-6 sm:flex-row sm:items-start sm:w-2/3">
           <div className="w-full flex justify-center items-start text-white gap-x-4">
             <div className={style.eachItems}>
               <p className={style.title}>About Modimal</p>
