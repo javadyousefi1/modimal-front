@@ -109,7 +109,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <header className="hidden sm:flex justify-around items-center ">
+      <header className="hidden sm:flex justify-around items-center my-4">
         <div>
           <svg
             width="139"
