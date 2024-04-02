@@ -1,7 +1,7 @@
 import { ReactNode, useEffect } from "react";
 // components
-// import Footer from "../components/Footer";
-// import Header from "../components/Header";
+import Footer from "@components/Footer";
+import Header from "@components/Header";
 // rrd
 import { useLocation } from "react-router";
 // routes
@@ -23,9 +23,9 @@ const Layout = ({ children }: LayoutPropType) => {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       {children}
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };

@@ -10,7 +10,7 @@ interface CartBoxPropType {
 const CartBox = ({ title, desc, price, colors }: CartBoxPropType) => {
   return (
     <div>
-      <div className="flex flex-col w-[112px] md:w-[392px]  relative">
+      <div className="relative flex flex-col">
         {/* wish list icon */}
         <span className="absolute right-3 top-3">
           <svg
