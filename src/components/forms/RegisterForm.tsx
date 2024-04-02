@@ -35,7 +35,7 @@ const RegisterForm = () => {
         registerUser(data).then(({ data }) => {
             toast.success(data?.message)
             setTimeout(() => {
-                navigate("/")
+                navigate("/?register=ok")
             }, 500)
         }).catch((err) => {
             toast.error(err?.response?.data?.message)
