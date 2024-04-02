@@ -151,8 +151,8 @@ const HomePage = () => {
         <section className="px-5  md:px-[108px] container">
           <h1 className="mt-4 mb-2 text-xl font-bold">Follow us @modimal </h1>
 
-          <div className="grid grid-cols-2 grid-rows-2 md:grid-cols-[minmax(100px,_1fr)_330px_330px] ">
-            <div className="hidden col-span-1 row-span-3 md:block">
+          <div className="grid grid-cols-2 grid-rows-2 lg:grid-cols-[minmax(100px,_1fr)_330px_330px] ">
+            <div className="hidden col-span-1 row-span-3 lg:block">
               <img
                 src={followUs1}
                 alt=""
