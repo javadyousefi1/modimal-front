@@ -17,5 +17,10 @@ export default defineConfig(({ mode }) => {
         "@lib": fileURLToPath(new URL("./src/lib", import.meta.url)),
       }
     },
+    test: {
+      environment: 'jsdom',
+      include: ['**/*.test.tsx'],
+      globals: true,
+    },
   };
 });
