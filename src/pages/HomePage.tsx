@@ -20,10 +20,26 @@ import collection1 from "@assets/images/collection1.jfif";
 import collection2 from "@assets/images/collection2.png";
 import collection3 from "@assets/images/collection3.png";
 import collection4 from "@assets/images/collection4.png";
+import ChildrenModal from "@components/modal/ChildrenModal";
+import { useState } from "react";
 
 const HomePage = () => {
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const registerQuery = urlParams.get('register');
+
+  const [IsshowEmailVerification, setIsShowEmailVerification] = useState(!!registerQuery)
+
   return (
     <>
+    {/* verify modal */}
+      {registerQuery && <ChildrenModal isVisible={IsshowEmailVerification} handleCloseModal={() => { setIsShowEmailVerification(false) }}><div className="max-w-[300px]">
+        <h1 className="text-center text-black font-bold">Verify your Email</h1>
+        <p className="text-xs font-normal text-center mt-4">We’ve sent an email to nina@gmail.com to verify your email address and activate your account. the link in the email will expire in 24 hours.</p>
+        <p className="text-xs font-normal text-center mt-4"><Link to=""><span className="text-primary">Click here</span></Link> <span>if you did not receive an email or would like to change the email address you registered with.</span></p>
+      </div></ChildrenModal>}
+
       <main className="">
         {/* first section */}
         <section className="relative">
@@ -40,7 +56,7 @@ const HomePage = () => {
             <h2 className="font-normal w-[210px] md:w-[300px] md:text-2xl text-xl italic">
               Elegance in simplicity, Earth’s harmony
             </h2>
-            <Button className="w-[100px]">New In</Button>
+            <Button className="w-[93px] !px-3 md:w-[200px]">New In</Button>
           </div>
         </section>
 
@@ -151,8 +167,8 @@ const HomePage = () => {
         <section className="px-5  md:px-[108px] container">
           <h1 className="mt-4 mb-2 text-xl font-bold">Follow us @modimal </h1>
 
-          <div className="grid grid-cols-2 grid-rows-2 md:grid-cols-[minmax(100px,_1fr)_330px_330px] ">
-            <div className="hidden col-span-1 row-span-3 md:block">
+          <div className="grid grid-cols-2 grid-rows-2 lg:grid-cols-[minmax(100px,_1fr)_330px_330px] ">
+            <div className="hidden col-span-1 row-span-3 lg:block">
               <img
                 src={followUs1}
                 alt=""

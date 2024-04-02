@@ -15,7 +15,7 @@ const Faq = () => {
     let faqBreadcrumbs = [{ id: 1, text: "Home", href: "/" }, { id: 2, text: "Faq", href: "/faq" }]
 
     return (<>
-        <div className="container px-5 mt-8 max-w-7xl">
+        <div className="container px-5 mt-8 max-w-7xl mb-28">
             <Breadcrumbs items={faqBreadcrumbs} />
             <div className="max-w-[1000px] mx-auto">
 
