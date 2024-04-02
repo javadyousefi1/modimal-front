@@ -1,8 +1,8 @@
-interface ModiWeekCartPropType {
+type ModiWeekCartPropType = {
   imgSrc: string;
   day: string;
 }
-const ModiWeekCart = ({ imgSrc, day }: ModiWeekCartPropType) => {
+const ModiWeekCart: React.FC<ModiWeekCartPropType> = ({ imgSrc, day }) => {
   return (
     <>
       <div>

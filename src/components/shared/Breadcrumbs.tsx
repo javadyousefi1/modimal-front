@@ -6,11 +6,11 @@ type ItemObject = {
     href: string,
 }
 
-interface BreadcrumbsPropType {
+type BreadcrumbsPropType = {
     items: ItemObject[]
 }
 
-const Breadcrumbs = ({ items }: BreadcrumbsPropType) => {
+const Breadcrumbs: React.FC<BreadcrumbsPropType> = ({ items }) => {
 
     const breadcrumbsLength = items.length
 

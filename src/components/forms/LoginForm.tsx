@@ -18,7 +18,7 @@ import { loginUser } from "../../api/index";
 // toast
 import toast from "react-hot-toast";
 
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()

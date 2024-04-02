@@ -14,7 +14,7 @@ import "swiper/css/pagination";
 
 import ModiWeekCart from "../cart/ModiWeekCart";
 
-const ModiWeekSlider = () => {
+const ModiWeekSlider:React.FC = () => {
 
   const ModiWeekSliderList = [
     { id: 1, imgSrc: modiweek1, day: "Sunday" },

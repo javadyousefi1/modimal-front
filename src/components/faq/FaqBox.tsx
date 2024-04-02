@@ -2,12 +2,12 @@ import { useState } from "react";
 // framer-motion
 import { motion } from 'framer-motion';
 
-interface FaqBoxPropType {
+type FaqBoxPropType= {
     answer: string;
     question: string;
 }
 
-const FaqBox = ({ answer, question }: FaqBoxPropType) => {
+const FaqBox: React.FC<FaqBoxPropType> = ({ answer, question }) => {
 
     const [isOpen, setIsOpen] = useState(false)
 

@@ -7,11 +7,11 @@ import { useLocation } from "react-router";
 // routes
 import { routes } from "../routes/route";
 
-interface LayoutPropType {
+type LayoutPropType = {
   children: ReactNode
 }
 
-const Layout = ({ children }: LayoutPropType) => {
+const Layout: React.FC<LayoutPropType> = ({ children }) => {
   const { pathname } = useLocation();
 
   // change title of each page dynamic by route

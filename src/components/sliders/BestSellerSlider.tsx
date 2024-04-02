@@ -8,7 +8,7 @@ import "swiper/css";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css/pagination"
 
-const BestSellerSlider = () => {
+const BestSellerSlider:React.FC = () => {
     return (<>
         <div className="w-full mt-2">
             <Swiper
