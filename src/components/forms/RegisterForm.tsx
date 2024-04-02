@@ -1,3 +1,4 @@
+import { useState } from "react";
 // inputs
 import PasswordInput from "@components/inputs/PasswordInput";
 import Input from "@components/inputs/Input";
@@ -12,15 +13,37 @@ import { RegisterFormType } from "@types";
 // schema
 import { registerFormSchema } from "@lib/yupSchema";
 // rrd
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+// api
+import { registerUser } from "../../api/index";
+// toast
+import toast from "react-hot-toast";
 
 const RegisterForm = () => {
+    const [isLoading, setIsLoading] = useState(false)
+
+    const navigate = useNavigate()
+
     const { control, handleSubmit, formState: { errors, isValid } } = useForm<RegisterFormType>({
         mode: "onChange",
         resolver: yupResolver(registerFormSchema),
     });
-    
-    const onSubmit = (data: RegisterFormType) => console.log(data)
+
+    const onSubmit = (data: RegisterFormType) => {
+        setIsLoading(true)
+
+        registerUser(data).then(({ data }) => {
+            toast.success(data?.message)
+            setTimeout(() => {
+                navigate("/")
+            }, 500)
+        }).catch((err) => {
+            console.log(err?.response?.data?.message)
+            toast.error(err?.response?.data?.message)
+        }).finally(() => {
+            setIsLoading(false)
+        })
+    }
 
     return (<>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -30,7 +53,7 @@ const RegisterForm = () => {
                 control={control}
                 defaultValue=""
                 render={({ field: { name, onChange, value } }) => (
-                    <Input value={value} name={name} type="text" error={!!errors.firstName} onChange={onChange} placeHolder="First Name" />
+                    <Input value={value} name={name} type="text" error={!!errors.firstName} onChange={onChange} placeHolder="First Name" disabled={isLoading} />
                 )}
             />
 
@@ -39,7 +62,7 @@ const RegisterForm = () => {
                 control={control}
                 defaultValue=""
                 render={({ field: { name, onChange, value } }) => (
-                    <Input value={value} name={name} type="text" error={!!errors.lastName} onChange={onChange} placeHolder="Last Name" className="mt-2" />
+                    <Input value={value} name={name} type="text" error={!!errors.lastName} onChange={onChange} placeHolder="Last Name" className="mt-2" disabled={isLoading} />
                 )}
             />
 
@@ -48,7 +71,7 @@ const RegisterForm = () => {
                 control={control}
                 defaultValue=""
                 render={({ field: { name, onChange, value } }) => (
-                    <Input value={value} name={name} type="text" error={!!errors.email} onChange={onChange} placeHolder="Email" className="mt-2" />
+                    <Input value={value} name={name} type="text" error={!!errors.email} onChange={onChange} placeHolder="Email" className="mt-2" disabled={isLoading} />
                 )}
             />
             <Controller
@@ -56,7 +79,7 @@ const RegisterForm = () => {
                 control={control}
                 defaultValue=""
                 render={({ field: { name, onChange, value } }) => (
-                    <PasswordInput value={value} name={name} error={!!errors.password} onChange={onChange} placeHolder="Password" className="mt-2" />
+                    <PasswordInput value={value} name={name} error={!!errors.password} onChange={onChange} placeHolder="Password" className="mt-2" disabled={isLoading} />
                 )}
             />
 
@@ -67,7 +90,7 @@ const RegisterForm = () => {
                 </Link>
             </div>
 
-            <Button theme="primary" type="submit" className="mt-8" disabled={!isValid}>Register Now</Button>
+            <Button theme="primary" type="submit" className="mt-8" disabled={!isValid || isLoading}>Register Now</Button>
         </form>
 
     </>);
