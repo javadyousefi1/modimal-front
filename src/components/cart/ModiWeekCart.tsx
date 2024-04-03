@@ -1,4 +1,4 @@
-type ModiWeekCartPropType {
+type ModiWeekCartPropType = {
   imgSrc: string;
   day: string;
 }
