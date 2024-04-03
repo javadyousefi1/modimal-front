@@ -3,7 +3,7 @@ import LoginImage from "@assets/images/register.jpg"
 // from
 import LoginForm from "@components/forms/LoginForm";
 
-const Login = () => {
+const Login: React.FC = () => {
 
     return (<div className="container w-full md:mt-8 md:px-5">
         <div className="flex flex-col items-center justify-center md:flex-row gap-x-32">

@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 
-interface PasswordInputPropType {
+type PasswordInputPropType ={
     onChange: (event: ChangeEvent<HTMLInputElement>) => void,
     name: string;
     placeHolder: string;
@@ -22,7 +22,7 @@ const showIcon = (<svg width="20" height="20" viewBox="0 0 24 24" fill="none" xm
 
 )
 
-const PasswordInput = ({ onChange, name, placeHolder, className, value, error, disabled }: PasswordInputPropType) => {
+const PasswordInput: React.FC<PasswordInputPropType> = ({ onChange, name, placeHolder, className, value, error, disabled }) => {
 
     const [isPasswordVisible, setIsPasswordVisible] = useState(false)
 
@@ -31,7 +31,7 @@ const PasswordInput = ({ onChange, name, placeHolder, className, value, error, d
     const inputStyle = `w-full px-3 py-2.5 text-xs border outline-none border-neutral-700 placeholder-neutral-700 transition linear duration-150 ${className} ${error ? "border-red-400 bg-red-50" : "border-neutral-700"}`
 
     return (<div className="relative">
-        <input placeholder={placeHolder} value={value} type={isPasswordVisible ? "text" : "password"} onChange={onChange} name={name} className={inputStyle} disabled={disabled}/>
+        <input placeholder={placeHolder} value={value} type={isPasswordVisible ? "text" : "password"} onChange={onChange} name={name} className={inputStyle} disabled={disabled} />
         <button type="button" className="absolute right-3 top-[18px]" onClick={handleTogglePasswordVisibility}>
             {isPasswordVisible ? hideIcon : showIcon}
         </button>

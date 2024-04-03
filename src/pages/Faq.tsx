@@ -1,7 +1,7 @@
 import FaqBox from "@components/faq/FaqBox";
 import Breadcrumbs from "@components/shared/Breadcrumbs";
 
-const Faq = () => {
+const Faq : React.FC = () => {
 
     const faqList = [
         { id: 1, answer: "Which size will fit me best?", question: "We offer product and body measurements on each of our products pages, just click on “Size Guide” to find your best fit. Measuring guides are included." }

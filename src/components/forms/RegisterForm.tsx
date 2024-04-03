@@ -19,7 +19,7 @@ import { registerUser } from "../../api/index";
 // toast
 import toast from "react-hot-toast";
 
-const RegisterForm = () => {
+const RegisterForm: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const navigate = useNavigate()

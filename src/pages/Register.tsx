@@ -2,7 +2,7 @@
 import RegisterImage from "@assets/images/register.jpg"
 // from
 import RegisterForm from "@components/forms/RegisterForm";
-const Register = () => {
+const Register: React.FC = () => {
 
     return (<div className="container md:mt-8 md:px-5">
         <div className="flex flex-col items-center justify-center md:flex-row gap-x-32">
