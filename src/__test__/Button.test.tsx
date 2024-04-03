@@ -14,4 +14,15 @@ describe('FaqBox Component', () => {
         expect(getButton).toBeInTheDocument()
     });
 
+    test("check disabling button", () => {
+        // props
+        const buttonText = 'click me';
+        // render component
+        render(<Button disabled={true}>{buttonText}</Button>);
+        // get button
+        const getButton = screen.getByText(buttonText);
+        // checking...
+        expect(getButton).toBeDisabled()
+    })
+
 })
