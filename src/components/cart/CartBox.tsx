@@ -31,7 +31,7 @@ const CartBox: React.FC<CartBoxPropType> = ({ title, desc, price, colors }) => {
         {/* cart image */}
         <img src={productImg} alt="" className="object-cover " />
         {/* title */}
-        <p className="font-semibold text-black text-md">{title}</p>
+        <p className="font-semibold text-black text-md" >{title}</p>
         {/* desc */}
         <span className="mt-1">{desc}</span>
         {/* cost */}
@@ -41,13 +41,15 @@ const CartBox: React.FC<CartBoxPropType> = ({ title, desc, price, colors }) => {
           {colors?.map((color, index) => (
             <div
               key={index}
+              data-testid={`color-${color}`}
               style={{
                 width: "16px",
                 height: "16px",
                 backgroundColor: color,
                 borderRadius: "100%",
               }}
-            ></div>
+            >
+            </div>
           ))}
         </div>
         {/* free space */}
