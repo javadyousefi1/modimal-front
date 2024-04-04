@@ -4,7 +4,7 @@ import Table from "@components/table/Table";
 
 const Users = () => {
   const [users, setUser] = useState([]);
-
+  let deletedColumns = ["_id"];
   useEffect(() => {
     getAllUsers().then((res) => {
       setUser(res.data.userData);
@@ -15,7 +15,7 @@ const Users = () => {
     <>
       <div className="">
         <h1 className="text-lg font-semibold ">Users</h1>
-        <Table tableData={users} />
+        <Table tableData={users} deletedColumns={deletedColumns} />
       </div>
     </>
   );
