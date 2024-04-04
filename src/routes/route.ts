@@ -5,6 +5,7 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Faq from "../pages/Faq";
 import Users from "../pages/admin/Users";
+import Main from "../pages/admin/Main";
 
 interface RouteType {
   id: number;
@@ -20,5 +21,6 @@ export const routes: RouteType[] = [
   { id: 2, path: "/register", title: "register", component: Register },
   { id: 3, path: "/login", title: "login", component: Login },
   { id: 4, path: "/faq", title: "faq", component: Faq },
-  { id: 5, path: "/users", title: "users", component: Users, panelAdmin: true },
+  { id: 5, path: "/admin", title: "main", component: Main, panelAdmin: true },
+  { id: 6, path: "/admin/users", title: "users", component: Users, panelAdmin: true },
 ];
