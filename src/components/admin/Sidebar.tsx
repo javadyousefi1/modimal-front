@@ -6,7 +6,52 @@ import { motion } from "framer-motion";
 
 const Sidebar = () => {
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
-  const menus = [{ id: 1, title: "users", href: "/admin/users" }];
+  const menus = [
+    {
+      id: 0,
+      title: "Home",
+      href: "/admin",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M12 18v-3M10.07 2.82 3.14 8.37c-.78.62-1.28 1.93-1.11 2.91l1.33 7.96c.24 1.42 1.6 2.57 3.04 2.57h11.2c1.43 0 2.8-1.16 3.04-2.57l1.33-7.96c.16-.98-.34-2.29-1.11-2.91l-6.93-5.54c-1.07-.86-2.8-.86-3.86-.01Z"
+            stroke="#fff"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      ),
+    },
+    {
+      id: 1,
+      title: "Users",
+      href: "/admin/users",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M9.16 10.87c-.1-.01-.22-.01-.33 0a4.42 4.42 0 0 1-4.27-4.43C4.56 3.99 6.54 2 9 2a4.435 4.435 0 0 1 .16 8.87ZM16.41 4c1.94 0 3.5 1.57 3.5 3.5 0 1.89-1.5 3.43-3.37 3.5a1.13 1.13 0 0 0-.26 0M4.16 14.56c-2.42 1.62-2.42 4.26 0 5.87 2.75 1.84 7.26 1.84 10.01 0 2.42-1.62 2.42-4.26 0-5.87-2.74-1.83-7.25-1.83-10.01 0ZM18.34 20c.72-.15 1.4-.44 1.96-.87 1.56-1.17 1.56-3.1 0-4.27-.55-.42-1.22-.7-1.93-.86"
+            stroke="#fff"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+        </svg>
+      ),
+    },
+  ];
 
   const toggleMobileMenu = () => setIsOpenMobileMenu((prev) => !prev);
 
@@ -61,9 +106,14 @@ const Sidebar = () => {
         </div>
 
         {/* map on menu */}
-        <div className="flex flex-col items-center mt-12">
+        <div className="flex flex-col items-center mt-12 gap-y-2">
           {menus.map((item) => (
-            <SideBarItem key={item.id} href={item.href} title={item.title} />
+            <SideBarItem
+              key={item.id}
+              href={item.href}
+              title={item.title}
+              icon={item.icon}
+            />
           ))}
         </div>
       </section>
@@ -146,9 +196,20 @@ const Sidebar = () => {
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         exit={{ opacity: 0 }}
-        className="fixed bottom-0 left-0 w-full bg-primary-50"
+        className="fixed left-0 w-full top-[62px] bg-primary-50"
       >
-        mobile menu
+        {/* map on menu */}
+        <div className="flex flex-col items-center mt-12 gap-y-4">
+          {menus.map((item) => (
+            <SideBarItem
+              key={item.id}
+              href={item.href}
+              title={item.title}
+              icon={item.icon}
+              closeMenuMobile={() => setIsOpenMobileMenu(false)}
+            />
+          ))}
+        </div>
       </motion.div>
     </>
   );
