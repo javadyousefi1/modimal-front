@@ -9,8 +9,8 @@ const style = {
 const Footer = () => {
   return (
     <>
-      <footer className="bg-neutral-8 mt-6 py-8 px-5 sm:px-16">
-        <div className="flex justify-center items-center flex-col sm:flex-row sm:gap-x-24">
+      <footer className="w-full flex justify-center items-center flex-col bg-neutral-8 mt-6 py-8 px-5 md:px-16">
+        <div className="max-w-[500px] flex justify-center items-center flex-col md:flex-row sm:gap-x-24">
           <div className="w-full sm:w-1/3">
             <p className="text-center text-white text-[13px] w-full whitespace-nowrap font-semibold">
               Join our club, get 15% off for your Birthday
@@ -37,7 +37,7 @@ const Footer = () => {
                 </svg>
               </div>
             </div>
-            <div className="w-full flex justify-end items-center gap-x-2 mt-2">
+            <div className="w-full flex justify-start items-center gap-x-2 mt-2">
               <div className="min-w-max">
                 <Input
                   type="checkbox"
@@ -104,7 +104,7 @@ const Footer = () => {
           </div>
         </div>
           </div>
-        <div>
+        <div className="max-w-[500px]">
           <div className="w-full flex justify-between items-center flex-row-reverse mt-3">
             <div>
               <svg

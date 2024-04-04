@@ -1,10 +1,10 @@
 const Header = () => {
   return (
     <>
-      <div className="bg-primary-600 text-center text-[10px] text-white">
+      <div className="bg-primary-600 text-center text-[10px] text-white md:text-[12px]">
         Enjoy Free Shipping On All Orders
       </div>
-      <header className="flex justify-between items-center flex-row-reverse px-5 my-1 sm:hidden">
+      <header className="flex justify-between items-center flex-row-reverse px-5 my-1 md:hidden">
         <div className="flex justify-center items-center gap-x-2 flex-row-reverse">
           {/* my shopping icon */}
           <div>
@@ -109,7 +109,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <header className="hidden sm:flex justify-around items-center my-4">
+      <header className="hidden md:flex justify-around items-center my-4">
         <div>
           <svg
             width="139"
@@ -146,16 +146,16 @@ const Header = () => {
             />
           </svg>
         </div>
-        <div className="flex justify-center items-center gap-x-6">
+        <div className="flex justify-center items-center gap-x-4 lg:gap-x-6">
           <a href="#">Collection</a>
           <a href="#">New In</a>
           <a href="#">ModiWeek</a>
           <a href="#">Plus Size</a>
           <a href="#">Sustainability</a>
         </div>
-        <div className="flex justify-center items-center gap-x-4">
+        <div className="flex justify-center items-center gap-x-2 lg:gap-x-4">
           {/* my shopping icon */}
-          <div>
+          <a href="#">
             <svg
               width="24"
               height="24"
@@ -168,9 +168,9 @@ const Header = () => {
                 fill="#202020"
               />
             </svg>
-          </div>
+          </a>
           {/* favorites icon */}
-          <div>
+          <a href="#">
             <svg
               width="24"
               height="24"
@@ -185,9 +185,9 @@ const Header = () => {
                 stroke-width="2"
               />
             </svg>
-          </div>
+          </a>
           {/* profile icon */}
-          <div>
+          <a href="#">
             <svg
               width="24"
               height="24"
@@ -204,7 +204,7 @@ const Header = () => {
                 fill="#202020"
               />
             </svg>
-          </div>
+          </a>
           {/* search icon */}
           <div>
             <svg
