@@ -6,23 +6,24 @@ import Header from "@components/Header";
 import { useLocation } from "react-router";
 // routes
 import { routes } from "../routes/route";
+import AdminLayout from "./AdminLayout";
+import Sidebar from "@components/admin/Sidebar";
 
 type LayoutPropType = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 const Layout: React.FC<LayoutPropType> = ({ children }) => {
-  const [currentRolePage, setCurrentRolePage] = useState<string | null>(null)
+  const [currentRolePage, setCurrentRolePage] = useState<string | null>(null);
   const { pathname } = useLocation();
 
   // change title of each page dynamic by route
   useEffect(() => {
-    const currentRouteTitle =
-      routes.find((r) => r.path === pathname);
+    const currentRouteTitle = routes.find((r) => r.path === pathname);
     document.title = currentRouteTitle?.title ?? "صفحه ای یافت نشد";
 
-    let checkRoute = currentRouteTitle?.panelAdmin ? "admin" : "user"
-    setCurrentRolePage(checkRoute)
+    let checkRoute = currentRouteTitle?.panelAdmin ? "admin" : "user";
+    setCurrentRolePage(checkRoute);
   }, [pathname]);
 
   if (currentRolePage === "user") {
@@ -36,11 +37,10 @@ const Layout: React.FC<LayoutPropType> = ({ children }) => {
   }
 
   return (
-    <>
-      {/* <Header /> */}
-      {children}
-      {/* <Footer /> */}
-    </>
+    <div className="flex">
+      <Sidebar />
+      <div className="w-full h-screen overflow-y-scroll bg-blue-500">{children}</div>
+    </div>
   );
 };
 

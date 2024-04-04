@@ -1,4 +1,3 @@
-import { FC } from "react";
 // page
 import HomePage from "../pages/HomePage";
 import NotFound from "../pages/NotFound";
@@ -12,7 +11,7 @@ interface RouteType {
   path: string;
   title: string;
   panelAdmin?: boolean;
-  component: FC<{}>
+  component: React.FC<{}>
 }
 // array of routes
 export const routes: RouteType[] = [
