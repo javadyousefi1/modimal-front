@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect, useState } from "react";
 // components
 import Footer from "@components/Footer";
 import Header from "@components/Header";
@@ -12,20 +12,34 @@ type LayoutPropType = {
 }
 
 const Layout: React.FC<LayoutPropType> = ({ children }) => {
+  const [currentRolePage, setCurrentRolePage] = useState<string | null>(null)
   const { pathname } = useLocation();
 
   // change title of each page dynamic by route
   useEffect(() => {
     const currentRouteTitle =
-      routes.find((r) => r.path === pathname)?.title ?? "صفحه ای یافت نشد";
-    document.title = currentRouteTitle;
+      routes.find((r) => r.path === pathname);
+    document.title = currentRouteTitle?.title ?? "صفحه ای یافت نشد";
+
+    let checkRoute = currentRouteTitle?.panelAdmin ? "admin" : "user"
+    setCurrentRolePage(checkRoute)
   }, [pathname]);
+
+  if (currentRolePage === "user") {
+    return (
+      <>
+        <Header />
+        {children}
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
