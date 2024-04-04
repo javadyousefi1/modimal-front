@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../api";
+import Table from "@components/table/Table";
 
 const Users = () => {
   const [users, setUser] = useState();
@@ -14,6 +15,8 @@ const Users = () => {
     <>
       <div className="h-[3000px]  ">
         <h1 className="text-lg font-semibold ">Users</h1>
+
+        <Table tableData={users} />
 
         {users &&
           users.map((user) => {
