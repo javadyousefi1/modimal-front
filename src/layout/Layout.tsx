@@ -38,7 +38,7 @@ const Layout: React.FC<LayoutPropType> = ({ children }) => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="w-full h-screen px-8 overflow-y-scroll bg-neutral-200">{children}</div>
+      <div className="w-full h-screen p-8 overflow-y-scroll bg-neutral-200">{children}</div>
     </div>
   );
 };

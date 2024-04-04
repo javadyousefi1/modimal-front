@@ -13,7 +13,7 @@ const Users = () => {
   return (
     <>
       <div className="h-[3000px]  ">
-        <h1 className="mt-6 text-lg font-semibold">Users</h1>
+        <h1 className="text-lg font-semibold ">Users</h1>
 
         {users &&
           users.map((user) => {

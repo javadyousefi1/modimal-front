@@ -48,7 +48,7 @@ const Sidebar = () => {
       </div>
 
       {/* map on menu */}
-      <div className="flex flex-col items-center mt-4">
+      <div className="flex flex-col items-center mt-12">
         {menus.map((item) => (
           <SideBarItem key={item.id} href={item.href} title={item.title} />
         ))}
