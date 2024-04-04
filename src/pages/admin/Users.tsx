@@ -13,7 +13,7 @@ const Users = () => {
 
   return (
     <>
-      <div className="h-[3000px]  ">
+      <div className="">
         <h1 className="text-lg font-semibold ">Users</h1>
         <Table tableData={users} />
       </div>
