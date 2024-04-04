@@ -11,7 +11,7 @@ const Table: React.FC<TablePropType> = ({ tableData }) => {
             <tr className="bg-primary-400">
               <th className="p-2">#</th>
               {tableData &&
-                Object.keys(tableData[0]).map((item, index) => (
+                Object.keys(tableData[0] || {}).map((item, index) => (
                   <th className="p-2" key={index}>
                     {item}
                   </th>
@@ -27,7 +27,7 @@ const Table: React.FC<TablePropType> = ({ tableData }) => {
                   className={index % 2 === 0 ? "bg-gray-100" : "bg-white"}
                 >
                   <td className="px-4 py-2 text-center">{index + 1}</td>
-                  {Object.values(data).map((value, index) => (
+                  {Object.values(data || {}).map((value, index) => (
                     <td key={index} className="px-4 py-2 text-center">
                       {String(value)}
                     </td>

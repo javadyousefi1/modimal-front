@@ -3,7 +3,7 @@ import { getAllUsers } from "../../api";
 import Table from "@components/table/Table";
 
 const Users = () => {
-  const [users, setUser] = useState();
+  const [users, setUser] = useState([]);
 
   useEffect(() => {
     getAllUsers().then((res) => {
@@ -15,13 +15,7 @@ const Users = () => {
     <>
       <div className="h-[3000px]  ">
         <h1 className="text-lg font-semibold ">Users</h1>
-
         <Table tableData={users} />
-
-        {users &&
-          users.map((user) => {
-            return <div>{user.firstname}</div>;
-          })}
       </div>
     </>
   );
