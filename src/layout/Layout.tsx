@@ -6,7 +6,6 @@ import Header from "@components/Header";
 import { useLocation } from "react-router";
 // routes
 import { routes } from "../routes/route";
-import AdminLayout from "./AdminLayout";
 import Sidebar from "@components/admin/Sidebar";
 
 type LayoutPropType = {
@@ -39,7 +38,7 @@ const Layout: React.FC<LayoutPropType> = ({ children }) => {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="w-full h-screen overflow-y-scroll bg-neutral-200">{children}</div>
+      <div className="w-full h-screen px-8 overflow-y-scroll bg-neutral-200">{children}</div>
     </div>
   );
 };
