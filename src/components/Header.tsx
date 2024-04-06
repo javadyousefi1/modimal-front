@@ -2,6 +2,7 @@ import { useState } from "react";
 
 // framer-motion
 import { motion } from "framer-motion";
+import DropDown from "./shared/DropDown";
 
 const Header = () => {
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
@@ -177,21 +178,19 @@ const Header = () => {
           height: isOpenMobileMenu ? "calc(100vh - 62px)" : "0px",
           opacity: isOpenMobileMenu ? 1 : 0,
         }}
-        style={{ overflow: "hidden", zIndex: "30px" }}
+        style={{ overflow: "hidden" }}
         variants={{
           open: { opacity: 1, height: "calc(100vh - 62px)" },
           collapsed: { opacity: 0, height: 0 },
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
         exit={{ opacity: 0 }}
-        className="fixed left-0 w-full top-[62px] bg-white"
+        className="fixed left-0 w-full top-[62px] bg-white z-50 "
       >
         {/* map on menu */}
         <div className="flex flex-col items-center mt-12 gap-y-4">
           {menus.map((item) => (
-            <div>
-              {item.title}
-            </div>
+            <DropDown item={item}/>
           ))}
         </div>
       </motion.div>
