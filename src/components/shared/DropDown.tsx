@@ -23,9 +23,9 @@ const DropDown: React.FC<DropDownProps> = ({ item }) => {
   };
 
   return (
-    <>
+    <div className="w-11/12 border-b-[1px] border-black">
       <div
-        className="w-11/12 border-b-[1px] border-black flex justify-between items-center"
+        className="flex justify-between items-center"
         onClick={handleOpenDropDown}
       >
         <span className="">{item.title}</span>
@@ -55,14 +55,14 @@ const DropDown: React.FC<DropDownProps> = ({ item }) => {
         item.subLink &&
         item.subLink.map((item) => (
           <a
-            className="flex justify-center items-end gap-y-2 pl-4"
+            className="flex justify-center items-start flex-col py-3 pl-8"
             href={item.link}
             key={item.id}
           >
             {item.title}
           </a>
         ))}
-    </>
+    </div>
   );
 };
 

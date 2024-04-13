@@ -3,6 +3,11 @@ import { useState } from "react";
 // framer-motion
 import { motion } from "framer-motion";
 import DropDown from "./shared/DropDown";
+import Button from "./elements/Button";
+
+const style = {
+  button: "w-36 h-10 border-[1px] border-primary-600 text-[14px] text-primary-600"
+}
 
 const Header = () => {
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
@@ -12,70 +17,103 @@ const Header = () => {
       id: 0,
       title: "Collection",
       href: "#",
-      subLink: null
+      subLink: null,
     },
     {
       id: 1,
       title: "New In",
       href: "#",
-      subLink: [{
-        id:1,
-        title: "Shop All",
-        link: "#"
-      },
-      {
-        id:2,
-        title: "Top & Boluses",
-        link: "#"
-      },
-      {
-        id:3,
-        title: "Tees",
-        link: "#"
-      },
-      {
-        id:4,
-        title: "Pants",
-        link: "#"
-      },
-      {
-        id:5,
-        title: "Jackets & Outwears",
-        link: "#"
-      },
-      {
-        id:6,
-        title: "Pullovers",
-        link: "#"
-      },
-      {
-        id:7,
-        title: "Dresses & Jumpsuits",
-        link: "#"
-      },
-      {
-        id:8,
-        title: "Shortr & Skirt",
-        link: "#"
-      },]
+      subLink: [
+        {
+          id: 1,
+          title: "Shop All",
+          link: "#",
+        },
+        {
+          id: 2,
+          title: "Top & Boluses",
+          link: "#",
+        },
+        {
+          id: 3,
+          title: "Tees",
+          link: "#",
+        },
+        {
+          id: 4,
+          title: "Pants",
+          link: "#",
+        },
+        {
+          id: 5,
+          title: "Jackets & Outwears",
+          link: "#",
+        },
+        {
+          id: 6,
+          title: "Pullovers",
+          link: "#",
+        },
+        {
+          id: 7,
+          title: "Dresses & Jumpsuits",
+          link: "#",
+        },
+        {
+          id: 8,
+          title: "Short & Skirt",
+          link: "#",
+        },
+      ],
     },
     {
       id: 2,
       title: "ModiWeek",
       href: "#",
-      subLink: null
+      subLink: null,
     },
     {
       id: 3,
       title: "Plus Size",
       href: "#",
-      subLink: null
+      subLink: null,
     },
     {
       id: 4,
       title: "Sustainability",
       href: "#",
-      subLink: null
+      subLink: [
+        {
+          id: 1,
+          title: "Misson",
+          link: "#",
+        },
+        {
+          id: 2,
+          title: "Processing",
+          link: "#",
+        },
+        {
+          id: 3,
+          title: "Materials",
+          link: "#",
+        },
+        {
+          id: 4,
+          title: "Packaging",
+          link: "#",
+        },
+        {
+          id: 5,
+          title: "Product Care",
+          link: "#",
+        },
+        {
+          id: 6,
+          title: "Our Suppliers",
+          link: "#",
+        },
+      ],
     },
   ];
 
@@ -178,66 +216,96 @@ const Header = () => {
           </div>
           {/* menu */}
           {isOpenMobileMenu ? (
-          <button className="w-[25px]" onClick={closeMenu}>
-            <svg
-              width="16"
-              height="14"
-              viewBox="0 0 15 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M14.5 1.41L13.09 0L7.5 5.59L1.91 0L0.5 1.41L6.09 7L0.5 12.59L1.91 14L7.5 8.41L13.09 14L14.5 12.59L8.91 7L14.5 1.41Z"
-                fill="#0C0C0C"
-              />
-            </svg>
-          </button>
-        ) : (
-          <button
-            className="cursor-pointer"
-            type="button"
-            onClick={openMenu}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25"
-              height="25"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M3 7h18M3 12h18M3 17h18"
-                stroke="var(--color-primary)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-              ></path>
-            </svg>
-          </button>
-        )}
+            <button className="w-[25px]" onClick={closeMenu}>
+              <svg
+                width="16"
+                height="14"
+                viewBox="0 0 15 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.5 1.41L13.09 0L7.5 5.59L1.91 0L0.5 1.41L6.09 7L0.5 12.59L1.91 14L7.5 8.41L13.09 14L14.5 12.59L8.91 7L14.5 1.41Z"
+                  fill="#0C0C0C"
+                />
+              </svg>
+            </button>
+          ) : (
+            <button className="cursor-pointer" type="button" onClick={openMenu}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M3 7h18M3 12h18M3 17h18"
+                  stroke="var(--color-primary)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                ></path>
+              </svg>
+            </button>
+          )}
         </div>
         {/* mobile menu */}
-      <motion.div
-        initial={false}
-        animate={{
-          height: isOpenMobileMenu ? "calc(100vh - 62px)" : "0px",
-          opacity: isOpenMobileMenu ? 1 : 0,
-        }}
-        style={{ overflow: "hidden" }}
-        variants={{
-          open: { opacity: 1, height: "calc(100vh - 62px)" },
-          collapsed: { opacity: 0, height: 0 },
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        exit={{ opacity: 0 }}
-        className="fixed left-0 w-full top-[62px] bg-white z-50 "
-      >
-        {/* map on menu */}
-        <div className="flex flex-col items-center mt-12 gap-y-4">
-          {menus.map((item) => (
-            <DropDown item={item} key={item.id}/>
-          ))}
-        </div>
-      </motion.div>
+        <motion.div
+          initial={false}
+          animate={{
+            height: isOpenMobileMenu ? "calc(100vh - 62px)" : "0px",
+            opacity: isOpenMobileMenu ? 1 : 0,
+          }}
+          // style={{ overflow: "hidden" }}
+          variants={{
+            open: { opacity: 1, height: "calc(100vh - 62px)" },
+            collapsed: { opacity: 0, height: 0 },
+          }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+          exit={{ opacity: 0 }}
+          className="fixed left-0 w-full top-[62px] bg-white z-50 overflow-auto"
+        >
+          {/* map on menu */}
+          <div className="flex flex-col items-center mt-12 gap-y-4">
+            {menus.map((item) => (
+              <DropDown item={item} key={item.id} />
+            ))}
+            <div className="w-11/12 flex justify-center items-center gap-x-6 mt-20 py-4 border-t-[1px]">
+              <Button
+                type="button"
+                children={
+                  <div className="flex justify-center items-center gap-x-2">
+                    <div>
+                      <svg
+                        width="24"
+                        height="25"
+                        viewBox="0 0 24 25"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M18.39 15.5776C16.71 14.7176 14.53 14.0176 12 14.0176C9.47 14.0176 7.29 14.7176 5.61 15.5776C4.61 16.0876 4 17.1176 4 18.2376V21.0176H20V18.2376C20 17.1176 19.39 16.0876 18.39 15.5776ZM18 19.0176H6V18.2376C6 17.8576 6.2 17.5176 6.52 17.3576C7.71 16.7476 9.63 16.0176 12 16.0176C14.37 16.0176 16.29 16.7476 17.48 17.3576C17.8 17.5176 18 17.8576 18 18.2376V19.0176Z"
+                          fill="#202020"
+                        />
+                        <path
+                          d="M12 13.0176C14.21 13.0176 16 11.2276 16 9.01758C16 7.64758 16 5.51758 16 5.51758C16 4.68758 15.33 4.01758 14.5 4.01758C13.98 4.01758 13.52 4.28758 13.25 4.68758C12.98 4.28758 12.52 4.01758 12 4.01758C11.48 4.01758 11.02 4.28758 10.75 4.68758C10.48 4.28758 10.02 4.01758 9.5 4.01758C8.67 4.01758 8 4.68758 8 5.51758C8 5.51758 8 7.63758 8 9.01758C8 11.2276 9.79 13.0176 12 13.0176ZM10 6.51758H14V9.01758C14 10.1176 13.1 11.0176 12 11.0176C10.9 11.0176 10 10.1176 10 9.01758V6.51758Z"
+                          fill="#202020"
+                        />
+                      </svg>
+                    </div>
+                      <p>Log In</p>
+                  </div>
+                }
+                className={style.button}
+              />
+              <Button
+                type="button"
+                children={"Create Account"}
+                className={style.button}
+              />
+            </div>
+          </div>
+        </motion.div>
       </header>
       {/* desktop design */}
       <header className="hidden md:flex justify-around items-center my-4">
