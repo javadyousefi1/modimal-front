@@ -12,26 +12,70 @@ const Header = () => {
       id: 0,
       title: "Collection",
       href: "#",
+      subLink: null
     },
     {
       id: 1,
       title: "New In",
       href: "#",
+      subLink: [{
+        id:1,
+        title: "Shop All",
+        link: "#"
+      },
+      {
+        id:2,
+        title: "Top & Boluses",
+        link: "#"
+      },
+      {
+        id:3,
+        title: "Tees",
+        link: "#"
+      },
+      {
+        id:4,
+        title: "Pants",
+        link: "#"
+      },
+      {
+        id:5,
+        title: "Jackets & Outwears",
+        link: "#"
+      },
+      {
+        id:6,
+        title: "Pullovers",
+        link: "#"
+      },
+      {
+        id:7,
+        title: "Dresses & Jumpsuits",
+        link: "#"
+      },
+      {
+        id:8,
+        title: "Shortr & Skirt",
+        link: "#"
+      },]
     },
     {
       id: 2,
       title: "ModiWeek",
       href: "#",
+      subLink: null
     },
     {
       id: 3,
       title: "Plus Size",
       href: "#",
+      subLink: null
     },
     {
       id: 4,
       title: "Sustainability",
       href: "#",
+      subLink: null
     },
   ];
 
@@ -190,7 +234,7 @@ const Header = () => {
         {/* map on menu */}
         <div className="flex flex-col items-center mt-12 gap-y-4">
           {menus.map((item) => (
-            <DropDown item={item}/>
+            <DropDown item={item} key={item.id}/>
           ))}
         </div>
       </motion.div>
