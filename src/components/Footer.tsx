@@ -43,12 +43,13 @@ const Footer = () => {
                   type="checkbox"
                   className="w-4 h-4"
                   name="emailCheckbox"
+                  id="emailCheckbox"
                 />
               </div>
-              <p className="text-white text-left text-[10px]">
+              <label htmlFor="emailCheckbox" className="text-white text-left text-[10px]">
                 By Submittng your email, you agree to receive advertising emails
                 from Modimal.
-              </p>
+              </label>
             </div>
           </div>
           <div className="w-full flex justify-center items-center flex-col mt-6 md:gap-x-2 md:flex-row md:items-start md:w-2/3">
