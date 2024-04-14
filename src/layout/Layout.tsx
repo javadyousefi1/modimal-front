@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useState } from "react";
 // components
 import Footer from "@components/Footer";
-import Header from "@components/Header";
+import Header from "@components/header/Header";
 // rrd
 import { useLocation } from "react-router";
 // routes

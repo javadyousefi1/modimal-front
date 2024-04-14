@@ -83,7 +83,7 @@ const Footer = () => {
                 <a href="#" className={style.item}>
                   Returns & Refunds
                 </a>
-                <a href="#" className={style.item}>
+                <a href="/faq" className={style.item}>
                   FAQs
                 </a>
                 <a href="#" className={style.item}>

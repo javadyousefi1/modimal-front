@@ -2,8 +2,8 @@ import { useState } from "react";
 
 // framer-motion
 import { motion } from "framer-motion";
-import DropDown from "./shared/DropDown";
-import Button from "./elements/Button";
+import MenuDropDown from "./MenuDropDown";
+import Button from "../elements/Button";
 
 const style = {
   button:
@@ -308,7 +308,7 @@ const Header = () => {
             {/* map on menu */}
             <div className="flex flex-col items-center mt-12 gap-y-4">
               {menus.map((item) => (
-                <DropDown item={item} key={item.id} />
+                <MenuDropDown item={item} key={item.id} />
               ))}
               <div className="w-11/12 flex justify-center items-center gap-x-6 mt-20 py-4 border-t-[1px]">
                 <Button
@@ -335,6 +335,9 @@ const Header = () => {
             {modimalIcon}
           </div>
           <div className="flex justify-center items-center gap-x-4 lg:gap-x-6">
+          {/* {menus.map((item) => (
+                <DropDown item={item} key={item.id} />
+              ))} */}
             <a href="#">Collection</a>
             <a href="#">New In</a>
             <a href="#">ModiWeek</a>

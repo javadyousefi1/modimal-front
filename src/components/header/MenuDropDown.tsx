@@ -15,7 +15,7 @@ interface DropDownProps {
 }
 
 // Use the interface as the generic parameter for React.FC
-const DropDown: React.FC<DropDownProps> = ({ item }) => {
+const MenuDropDown: React.FC<DropDownProps> = ({ item }) => {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
 
   const handleOpenDropDown = () => {
@@ -23,7 +23,7 @@ const DropDown: React.FC<DropDownProps> = ({ item }) => {
   };
 
   return (
-    <div className="w-11/12 border-b-[1px] border-black">
+    <div className=" border-b-[1px] border-black">
       <div
         className="flex justify-between items-center"
         onClick={handleOpenDropDown}
@@ -54,6 +54,7 @@ const DropDown: React.FC<DropDownProps> = ({ item }) => {
       {isOpenDropDown &&
         item.subLink &&
         item.subLink.map((item) => (
+          <>
           <a
             className="flex justify-center items-start flex-col py-3 pl-8"
             href={item.link}
@@ -61,9 +62,11 @@ const DropDown: React.FC<DropDownProps> = ({ item }) => {
           >
             {item.title}
           </a>
+          
+          </>
         ))}
     </div>
   );
 };
 
-export default DropDown;
+export default MenuDropDown;
