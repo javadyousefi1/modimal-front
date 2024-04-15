@@ -252,8 +252,17 @@ const Header = () => {
     },
   ];
 
-  const openMenu = () => setIsOpenMobileMenu(true);
-  const closeMenu = () => setIsOpenMobileMenu(false);
+  const openMenu = () => {
+    setIsOpenMobileMenu(true);
+    // Disable body scroll when menu is open
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeMenu = () => {
+    setIsOpenMobileMenu(false);
+    // Enable body scroll when menu is closed
+    document.body.style.overflow = "";
+  };
 
   return (
     <>
@@ -276,7 +285,7 @@ const Header = () => {
             <div>{searchIcon}</div>
             {/* menu */}
             {isOpenMobileMenu ? (
-              <button className="w-[25px]" onClick={closeMenu}>
+              <button className="mx-[4px] w-[17px]" onClick={closeMenu}>
                 {closeIcon}
               </button>
             ) : (
@@ -305,37 +314,38 @@ const Header = () => {
             exit={{ opacity: 0 }}
             className="fixed left-0 w-full top-[56px] bg-white z-50 overflow-auto"
           >
-            {/* map on menu */}
-            <div className="flex flex-col items-center mt-12 gap-y-4">
-              {menus.map((item) => (
-                <MenuDropDown item={item} key={item.id} />
-              ))}
-              <div className="w-11/12 flex justify-center items-center gap-x-6 mt-20 py-4 border-t-[1px]">
-                <Button
-                  type="button"
-                  children={
-                    <div className="flex justify-center items-center gap-x-2">
-                      <div>{profileIcon}</div>
-                      <p>Log In</p>
-                    </div>
-                  }
-                  className={style.button}
-                />
-                <Button
-                  type="button"
-                  children={"Create Account"}
-                  className={style.button}
-                />
-              </div>
-            </div>
+            <div className="flex flex-col items-center mt-12"> {/* Set height to full screen */}
+  <div className="w-full overflow-auto max-h-[calc(100vh-200px)] flex flex-col items-center gap-y-4"> {/* Allow content to scroll */}
+    {menus.map((item) => (
+      <MenuDropDown item={item} key={item.id} />
+    ))}
+  </div>
+  <div className="w-full absolute bottom-0 flex justify-center items-center gap-x-4 py-4 px-4 border-t-[1px]">
+    <Button
+      type="button"
+      children={
+        <div className="flex justify-center items-center gap-x-2">
+          <div>{profileIcon}</div>
+          <p>Log In</p>
+        </div>
+      }
+      className={style.button}
+    />
+    <Button
+      type="button"
+      children={"Create Account"}
+      className={style.button}
+    />
+  </div>
+</div>
+
           </motion.div>
         </div>
+        {/* desktop design */}
         <div className="hidden md:flex justify-around items-center py-4 bg-white border-b-[1px] border-neutral-2">
-          <div>
-            {modimalIcon}
-          </div>
+          <div>{modimalIcon}</div>
           <div className="flex justify-center items-center gap-x-4 lg:gap-x-6">
-          {/* {menus.map((item) => (
+            {/* {menus.map((item) => (
                 <DropDown item={item} key={item.id} />
               ))} */}
             <a href="#">Collection</a>
@@ -346,25 +356,16 @@ const Header = () => {
           </div>
           <div className="flex justify-center items-center gap-x-2 lg:gap-x-4">
             {/* my shopping icon */}
-            <a href="#">
-              {myShoppingIcon}
-            </a>
+            <a href="#">{myShoppingIcon}</a>
             {/* favorites icon */}
-            <a href="#">
-              {favoriteIcon}
-            </a>
+            <a href="#">{favoriteIcon}</a>
             {/* profile icon */}
-            <a href="#">
-              {profileIcon}
-            </a>
+            <a href="#">{profileIcon}</a>
             {/* search icon */}
-            <div>
-              {searchIcon}
-            </div>
+            <div>{searchIcon}</div>
           </div>
         </div>
       </header>
-      {/* desktop design */}
       <a href="#" className="fixed bottom-14 right-4 z-10">
         <svg
           width="56"

@@ -23,7 +23,7 @@ const MenuDropDown: React.FC<DropDownProps> = ({ item }) => {
   };
 
   return (
-    <div className=" border-b-[1px] border-black">
+    <div className="w-11/12 border-b-[1px] border-black">
       <div
         className="flex justify-between items-center"
         onClick={handleOpenDropDown}
@@ -51,20 +51,23 @@ const MenuDropDown: React.FC<DropDownProps> = ({ item }) => {
           ""
         )}
       </div>
-      {isOpenDropDown &&
-        item.subLink &&
-        item.subLink.map((item) => (
-          <>
-          <a
-            className="flex justify-center items-start flex-col py-3 pl-8"
-            href={item.link}
-            key={item.id}
-          >
-            {item.title}
-          </a>
-          
-          </>
-        ))}
+      <div
+        className={`transition-max-h duration-500 ease-in-out overflow-hidden ${
+          isOpenDropDown ? "max-h-96" : "max-h-0"
+        }`}
+      >
+        {isOpenDropDown &&
+          item.subLink &&
+          item.subLink.map((item) => (
+            <a
+              className="flex justify-center items-start flex-col py-3 pl-8 text-neutral-8"
+              href={item.link}
+              key={item.id}
+            >
+              {item.title}
+            </a>
+          ))}
+      </div>
     </div>
   );
 };
