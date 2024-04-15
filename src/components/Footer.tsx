@@ -3,16 +3,16 @@ import Input from "./inputs/Input";
 const style = {
   eachItems: "w-1/2 flex justify-center items-start flex-col gap-y-2",
   title: "text-[14px] font-semibold",
-  item: "text-[14px] font-regular",
+  item: "min-w-max text-[14px] font-regular",
 };
 
 const Footer = () => {
   return (
     <>
       <footer className="w-full flex justify-center items-center flex-col bg-neutral-8 mt-6 py-8 px-5 md:px-16">
-        <div className="max-w-[500px] flex justify-center items-center flex-col md:flex-row sm:gap-x-24">
-          <div className="w-full sm:w-1/3">
-            <p className="text-center text-white text-[13px] w-full whitespace-nowrap font-semibold">
+        <div className="w-full sm:w-3/4 md:w-full md:flex md:justify-center md:items-center md:flex-row md:gap-x-24">
+          <div className="w-full md:w-1/3">
+            <p className="w-full text-center text-white text-[13px] whitespace-nowrap font-semibold">
               Join our club, get 15% off for your Birthday
             </p>
             <div className="w-full relative">
@@ -38,91 +38,75 @@ const Footer = () => {
               </div>
             </div>
             <div className="w-full flex justify-start items-center gap-x-2 mt-2">
-              <div className="min-w-max">
+              <div className="min-w-max flex justify-center items-center">
                 <Input
                   type="checkbox"
                   className="w-4 h-4"
                   name="emailCheckbox"
+                  id="emailCheckbox"
                 />
               </div>
-              <p className="text-white text-left text-[10px]">
+              <label htmlFor="emailCheckbox" className="text-white text-left text-[10px]">
                 By Submittng your email, you agree to receive advertising emails
                 from Modimal.
-              </p>
+              </label>
             </div>
           </div>
-          <div className="w-full flex justify-center items-center flex-col mt-6 sm:flex-row sm:items-start sm:w-2/3">
-          <div className="w-full flex justify-center items-start text-white gap-x-4">
-            <div className={style.eachItems}>
-              <p className={style.title}>About Modimal</p>
+          <div className="w-full flex justify-center items-center flex-col mt-6 md:gap-x-2 md:flex-row md:items-start md:w-2/3">
+            <div className="w-full flex justify-center items-start text-white gap-x-4">
+              <div className={style.eachItems}>
+                <p className={style.title}>About Modimal</p>
+                <a href="#" className={style.item}>
+                  Collection
+                </a>
+                <a href="#" className={style.item}>
+                  Sustainability
+                </a>
+                <a href="#" className={style.item}>
+                  Privacy Policy
+                </a>
+                <a href="#" className={style.item}>
+                  Support System
+                </a>
+                <a href="#" className={style.item}>
+                  Terms & Condition
+                </a>
+                <a href="#" className={style.item}>
+                  Copyright Notice
+                </a>
+              </div>
+              <div className={style.eachItems}>
+                <p className={style.title}>Help & Support</p>
+                <a href="#" className={style.item}>
+                  Orders & Shipping
+                </a>
+                <a href="#" className={style.item}>
+                  Returns & Refunds
+                </a>
+                <a href="/faq" className={style.item}>
+                  FAQs
+                </a>
+                <a href="#" className={style.item}>
+                  Contact Us
+                </a>
+              </div>
+            </div>
+            <div className="w-full flex justify-center items-start flex-col gap-y-2 text-white mt-6 md:mt-0 md:w-1/2">
+              <p className={style.title}>Join Up</p>
               <a href="#" className={style.item}>
-                Collection
+                Modimal Club
               </a>
               <a href="#" className={style.item}>
-                Sustainability
+                Careers
               </a>
               <a href="#" className={style.item}>
-                Privacy Policy
-              </a>
-              <a href="#" className={style.item}>
-                Support System
-              </a>
-              <a href="#" className={style.item}>
-                Terms & Condition
-              </a>
-              <a href="#" className={style.item}>
-                Copyright Notice
+                Visit Us
               </a>
             </div>
-            <div className={style.eachItems}>
-              <p className={style.title}>Help & Support</p>
-              <a href="#" className={style.item}>
-                Orders & Shipping
-              </a>
-              <a href="#" className={style.item}>
-                Returns & Refunds
-              </a>
-              <a href="#" className={style.item}>
-                FAQs
-              </a>
-              <a href="#" className={style.item}>
-                Contact Us
-              </a>
-            </div>
-          </div>
-          <div className="w-full flex justify-center items-start flex-col gap-y-2 text-white mt-6 sm:mt-0 sm:w-1/2">
-            <p className={style.title}>Join Up</p>
-            <a href="#" className={style.item}>
-              Modimal Club
-            </a>
-            <a href="#" className={style.item}>
-              Careers
-            </a>
-            <a href="#" className={style.item}>
-              Visit Us
-            </a>
           </div>
         </div>
-          </div>
-        <div className="max-w-[500px]">
-          <div className="w-full flex justify-between items-center flex-row-reverse mt-3">
-            <div>
-              <svg
-                width="56"
-                height="48"
-                viewBox="0 0 56 48"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect x="0.5" y="0.5" width="55" height="47" fill="#5A6D57" />
-                <rect x="0.5" y="0.5" width="55" height="47" stroke="white" />
-                <path
-                  d="M36 14H20.01C18.91 14 18.01 14.9 18.01 16L18 34L22 30H36C37.1 30 38 29.1 38 28V16C38 14.9 37.1 14 36 14ZM36 28H21.17L20 29.17V16H36V28ZM28 22C29.1 22 30 21.1 30 20C30 18.9 29.1 18 28 18C26.9 18 26 18.9 26 20C26 21.1 26.9 22 28 22ZM32 25.43C32 24.62 31.52 23.9 30.78 23.58C29.93 23.21 28.99 23 28 23C27.01 23 26.07 23.21 25.22 23.58C24.48 23.9 24 24.62 24 25.43V26H32V25.43Z"
-                  fill="white"
-                />
-              </svg>
-            </div>
-            <div className="flex justify-center items-center gap-x-4">
+        <div className="w-full sm:w-3/4 md:w-full mt-4">
+            <div className="flex justify-start items-center gap-x-4">
               {/* instagram */}
               <a href="#">
                 <svg
@@ -201,7 +185,6 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
-          </div>
           <div className="w-full flex justify-start items-center gap-x-4 mt-6">
             <div>
               <svg
