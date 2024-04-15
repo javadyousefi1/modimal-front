@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import MenuDropDown from "./MenuDropDown";
 import Button from "../elements/Button";
+import DropDown from "@components/shared/DropDown";
 
 const style = {
   button:
@@ -345,14 +346,14 @@ const Header = () => {
         <div className="hidden md:flex justify-around items-center py-4 bg-white border-b-[1px] border-neutral-2">
           <div>{modimalIcon}</div>
           <div className="flex justify-center items-center gap-x-4 lg:gap-x-6">
-            {/* {menus.map((item) => (
+            {menus.map((item) => (
                 <DropDown item={item} key={item.id} />
-              ))} */}
-            <a href="#">Collection</a>
+              ))}
+            {/* <a href="#">Collection</a>
             <a href="#">New In</a>
             <a href="#">ModiWeek</a>
             <a href="#">Plus Size</a>
-            <a href="#">Sustainability</a>
+            <a href="#">Sustainability</a> */}
           </div>
           <div className="flex justify-center items-center gap-x-2 lg:gap-x-4">
             {/* my shopping icon */}
