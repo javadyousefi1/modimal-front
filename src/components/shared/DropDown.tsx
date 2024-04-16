@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState } from "react";
 interface SubLink {
   id: number;
   link: string;
@@ -15,20 +15,31 @@ interface DropDownProps {
 }
 
 // Use the interface as the generic parameter for React.FC
-const MenuDropDown: React.FC<DropDownProps> = ({ item }) => {
+const DropDown: React.FC<DropDownProps> = ({ item }) => {
   const [isOpenDropDown, setIsOpenDropDown] = useState(false);
 
+
+
+  // const handleOpenDropDown = () => {
+  //   setIsOpenDropDown((prev) => !prev);
+  // };
   const handleOpenDropDown = () => {
-    setIsOpenDropDown((prev) => !prev);
+    setIsOpenDropDown(true);
+  };
+  const handleCloseDropDown = () => {
+    setIsOpenDropDown(false);
   };
 
+
+
   return (
-    <div className="w-11/12 border-b-[1px] border-black">
+    <div>
       <div
-        className="flex justify-between items-center"
-        onClick={handleOpenDropDown}
+        className="flex justify-between items-center gap-x-2 cursor-pointer"
+        onMouseEnter={handleOpenDropDown}
+        onMouseLeave={handleCloseDropDown}
       >
-        <span className="">{item.title}</span>
+        <span>{item.title}</span>
         {item.subLink !== null ? (
           <div>
             <svg
@@ -52,24 +63,26 @@ const MenuDropDown: React.FC<DropDownProps> = ({ item }) => {
         )}
       </div>
       <div
-        className={`transition-max-h duration-500 ease-in-out overflow-hidden ${
+        className={`transition-max-h duration-500 ease-in-out overflow-hidden absolute top-12 bg-white ${
           isOpenDropDown ? "max-h-96" : "max-h-0"
         }`}
       >
         {isOpenDropDown &&
           item.subLink &&
           item.subLink.map((item) => (
+            <div onMouseEnter={handleOpenDropDown} onMouseLeave={handleCloseDropDown}>
             <a
-              className="flex justify-center items-start flex-col py-3 pl-8 text-neutral-8"
+              className="flex justify-center items-start flex-col p-3 text-neutral-8 hover:bg-primary-200 hover:text-white text-[14px]"
               href={item.link}
               key={item.id}
             >
               {item.title}
             </a>
+            </div>
           ))}
       </div>
     </div>
   );
 };
 
-export default MenuDropDown;
+export default DropDown;
