@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import MenuDropDown from "./MenuDropDown";
 import Button from "../elements/Button";
+import DropDown from "@components/shared/DropDown";
 
 const style = {
   button:
@@ -252,8 +253,17 @@ const Header = () => {
     },
   ];
 
-  const openMenu = () => setIsOpenMobileMenu(true);
-  const closeMenu = () => setIsOpenMobileMenu(false);
+  const openMenu = () => {
+    setIsOpenMobileMenu(true);
+    // Disable body scroll when menu is open
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeMenu = () => {
+    setIsOpenMobileMenu(false);
+    // Enable body scroll when menu is closed
+    document.body.style.overflow = "";
+  };
 
   return (
     <>
@@ -276,7 +286,7 @@ const Header = () => {
             <div>{searchIcon}</div>
             {/* menu */}
             {isOpenMobileMenu ? (
-              <button className="w-[25px]" onClick={closeMenu}>
+              <button className="mx-[4px] w-[17px]" onClick={closeMenu}>
                 {closeIcon}
               </button>
             ) : (
@@ -293,78 +303,70 @@ const Header = () => {
           <motion.div
             initial={false}
             animate={{
-              height: isOpenMobileMenu ? "calc(100vh - 56px)" : "0px",
+              height: isOpenMobileMenu ? "calc(100vh - 58px)" : "0px",
               opacity: isOpenMobileMenu ? 1 : 0,
             }}
             // style={{ overflow: "hidden" }}
             variants={{
-              open: { opacity: 1, height: "calc(100vh - 56px)" },
+              open: { opacity: 1, height: "calc(100vh - 58px)" },
               collapsed: { opacity: 0, height: 0 },
             }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             exit={{ opacity: 0 }}
-            className="fixed left-0 w-full top-[56px] bg-white z-50 overflow-auto"
+            className="fixed left-0 w-full top-[58px] bg-white z-50 overflow-auto"
           >
-            {/* map on menu */}
-            <div className="flex flex-col items-center mt-12 gap-y-4">
-              {menus.map((item) => (
-                <MenuDropDown item={item} key={item.id} />
-              ))}
-              <div className="w-11/12 flex justify-center items-center gap-x-6 mt-20 py-4 border-t-[1px]">
-                <Button
-                  type="button"
-                  children={
-                    <div className="flex justify-center items-center gap-x-2">
-                      <div>{profileIcon}</div>
-                      <p>Log In</p>
-                    </div>
-                  }
-                  className={style.button}
-                />
-                <Button
-                  type="button"
-                  children={"Create Account"}
-                  className={style.button}
-                />
-              </div>
-            </div>
+            <div className="flex flex-col items-center mt-12"> {/* Set height to full screen */}
+  <div className="w-full overflow-auto max-h-[calc(100vh-200px)] flex flex-col items-center gap-y-4"> {/* Allow content to scroll */}
+    {menus.map((item) => (
+      <MenuDropDown item={item} key={item.id} />
+    ))}
+  </div>
+  <div className="w-full absolute bottom-0 flex justify-center items-center gap-x-4 py-4 px-4 border-t-[1px]">
+    <Button
+      type="button"
+      children={
+        <div className="flex justify-center items-center gap-x-2">
+          <div>{profileIcon}</div>
+          <p>Log In</p>
+        </div>
+      }
+      className={style.button}
+    />
+    <Button
+      type="button"
+      children={"Create Account"}
+      className={style.button}
+    />
+  </div>
+</div>
+
           </motion.div>
         </div>
+        {/* desktop design */}
         <div className="hidden md:flex justify-around items-center py-4 bg-white border-b-[1px] border-neutral-2">
-          <div>
-            {modimalIcon}
-          </div>
+          <div>{modimalIcon}</div>
           <div className="flex justify-center items-center gap-x-4 lg:gap-x-6">
-          {/* {menus.map((item) => (
+            {menus.map((item) => (
                 <DropDown item={item} key={item.id} />
-              ))} */}
-            <a href="#">Collection</a>
+              ))}
+            {/* <a href="#">Collection</a>
             <a href="#">New In</a>
             <a href="#">ModiWeek</a>
             <a href="#">Plus Size</a>
-            <a href="#">Sustainability</a>
+            <a href="#">Sustainability</a> */}
           </div>
           <div className="flex justify-center items-center gap-x-2 lg:gap-x-4">
             {/* my shopping icon */}
-            <a href="#">
-              {myShoppingIcon}
-            </a>
+            <a href="#">{myShoppingIcon}</a>
             {/* favorites icon */}
-            <a href="#">
-              {favoriteIcon}
-            </a>
+            <a href="#">{favoriteIcon}</a>
             {/* profile icon */}
-            <a href="#">
-              {profileIcon}
-            </a>
+            <a href="#">{profileIcon}</a>
             {/* search icon */}
-            <div>
-              {searchIcon}
-            </div>
+            <div>{searchIcon}</div>
           </div>
         </div>
       </header>
-      {/* desktop design */}
       <a href="#" className="fixed bottom-14 right-4 z-10">
         <svg
           width="56"
