@@ -303,17 +303,17 @@ const Header = () => {
           <motion.div
             initial={false}
             animate={{
-              height: isOpenMobileMenu ? "calc(100vh - 58px)" : "0px",
+              height: isOpenMobileMenu ? "calc(100vh - 57px)" : "0px",
               opacity: isOpenMobileMenu ? 1 : 0,
             }}
             // style={{ overflow: "hidden" }}
             variants={{
-              open: { opacity: 1, height: "calc(100vh - 58px)" },
+              open: { opacity: 1, height: "calc(100vh - 57px)" },
               collapsed: { opacity: 0, height: 0 },
             }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             exit={{ opacity: 0 }}
-            className="fixed left-0 w-full top-[58px] bg-white z-50 overflow-auto"
+            className="fixed left-0 w-full top-[57px] bg-white z-50 overflow-auto"
           >
             <div className="flex flex-col items-center mt-12"> {/* Set height to full screen */}
   <div className="w-full overflow-auto max-h-[calc(100vh-200px)] flex flex-col items-center gap-y-4"> {/* Allow content to scroll */}
