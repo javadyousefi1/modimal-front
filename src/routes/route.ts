@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Faq from "../pages/Faq";
 import Users from "../pages/admin/Users";
 import Main from "../pages/admin/Main";
+import Products from "../pages/Products";
 
 interface RouteType {
   id: number;
@@ -23,4 +24,5 @@ export const routes: RouteType[] = [
   { id: 4, path: "/faq", title: "faq", component: Faq },
   { id: 5, path: "/admin", title: "main", component: Main, panelAdmin: true },
   { id: 6, path: "/admin/users", title: "users", component: Users, panelAdmin: true },
+  { id: 7, path: "/products", title: "products", component: Products },
 ];
