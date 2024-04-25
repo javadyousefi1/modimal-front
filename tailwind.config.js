@@ -40,6 +40,9 @@ export default {
         "error-light": "var(--color-error-light)",
         "error": "var(--color-error)",
       },
+      screens: {
+        'customResolution': "450px",
+      },
     },
     container: {
       center: true,

@@ -1,11 +1,27 @@
 import Breadcrumbs from "@components/shared/Breadcrumbs";
 import CartBox from "@components/cart/CartBox";
-import banner from "../assets/images/productswiper3.svg";
+import MobileBanner from "../assets/images/productswiper3.svg";
+import DesktopBanner from "../assets/images/productswiper4.svg";
+import product1 from "../assets/images/product1.svg";
+import product2 from "../assets/images/product2.svg";
+import product3 from "../assets/images/product3.svg";
+import product4 from "../assets/images/product4.svg";
+import product5 from "../assets/images/product5.svg";
+import product6 from "../assets/images/product6.svg";
 const Products: React.FC = () => {
   let faqBreadcrumbs = [
     { id: 1, text: "Home", href: "/" },
     { id: 2, text: "shopAll", href: "/products" },
   ];
+
+  const products = [
+    {id: 1, image: product1 , title: "product1", off: null, newproduct: false},
+    {id: 2, image: product2 , title: "product2", off: "20%", newproduct: true},
+    {id: 3, image: product3 , title: "product3", off: null, newproduct: true},
+    {id: 4, image: product4 , title: "product4", off: null, newproduct: false},
+    {id: 5, image: product5 , title: "product5", off: "30%", newproduct: false},
+    {id: 6, image: product6 , title: "product6", off: null, newproduct: false},
+  ]
 
   return (
     <div className="w-full px-5">
@@ -13,7 +29,8 @@ const Products: React.FC = () => {
         <Breadcrumbs items={faqBreadcrumbs} />
       </div>
       <div className="flex justify-center items-center">
-        <img src={banner} />
+        <img src={ MobileBanner} className="block customResolution:hidden"/>
+        <img src={DesktopBanner} className="hidden customResolution:block" />
       </div>
       <div className="w-full flex flex-row-reverse justify-center items-center gap-x-1 mt-6">
         <span className="text-[14px]">Filter</span>
