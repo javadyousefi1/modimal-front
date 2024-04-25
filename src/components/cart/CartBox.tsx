@@ -43,7 +43,7 @@ const CartBox: React.FC<CartBoxPropType> = ({
         </span>
         {/* new clothe */}
         {newProduct && (
-          <span className="absolute left-3 top-3 bg-white px-4 py-2 text-[12px]">
+          <span className="absolute left-3 top-3 bg-white px-2 py-1 text-[12px] cursor-default" >
             New
           </span>
         )}

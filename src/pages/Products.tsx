@@ -116,11 +116,11 @@ const Products: React.FC = () => {
         </span>
       </div>
       {/* product */}
-      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-4 mt-6">
+      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-6">
         {/* desktop filter */}
         <ProductFilter />
         <div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4">
             {products.map((item, index) => (
               <div key={index}>
                 <CartBox
