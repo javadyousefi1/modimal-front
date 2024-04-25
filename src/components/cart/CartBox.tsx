@@ -5,10 +5,22 @@ type CartBoxPropType = {
   desc: string;
   price: number;
   colors: string[];
-  productImg: "string"
-}
+  productImg: "string";
+  alt: string;
+  newProduct?: boolean;
+  oldPrice?: number | null
+};
 
-const CartBox: React.FC<CartBoxPropType> = ({ title, desc, price, colors, productImg = image }) => {
+const CartBox: React.FC<CartBoxPropType> = ({
+  title,
+  desc,
+  price,
+  colors,
+  productImg = image,
+  alt,
+  newProduct,
+  oldPrice
+}) => {
   return (
     <div>
       <div className="relative flex flex-col">
@@ -29,14 +41,27 @@ const CartBox: React.FC<CartBoxPropType> = ({ title, desc, price, colors, produc
             />
           </svg>
         </span>
+        {/* new clothe */}
+        {newProduct && (
+          <span className="absolute left-3 top-3 bg-white px-4 py-2 text-[12px]">
+            New
+          </span>
+        )}
         {/* cart image */}
-        <img src={productImg} alt="" className="object-cover " />
+        <img src={productImg} alt={alt} className="object-cover " />
         {/* title */}
-        <p className="font-semibold text-black text-md" >{title}</p>
+        <p className="min-w-max font-semibold text-black text-[14px]">
+          {title}
+        </p>
         {/* desc */}
-        <span className="mt-1">{desc}</span>
-        {/* cost */}
-        <p className="mb-3 font-bold text-right">$ {price}</p>
+        <span className="mt-1 text-[14px]">{desc}</span>
+        {/* price */}
+        <div className="flex justify-between items-center flex-row-reverse">
+          <p className="mb-3 font-bold text-right">$ {price}</p>
+          {oldPrice && (
+            <p className="mb-3 text-left line-through text-neutral-6">$ {oldPrice}</p>
+          )}
+        </div>
         {/* colors */}
         <div className="flex gap-x-2 ">
           {colors?.map((color, index) => (
@@ -49,8 +74,7 @@ const CartBox: React.FC<CartBoxPropType> = ({ title, desc, price, colors, produc
                 backgroundColor: color,
                 borderRadius: "100%",
               }}
-            >
-            </div>
+            ></div>
           ))}
         </div>
         {/* free space */}

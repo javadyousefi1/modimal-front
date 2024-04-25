@@ -1,5 +1,7 @@
 import Breadcrumbs from "@components/shared/Breadcrumbs";
+// componenet
 import CartBox from "@components/cart/CartBox";
+// SVG
 import MobileBanner from "../assets/images/productswiper3.svg";
 import DesktopBanner from "../assets/images/productswiper4.svg";
 import product1 from "../assets/images/product1.svg";
@@ -14,6 +16,7 @@ const Products: React.FC = () => {
     { id: 2, text: "shopAll", href: "/products" },
   ];
 
+  // product data
   const products = [
     {
       id: 1,
@@ -23,7 +26,8 @@ const Products: React.FC = () => {
       newproduct: false,
       color: ["#CA2929"],
       price: 160,
-      desc: "Turn it up Top "
+      oldPrice: null,
+      desc: "Turn it up Top ",
     },
     {
       id: 2,
@@ -33,7 +37,8 @@ const Products: React.FC = () => {
       newproduct: true,
       color: ["#0C0C0C", "#7DC3EB", "#748C70"],
       price: 95,
-      desc: "Turn it up T-shirt"
+      oldPrice: 120,
+      desc: "Turn it up T-shirt",
     },
     {
       id: 3,
@@ -43,7 +48,8 @@ const Products: React.FC = () => {
       newproduct: true,
       color: ["#0C0C0C", "#7DC3EB", "#748C70"],
       price: 245,
-      desc: "Turn it up Dress"
+      oldPrice: null,
+      desc: "Turn it up Dress",
     },
     {
       id: 4,
@@ -53,7 +59,8 @@ const Products: React.FC = () => {
       newproduct: false,
       color: ["#909225", "#CA6D29"],
       price: 199,
-      desc: "Turn it up Jacket"
+      oldPrice: null,
+      desc: "Turn it up Jacket",
     },
     {
       id: 5,
@@ -63,7 +70,8 @@ const Products: React.FC = () => {
       newproduct: false,
       color: ["#0C0C0C", "#19418E", "#748C70"],
       price: 180,
-      desc: "Turn it up Pants"
+      oldPrice: 240,
+      desc: "Turn it up Pants",
     },
     {
       id: 6,
@@ -73,7 +81,8 @@ const Products: React.FC = () => {
       newproduct: false,
       color: ["#0C0C0C", "#748C70"],
       price: 280,
-      desc: "Turn it up Pullover"
+      oldPrice: 350,
+      desc: "Turn it up Pullover",
     },
   ];
 
@@ -82,11 +91,13 @@ const Products: React.FC = () => {
       <div className="my-6">
         <Breadcrumbs items={faqBreadcrumbs} />
       </div>
+      {/* banner */}
       <div className="flex justify-center items-center">
         <img src={MobileBanner} className="block customResolution:hidden" />
         <img src={DesktopBanner} className="hidden customResolution:block" />
       </div>
-      <div className="w-full flex flex-row-reverse justify-center items-center gap-x-1 mt-6">
+      {/*mobile filter */}
+      <div className="w-full flex flex-row-reverse justify-center items-center gap-x-1 mt-6 sm:hidden">
         <span className="text-[14px]">Filter</span>
         <span>
           <svg
@@ -103,18 +114,34 @@ const Products: React.FC = () => {
           </svg>
         </span>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4 mt-6">
-        {products.map((item, index) => (
-          <div key={index}>
-            <CartBox
-              title={item.title}
-              desc={item.desc}
-              price={item.price}
-              colors={item.color}
-              productImg={item.image}
-            />
+      {/* product */}
+      <div className="sm:flex sm:justify-center sm:items-center">
+        {/* desktop filter */}
+        <div className="w-1/3 hidden sm:block">filter</div>
+        <div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4 mt-6">
+            {products.map((item, index) => (
+              <div key={index}>
+                <CartBox
+                  title={item.title}
+                  desc={item.desc}
+                  price={item.price}
+                  colors={item.color}
+                  productImg={item.image}
+                  alt={item.title}
+                  newProduct={item.newproduct}
+                  oldPrice={item.oldPrice}
+                />
+              </div>
+            ))}
           </div>
-        ))}
+          {/* button */}
+          <div className="w-full flex justify-center items-center">
+            <button className="min-w-max flex justify-center items-center py-5 px-10 h-4 border-[1px] border-primary-600 text-[14px] text-primary-600">
+              Load More
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
