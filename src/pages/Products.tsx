@@ -15,13 +15,67 @@ const Products: React.FC = () => {
   ];
 
   const products = [
-    {id: 1, image: product1 , title: "product1", off: null, newproduct: false},
-    {id: 2, image: product2 , title: "product2", off: "20%", newproduct: true},
-    {id: 3, image: product3 , title: "product3", off: null, newproduct: true},
-    {id: 4, image: product4 , title: "product4", off: null, newproduct: false},
-    {id: 5, image: product5 , title: "product5", off: "30%", newproduct: false},
-    {id: 6, image: product6 , title: "product6", off: null, newproduct: false},
-  ]
+    {
+      id: 1,
+      image: product1,
+      title: "chill wrap top",
+      off: null,
+      newproduct: false,
+      color: ["#CA2929"],
+      price: 160,
+      desc: "Turn it up Top "
+    },
+    {
+      id: 2,
+      image: product2,
+      title: "Essential T-shirt",
+      off: "20%",
+      newproduct: true,
+      color: ["#0C0C0C", "#7DC3EB", "#748C70"],
+      price: 95,
+      desc: "Turn it up T-shirt"
+    },
+    {
+      id: 3,
+      image: product3,
+      title: "Shirt Dress",
+      off: null,
+      newproduct: true,
+      color: ["#0C0C0C", "#7DC3EB", "#748C70"],
+      price: 245,
+      desc: "Turn it up Dress"
+    },
+    {
+      id: 4,
+      image: product4,
+      title: "Rule zip Jacket",
+      off: null,
+      newproduct: false,
+      color: ["#909225", "#CA6D29"],
+      price: 199,
+      desc: "Turn it up Jacket"
+    },
+    {
+      id: 5,
+      image: product5,
+      title: "New Age Linen",
+      off: "30%",
+      newproduct: false,
+      color: ["#0C0C0C", "#19418E", "#748C70"],
+      price: 180,
+      desc: "Turn it up Pants"
+    },
+    {
+      id: 6,
+      image: product6,
+      title: "Boss Pullover",
+      off: null,
+      newproduct: false,
+      color: ["#0C0C0C", "#748C70"],
+      price: 280,
+      desc: "Turn it up Pullover"
+    },
+  ];
 
   return (
     <div className="w-full px-5">
@@ -29,7 +83,7 @@ const Products: React.FC = () => {
         <Breadcrumbs items={faqBreadcrumbs} />
       </div>
       <div className="flex justify-center items-center">
-        <img src={ MobileBanner} className="block customResolution:hidden"/>
+        <img src={MobileBanner} className="block customResolution:hidden" />
         <img src={DesktopBanner} className="hidden customResolution:block" />
       </div>
       <div className="w-full flex flex-row-reverse justify-center items-center gap-x-1 mt-6">
@@ -50,13 +104,14 @@ const Products: React.FC = () => {
         </span>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4 mt-6">
-        {[...Array(9)].map((_, index) => (
+        {products.map((item, index) => (
           <div key={index}>
             <CartBox
-              title="tailored stretch"
-              desc="turn it up pants"
-              price={180}
-              colors={["#7DC3EB", "#0C0C0C", "#748C70"]}
+              title={item.title}
+              desc={item.desc}
+              price={item.price}
+              colors={item.color}
+              productImg={item.image}
             />
           </div>
         ))}

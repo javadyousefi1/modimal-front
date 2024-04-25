@@ -1,13 +1,14 @@
-import productImg from "@assets/images/productImg(1).png";
+import image from "@assets/images/productImg(1).png";
 
 type CartBoxPropType = {
   title: string;
   desc: string;
   price: number;
-  colors: string[]
+  colors: string[];
+  productImg: "string"
 }
 
-const CartBox: React.FC<CartBoxPropType> = ({ title, desc, price, colors }) => {
+const CartBox: React.FC<CartBoxPropType> = ({ title, desc, price, colors, productImg = image }) => {
   return (
     <div>
       <div className="relative flex flex-col">
