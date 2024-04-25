@@ -1,6 +1,7 @@
 import Breadcrumbs from "@components/shared/Breadcrumbs";
 // componenet
 import CartBox from "@components/cart/CartBox";
+import ProductFilter from "@components/products/ProductFilter"
 // SVG
 import MobileBanner from "../assets/images/productswiper3.svg";
 import DesktopBanner from "../assets/images/productswiper4.svg";
@@ -92,7 +93,7 @@ const Products: React.FC = () => {
         <Breadcrumbs items={faqBreadcrumbs} />
       </div>
       {/* banner */}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center -mx-5">
         <img src={MobileBanner} className="block customResolution:hidden" />
         <img src={DesktopBanner} className="hidden customResolution:block" />
       </div>
@@ -115,11 +116,11 @@ const Products: React.FC = () => {
         </span>
       </div>
       {/* product */}
-      <div className="sm:flex sm:justify-center sm:items-center">
+      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-4 mt-6">
         {/* desktop filter */}
-        <div className="w-1/3 hidden sm:block">filter</div>
+        <ProductFilter />
         <div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4 mt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-x-4">
             {products.map((item, index) => (
               <div key={index}>
                 <CartBox
