@@ -63,7 +63,7 @@ const Sidebar = () => {
         {/* profile section */}
         <div className="flex flex-col items-center gap-y-2">
           {/* user icon */}
-          <div className="flex justify-center mt-10 bg-primary-600 w-[30px] h-[30px] rounded-full items-center">
+          <div className="flex justify-center mt-10 bg-primary-600 w-[30px] h-[30px] items-center">
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
