@@ -303,20 +303,20 @@ const Header = () => {
           <motion.div
             initial={false}
             animate={{
-              height: isOpenMobileMenu ? "calc(100vh - 58px)" : "0px",
+              height: isOpenMobileMenu ? "calc(100dvh - 57px)" : "0px",
               opacity: isOpenMobileMenu ? 1 : 0,
             }}
             // style={{ overflow: "hidden" }}
             variants={{
-              open: { opacity: 1, height: "calc(100vh - 58px)" },
+              open: { opacity: 1, height: "calc(100dvh - 57px)" },
               collapsed: { opacity: 0, height: 0 },
             }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             exit={{ opacity: 0 }}
-            className="fixed left-0 w-full top-[58px] bg-white z-50 overflow-auto"
+            className="fixed left-0 w-full top-[57px] bg-white z-50 overflow-auto"
           >
             <div className="flex flex-col items-center mt-12"> {/* Set height to full screen */}
-  <div className="w-full overflow-auto max-h-[calc(100vh-200px)] flex flex-col items-center gap-y-4"> {/* Allow content to scroll */}
+  <div className="w-full overflow-auto max-h-[calc(100dvh-200px)] flex flex-col items-center gap-y-4"> {/* Allow content to scroll */}
     {menus.map((item) => (
       <MenuDropDown item={item} key={item.id} />
     ))}
@@ -367,7 +367,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <a href="#" className="fixed bottom-14 right-4 z-10">
+      <a href="#" className="fixed bottom-5 right-4 z-10">
         <svg
           width="56"
           height="48"
