@@ -46,5 +46,4 @@ const usersSlice = createSlice({
 });
 
 export { getCurrentUser };
-
 export default usersSlice.reducer
