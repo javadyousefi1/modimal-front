@@ -53,7 +53,7 @@ const MenuDropDown: React.FC<DropDownProps> = ({ item }) => {
       </div>
       <div
         className={`transition-max-h duration-500 ease-in-out overflow-hidden ${
-          isOpenDropDown ? "max-h-96" : "max-h-0"
+          isOpenDropDown ? "h-96" : "h-0"
         }`}
       >
         {isOpenDropDown &&
