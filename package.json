@@ -6,7 +6,7 @@
   "scripts": {
     "start": "vite --mode d.modimal",
     "test": "vitest --root src/",
-    "build": "vite build",
+    "build": "vite build --mode p.modimal",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

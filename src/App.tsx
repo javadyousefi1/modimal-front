@@ -10,7 +10,7 @@ import Layout from "./layout/Layout";
 // react hot toast
 import { Toaster } from "react-hot-toast";
 // redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // auth function
 import { getCurrentUser } from "./features/auth";
 // app store type
@@ -23,6 +23,11 @@ function App() {
   useEffect(() => {
     dispatch(getCurrentUser());
   }, []);
+
+  const state = useSelector((state) => state);
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   return (
     <>

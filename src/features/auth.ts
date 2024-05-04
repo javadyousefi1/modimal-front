@@ -3,15 +3,18 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 type initialStatetype = { userData: null | any[], loading: boolean, loggedIn: boolean }
 
 function checkAuth() {
-    const result = { data: [{ name: "javad" }] }
+    const result = null
     return result
 }
 
 const getCurrentUser = createAsyncThunk(
     'userAuth',
-    async () => {
+    async (payload) => {
+        if (payload) {
+            return payload
+        }
         const response = await checkAuth();
-        return response.data;
+        return response;
     }
 );
 
