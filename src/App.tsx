@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 // css
 import "./App.css";
 // rrd
@@ -6,9 +7,29 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { routes } from "./routes/route";
 // layout
 import Layout from "./layout/Layout";
+// react hot toast
 import { Toaster } from "react-hot-toast";
+// redux
+import { useDispatch, useSelector } from "react-redux";
+// auth function
+import { getCurrentUser } from "./features/auth";
+// app store type
+import { AppDispatch } from "./store/store";
 
 function App() {
+  // redux dispatcher
+  const dispatch = useDispatch<AppDispatch>();
+  const state = useSelector((state) => state);
+
+  // check user auth at first mount
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, []);
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
+
   return (
     <>
       <BrowserRouter>
