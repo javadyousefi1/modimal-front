@@ -19,12 +19,13 @@ import { AppDispatch } from "./store/store";
 function App() {
   // redux dispatcher
   const dispatch = useDispatch<AppDispatch>();
+  const state = useSelector((state) => state);
+
   // check user auth at first mount
   useEffect(() => {
     dispatch(getCurrentUser());
   }, []);
 
-  const state = useSelector((state) => state);
   useEffect(() => {
     console.log(state);
   }, [state]);

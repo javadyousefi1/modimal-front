@@ -18,7 +18,7 @@ import { loginUser } from "../../api/index";
 // toast
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { getCurrentUser } from "../../features/auth";
+import { userLoggedIn } from "../../features/auth";
 import { AppDispatch } from "src/store/store";
 
 const LoginForm: React.FC = () => {
@@ -42,7 +42,7 @@ const LoginForm: React.FC = () => {
     loginUser(data)
       .then(({ data }) => {
         // save user data in redux
-        dispatch(getCurrentUser(data.data));
+        dispatch(userLoggedIn(data.data));
         // show toast
         toast.success(data?.message);
         // redirect user
