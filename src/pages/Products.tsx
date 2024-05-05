@@ -3,8 +3,8 @@ import Breadcrumbs from "@components/shared/Breadcrumbs";
 import CartBox from "@components/cart/CartBox";
 import ProductFilter from "@components/products/ProductFilter"
 // SVG
-import MobileBanner from "../assets/images/productswiper3.svg";
-import DesktopBanner from "../assets/images/productswiper4.svg";
+import MobileBanner from "../assets/images/productswiper3.png";
+import DesktopBanner from "../assets/images/productswiper4.png";
 import product1 from "../assets/images/productImg(1).png";
 const Products: React.FC = () => {
   let faqBreadcrumbs = [
