@@ -18,7 +18,7 @@ const userLoggedIn = createAsyncThunk('userLogin', async (data:object) => {
 
 const initialState: initialStatetype = {
     userData: null,
-    loading: false,
+    loading: true,
     loggedIn: false
 };
 
@@ -31,7 +31,7 @@ const usersSlice = createSlice({
             state.userData = action.payload
             state.loading = false
             state.loggedIn = true
-        });
+        }); 
         builder.addCase(getCurrentUser.pending, (state) => {
             state.userData = null
             state.loading = true
