@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { Tag } from "antd";
 import ProfileMenuItem from "@components/profile/ProfileMenuItem";
 
-import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
-
 const Profile = () => {
   const { loggedIn, loading, userData } = useSelector(
     (state: RootState) => state.usersSlice
@@ -86,13 +84,9 @@ const Profile = () => {
             {userData?.firstName + " " + userData?.lastName}{" "}
             <span>
               {userData?.isVerify ? (
-                <Tag color="success" icon={<CheckCircleOutlined />}>
-                  verify
-                </Tag>
+                <Tag color="success">verify</Tag>
               ) : (
-                <Tag color="error" icon={<CloseCircleOutlined />}>
-                  not verify
-                </Tag>
+                <Tag color="error">not verify</Tag>
               )}
             </span>
           </span>
