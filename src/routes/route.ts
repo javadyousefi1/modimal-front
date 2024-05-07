@@ -8,6 +8,7 @@ import Users from "../pages/admin/Users";
 import Main from "../pages/admin/Main";
 import Products from "../pages/Products";
 import Profile from "../pages/Profile";
+import VerifyEmail from "../pages/VerifyEmail";
 
 interface RouteType {
   id: number;
@@ -27,4 +28,5 @@ export const routes: RouteType[] = [
   { id: 6, path: "/admin/users", title: "users", component: Users, panelAdmin: true },
   { id: 7, path: "/products", title: "products", component: Products },
   { id: 8, path: "/profile", title: "profile", component: Profile },
+  { id: 9, path: "/profile/verfiy-email", title: "profile", component: VerifyEmail },
 ];
