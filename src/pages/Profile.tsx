@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 // rrd
 import { useNavigate } from "react-router-dom";
+import { Tag } from "antd";
 import ProfileMenuItem from "@components/profile/ProfileMenuItem";
 
 const Profile = () => {
@@ -54,26 +55,26 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
-  // if (!loading && !loggedIn) {
-  //   navigate("/");
-  //   return;
-  // }
+  if (!loading && !loggedIn) {
+    navigate("/");
+    return;
+  }
 
-  // if (loading) {
-  //   return (
-  //     <div className="flex justify-center mt-4">
-  //       <h4 className="text-lg">loading</h4>
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen mt-4">
+        <h4 className="text-lg">loading</h4>
+      </div>
+    );
+  }
 
-  // if (!userData) {
-  //   return (
-  //     <div className="flex justify-center mt-4">
-  //       <h4 className="text-lg">please login</h4>
-  //     </div>
-  //   );
-  // }
+  if (!userData) {
+    return (
+      <div className="flex justify-center mt-4">
+        <h4 className="text-lg">please login</h4>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-start min-h-screen px-6 mt-4">
@@ -83,10 +84,17 @@ const Profile = () => {
       <div className="flex items-center justify-between w-full">
         {/* user name */}
         <div className="flex flex-col">
-          <span>Javad Yousefi</span>
-          <span className="text-xs text-neutral-500">
-            javadyousefi9000@gmail.com
+          <span>
+            {userData?.firstName + " " + userData?.lastName}{" "}
+            <span>
+              {userData?.isVerify ? (
+                <Tag color="green">verify</Tag>
+              ) : (
+                <Tag color="red">not verify</Tag>
+              )}
+            </span>
           </span>
+          <span className="text-xs text-neutral-500">{userData?.email}</span>
         </div>
         {/* edit profile icon */}
         <div>
