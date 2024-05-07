@@ -17,7 +17,7 @@ import { redirect, useNavigate } from "react-router-dom";
 
 const VerifyEmailForm = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { userData } = useSelector((state: RootState) => state.usersSlice);
   const {
     control,
@@ -33,7 +33,7 @@ const VerifyEmailForm = () => {
 
     verifyUserEmail({ verifyCode: data.otp, email: userData?.email })
       .then(({ data }) => {
-        toast.success("your account verified successfully");
+        toast.success("your account verified ");
         dispatch(userLoggedIn(data?.userData));
         setTimeout(() => {
           navigate("/profile");
