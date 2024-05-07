@@ -9,3 +9,8 @@ export interface LoginFormType {
     email: string;
     password: string
 }
+
+export interface verifyEmailFormType {
+    email: string;
+    verifyCode: string
+}
