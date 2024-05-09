@@ -22,23 +22,51 @@ import collection3 from "@assets/images/collection3.png";
 import collection4 from "@assets/images/collection4.png";
 import ChildrenModal from "@components/modal/ChildrenModal";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
 
-const HomePage : React.FC = () => {
+const HomePage: React.FC = () => {
+  const { userData } = useSelector((state: RootState) => state.usersSlice);
 
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const registerQuery = urlParams.get('register');
+  const registerQuery = urlParams.get("register");
 
-  const [IsshowEmailVerification, setIsShowEmailVerification] = useState(!!registerQuery)
+  const [IsshowEmailVerification, setIsShowEmailVerification] = useState(
+    !!registerQuery
+  );
 
   return (
     <>
-    {/* verify modal */}
-      {registerQuery && <ChildrenModal isVisible={IsshowEmailVerification} handleCloseModal={() => { setIsShowEmailVerification(false) }}><div className="max-w-[300px]">
-        <h1 className="font-bold text-center text-black">Verify your Email</h1>
-        <p className="mt-4 text-xs font-normal text-center">We’ve sent an email to nina@gmail.com to verify your email address and activate your account. the link in the email will expire in 24 hours.</p>
-        <p className="mt-4 text-xs font-normal text-center"><Link to=""><span className="text-primary">Click here</span></Link> <span>if you did not receive an email or would like to change the email address you registered with.</span></p>
-      </div></ChildrenModal>}
+      {/* verify modal */}
+      {registerQuery && (
+        <ChildrenModal
+          isVisible={IsshowEmailVerification}
+          handleCloseModal={() => {
+            setIsShowEmailVerification(false);
+          }}
+        >
+          <div className="max-w-[300px]">
+            <h1 className="font-bold text-center text-black">
+              Verify your Email
+            </h1>
+            <p className="mt-4 text-xs font-normal text-center">
+              We’ve sent an email to {userData?.email} to verify your email address
+              and activate your account. the link in the email will expire in 24
+              hours.
+            </p>
+            <p className="mt-4 text-xs font-normal text-center">
+              <Link to="">
+                <span className="text-primary">Click here</span>
+              </Link>{" "}
+              <span>
+                if you did not receive an email or would like to change the
+                email address you registered with.
+              </span>
+            </p>
+          </div>
+        </ChildrenModal>
+      )}
 
       <main className="">
         {/* first section */}

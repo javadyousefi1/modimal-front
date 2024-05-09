@@ -18,8 +18,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../../api/index";
 // toast
 import toast from "react-hot-toast";
+// redux
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../features/auth";
+import { AppDispatch } from "src/store/store";
 
 const RegisterForm: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -38,6 +43,9 @@ const RegisterForm: React.FC = () => {
 
     registerUser(data)
       .then(({ data }) => {
+        // save user data in redux
+        dispatch(setUserData(data.data));
+        
         toast.success(data?.message);
         setTimeout(() => {
           navigate("/?register=ok");

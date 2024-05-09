@@ -6,7 +6,7 @@ import MenuDropDown from "./MenuDropDown";
 import Button from "../elements/Button";
 import DropDown from "@components/shared/DropDown";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RootState } from "../../store/store";
 
 const style = {
@@ -149,7 +149,9 @@ const profileIcon = (
 );
 
 const Header = () => {
-  const { loggedIn } = useSelector((state:RootState) => state.usersSlice);
+  const { loggedIn } = useSelector((state: RootState) => state.usersSlice);
+
+  const navigate = useNavigate();
 
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
 
@@ -334,7 +336,11 @@ const Header = () => {
                 {loggedIn ? (
                   <div className="flex items-center justify-center w-full gap-x-4">
                     <Link to="/profile" className="w-full">
-                      <Button type="button" className={style.button} onClick={closeMenu}>
+                      <Button
+                        type="button"
+                        className={style.button}
+                        onClick={closeMenu}
+                      >
                         <div className="flex items-center justify-center gap-x-2">
                           <div>{profileIcon}</div>
                           <p>profile</p>
@@ -345,7 +351,11 @@ const Header = () => {
                 ) : (
                   <div className="flex items-center justify-center w-full gap-x-4 ">
                     <Link to="login" className="w-full">
-                      <Button type="button" className={style.button} onClick={closeMenu}>
+                      <Button
+                        type="button"
+                        className={style.button}
+                        onClick={closeMenu}
+                      >
                         <div className="flex items-center justify-center gap-x-2">
                           <div>{profileIcon}</div>
                           <p>Log In</p>
@@ -353,7 +363,11 @@ const Header = () => {
                       </Button>
                     </Link>
                     <Link to="/register" className="w-full">
-                      <Button type="button" className={style.button} onClick={closeMenu}>
+                      <Button
+                        type="button"
+                        className={style.button}
+                        onClick={closeMenu}
+                      >
                         <span className="whitespace-nowrap">
                           Create Account
                         </span>
@@ -380,11 +394,11 @@ const Header = () => {
           </div>
           <div className="flex items-center justify-center gap-x-2 lg:gap-x-4">
             {/* my shopping icon */}
-            <a href="#">{myShoppingIcon}</a>
+            <Link to="#">{myShoppingIcon}</Link>
             {/* favorites icon */}
-            <a href="#">{favoriteIcon}</a>
+            <Link to="#">{favoriteIcon}</Link>
             {/* profile icon */}
-            <a href="#">{profileIcon}</a>
+            <button onClick={() => navigate("/profile")}>{profileIcon}</button>
             {/* search icon */}
             <div>{searchIcon}</div>
           </div>

@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 // store
 import { AppDispatch, RootState } from "../../store/store";
 // redux fundtion
-import { userLoggedIn } from "../../features/auth.ts";
+import { setUserData } from "../../features/auth.ts";
 // rrd
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const VerifyEmailForm = () => {
     verifyUserEmail({ verifyCode: data.otp, email: userData?.email })
       .then(({ data }) => {
         toast.success("your account verified ");
-        dispatch(userLoggedIn(data?.userData));
+        dispatch(setUserData(data?.userData));
         setTimeout(() => {
           navigate("/profile");
         }, 2000);

@@ -15,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "./features/auth";
 // app store type
 import { AppDispatch } from "./store/store";
+// antd
+import { ConfigProvider } from "antd";
 
 function App() {
   // redux dispatcher
@@ -32,17 +34,32 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Toaster />
-        <Layout>
-          <Routes>
-            {/* map on defined routes */}
-            {routes.map((r) => (
-              <Route key={r.id} path={r.path} element={<r.component />} />
-            ))}
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+      {" "}
+      <ConfigProvider
+        theme={{
+          token: {
+            // Seed Token
+            colorPrimary: "var(  --color-primary-800  )",
+            // borderRadius: 2,
+
+            // Alias Token
+            // colorBgContainer: "#f6ffed",
+          },
+        }}
+      >
+        {" "}
+        <BrowserRouter>
+          <Toaster />
+          <Layout>
+            <Routes>
+              {/* map on defined routes */}
+              {routes.map((r) => (
+                <Route key={r.id} path={r.path} element={<r.component />} />
+              ))}
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </ConfigProvider>
     </>
   );
 }

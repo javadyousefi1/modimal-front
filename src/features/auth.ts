@@ -1,7 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { checkAuth } from "../api/login";
 
-type initialStatetype = { userData: null | Object, loading: boolean, loggedIn: boolean }
+interface userObject {
+    _id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    profile: null;
+    address: null;
+    joinDate: number;
+    isVerify: boolean;
+}
+type initialStatetype = { userData: null | userObject, loading: boolean, loggedIn: boolean }
 
 
 const getCurrentUser = createAsyncThunk(
@@ -12,7 +23,7 @@ const getCurrentUser = createAsyncThunk(
     }
 );
 
-const userLoggedIn = createAsyncThunk('userLogin', async (data:object) => {
+const setUserData = createAsyncThunk('userLogin', async (data: object) => {
     return data;
 })
 
@@ -31,7 +42,7 @@ const usersSlice = createSlice({
             state.userData = action.payload
             state.loading = false
             state.loggedIn = true
-        }); 
+        });
         builder.addCase(getCurrentUser.pending, (state) => {
             state.userData = null
             state.loading = true
@@ -42,7 +53,7 @@ const usersSlice = createSlice({
             state.loading = false
             state.loggedIn = false
         });
-        builder.addCase(userLoggedIn.fulfilled, (state, action) => {
+        builder.addCase(setUserData.fulfilled, (state, action) => {
             state.userData = action.payload
             state.loading = false
             state.loggedIn = true
@@ -50,5 +61,5 @@ const usersSlice = createSlice({
     },
 });
 
-export { getCurrentUser ,userLoggedIn};
+export { getCurrentUser, setUserData };
 export default usersSlice.reducer

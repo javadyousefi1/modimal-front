@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 // rrd
 import { useNavigate } from "react-router-dom";
-import { Tag } from "antd";
+// antd
+import { Alert, Spin, Tag } from "antd";
 import ProfileMenuItem from "@components/profile/ProfileMenuItem";
+import { useEffect } from "react";
 
 const Profile = () => {
   const { loggedIn, loading, userData } = useSelector(
@@ -75,9 +77,38 @@ const Profile = () => {
       ),
       title: "My Orders",
     },
+    {
+      id: 2,
+      href: "",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            stroke="red"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-miterlimit="10"
+            stroke-width="1.5"
+            d="M17.44 14.62L20 12.06 17.44 9.5M9.76 12.06h10.17M11.76 20c-4.42 0-8-3-8-8s3.58-8 8-8"
+          ></path>
+        </svg>
+      ),
+      title: "Log Out",
+    },
   ];
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userData) {
+      navigate("/");
+    }
+  }, [userData, loading, loggedIn]);
 
   if (!loading && !loggedIn) {
     navigate("/");
@@ -86,19 +117,15 @@ const Profile = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen mt-4">
-        <h4 className="text-lg">loading</h4>
+      <div className="container flex flex-col items-start min-h-screen px-6 mt-4 max-w-7xl md:px-0">
+        <Spin spinning={loading} fullscreen />
       </div>
     );
   }
 
-  if (!userData) {
-    navigate("/");
-  }
-
   return (
     <div className="container flex flex-col items-start min-h-screen px-6 mt-4 max-w-7xl md:px-0">
-      <div>
+      <div className="w-full md:max-w-72">
         {/* detail */}
         {/* profile summery */}
         <div className="flex items-center justify-between w-full">
@@ -160,8 +187,16 @@ const Profile = () => {
             </span>
           </div>
         </div>
+        {/* is verify warn */}
+        {!userData?.isVerify && (
+          <Alert
+            message="For better user experience it is good to verify your email first"
+            banner
+            className="mt-4"
+          />
+        )}
         {/* menu */}
-        <div className="w-full mt-4 md:min-w-72">
+        <div className="w-full mt-4 ">
           {/* menus */}
           {profileMenuList.map((menu) => (
             <ProfileMenuItem {...menu} />

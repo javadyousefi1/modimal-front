@@ -17,6 +17,9 @@ const Layout: React.FC<LayoutPropType> = ({ children }) => {
 
   // change title of each page dynamic by route
   useEffect(() => {
+    // scroll to page first 
+    window.scrollTo(0, 0);
+    // set title of each page
     const currentRouteTitle = routes.find((r) => r.path === pathname);
     document.title = currentRouteTitle?.title ?? "صفحه ای یافت نشد";
   }, [pathname]);
