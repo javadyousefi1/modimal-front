@@ -120,13 +120,13 @@ const Profile = () => {
   ];
 
   useEffect(() => {
-    if (!userData) {
+    if (!loading && !userData) {
       navigate("/");
     }
   }, [userData, loading, loggedIn]);
 
   if (!loading && !loggedIn) {
-    navigate("/");
+    navigate("/");    
     return;
   }
 
