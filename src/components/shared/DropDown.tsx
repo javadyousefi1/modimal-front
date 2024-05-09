@@ -35,7 +35,7 @@ const DropDown: React.FC<DropDownProps> = ({ item }) => {
   return (
     <div>
       <div
-        className="flex justify-between items-center gap-x-2 cursor-pointer"
+        className="h-[73px] flex justify-between items-center gap-x-2 cursor-pointer"
         onMouseEnter={handleOpenDropDown}
         onMouseLeave={handleCloseDropDown}
       >
