@@ -1,18 +1,34 @@
 // redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // store
-import { RootState } from "../store/store";
+import { AppDispatch, RootState } from "../store/store";
 // rrd
 import { useNavigate } from "react-router-dom";
 // antd
 import { Alert, Spin, Tag } from "antd";
 import ProfileMenuItem from "@components/profile/ProfileMenuItem";
 import { useEffect } from "react";
+import { logout } from "../api";
+import toast from "react-hot-toast";
+import { logout as logOutUser } from "../features/auth";
 
 const Profile = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const { loggedIn, loading, userData } = useSelector(
     (state: RootState) => state.usersSlice
   );
+
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logout()
+      .then(({ data }) => {
+        toast.success(data.message);
+        dispatch(logOutUser());
+        navigate("/");
+      })
+      .catch(() => toast.error("logout failed"));
+  };
 
   const profileMenuList = [
     {
@@ -80,6 +96,7 @@ const Profile = () => {
     {
       id: 2,
       href: "",
+      action: handleLogOut,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -101,8 +118,6 @@ const Profile = () => {
       title: "Log Out",
     },
   ];
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!userData) {

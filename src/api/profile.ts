@@ -5,3 +5,8 @@ export async function verifyUserEmail(userData: verifyEmailFormType): Promise<an
     return axios.post(`/verifyEmail`, userData)
 }
 
+
+export async function logout(): Promise<any> {
+    return axios.get(`/users/logout`,)
+}
+

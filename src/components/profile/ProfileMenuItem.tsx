@@ -8,9 +8,14 @@ const ProfileMenuItem: React.FC<{
   title: string;
   icon: ReactNode;
   isVisible?: boolean;
-}> = ({ title, icon, href, isVisible }) => {
+  action?: () => void;
+}> = ({ title, icon, href, isVisible, action }) => {
   return (
-    <Link to={href} className={`w-full ${isVisible === false ? "hidden" : ""}`}>
+    <Link
+      to={href}
+      className={`w-full ${isVisible === false ? "hidden" : ""}`}
+      onClick={action ? () => action() : () => {}}
+    >
       <div className="border-b-[1px] border-neutral-300 py-3 flex items-center gap-x-2">
         {/* icon */}
         <span>{icon}</span>

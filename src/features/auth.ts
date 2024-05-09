@@ -23,11 +23,15 @@ const getCurrentUser = createAsyncThunk(
     }
 );
 
-const setUserData = createAsyncThunk('userLogin', async (data: object) => {
+const setUserData = createAsyncThunk('userLogin', async (data: object | null) => {
     return data;
 })
 
-const initialState: initialStatetype = {
+const logout = createAsyncThunk('userLogout', async (data) => {
+    return data;
+})
+
+export const initialState: initialStatetype = {
     userData: null,
     loading: true,
     loggedIn: false
@@ -58,8 +62,13 @@ const usersSlice = createSlice({
             state.loading = false
             state.loggedIn = true
         });
+        builder.addCase(logout.fulfilled, (state) => {
+            state.userData = null
+            state.loading = false
+            state.loggedIn = false
+        });
     },
 });
 
-export { getCurrentUser, setUserData };
+export { getCurrentUser, setUserData, logout };
 export default usersSlice.reducer
