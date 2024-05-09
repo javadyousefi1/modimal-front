@@ -21,7 +21,7 @@ const Layout: React.FC<LayoutPropType> = ({ children }) => {
     document.title = currentRouteTitle?.title ?? "صفحه ای یافت نشد";
   }, [pathname]);
 
-  if (!pathname.includes("profile")) {
+  if (!pathname.includes("admin")) {
     return (
       <>
         <Header />

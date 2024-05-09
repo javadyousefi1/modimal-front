@@ -9,11 +9,16 @@ import { verifyEmailSchema } from "@lib/yupSchema";
 import { yupResolver } from "@hookform/resolvers/yup";
 // toast
 import toast from "react-hot-toast";
+// api
 import { verifyUserEmail } from "../../api/profile.ts";
+// redux
 import { useDispatch, useSelector } from "react-redux";
+// store
 import { AppDispatch, RootState } from "../../store/store";
+// redux fundtion
 import { userLoggedIn } from "../../features/auth.ts";
-import { redirect, useNavigate } from "react-router-dom";
+// rrd
+import { useNavigate } from "react-router-dom";
 
 const VerifyEmailForm = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -47,26 +52,28 @@ const VerifyEmailForm = () => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name="otp"
-          control={control}
-          defaultValue=""
-          render={({ field }) => (
-            <Input.OTP
-              formatter={(str) => str.toUpperCase()}
-              {...field}
-              onChange={(text) => field.onChange(text)}
-            />
-          )}
-        />
-        <Button
-          theme="primary"
-          className="mt-3"
-          type="submit"
-          disabled={!isValid}
-        >
-          Confirm
-        </Button>
+        <div className="md:w-[313px] flex flex-col items-center justify-center">
+          <Controller
+            name="otp"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <Input.OTP
+                formatter={(str) => str.toUpperCase()}
+                {...field}
+                onChange={(text) => field.onChange(text)}
+              />
+            )}
+          />
+          <Button
+            theme="primary"
+            className="mt-3 "
+            type="submit"
+            disabled={!isValid}
+          >
+            Confirm
+          </Button>
+        </div>
       </form>
     </>
   );
