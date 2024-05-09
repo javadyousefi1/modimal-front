@@ -149,12 +149,7 @@ const profileIcon = (
 );
 
 const Header = () => {
-  const [isLogin, setIsLogin] = useState(false);
   const { loggedIn } = useSelector((state: RootState) => state.usersSlice);
-
-  useEffect(()=>{
-    setIsLogin(loggedIn)
-  },[loggedIn])
 
   const navigate = useNavigate();
 
@@ -338,7 +333,7 @@ const Header = () => {
                 ))}
               </div>
               <div className="w-full absolute bottom-0 flex justify-center items-center gap-x-4 py-4 px-4 border-t-[1px]">
-                {isLogin ? (
+                {loggedIn ? (
                   <div className="flex items-center justify-center w-full gap-x-4">
                     <Link to="/profile" className="w-full">
                       <Button
