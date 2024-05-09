@@ -95,7 +95,7 @@ const ProductFilter: React.FC = () => {
     }));
   };
   return (
-    <div className="w-1/4 hidden sm:block">
+    <div>
       <span className="font-semibold text-[28px]">Filters</span>
       {filter.map((item) => {
         return (
