@@ -29,7 +29,7 @@ const MenuDropDown: React.FC<DropDownProps> = ({ item }) => {
         onClick={handleOpenDropDown}
       >
         <span className="">{item.title}</span>
-        {item.subLink !== null ? (
+        {item.subLink && item.subLink.length > 0 ? (
           <div>
             <svg
               width="12"
@@ -48,12 +48,12 @@ const MenuDropDown: React.FC<DropDownProps> = ({ item }) => {
             </svg>
           </div>
         ) : (
-          ""
+          null
         )}
       </div>
       <div
         className={`transition-max-h duration-500 ease-in-out overflow-hidden ${
-          isOpenDropDown ? "h-96" : "h-0"
+          isOpenDropDown && item.subLink ? "h-96" : "h-0"
         }`}
       >
         {isOpenDropDown &&
