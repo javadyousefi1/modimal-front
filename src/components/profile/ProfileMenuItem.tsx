@@ -2,15 +2,15 @@
 import { type ReactNode } from "react";
 // rrd
 import { Link } from "react-router-dom";
-import { Badge, } from 'antd';
 
 const ProfileMenuItem: React.FC<{
   href: string;
   title: string;
   icon: ReactNode;
-}> = ({ title, icon, href }) => {
+  isVisible?: boolean;
+}> = ({ title, icon, href, isVisible }) => {
   return (
-    <Link to={href} className="w-full">
+    <Link to={href} className={`w-full ${isVisible === false ? "hidden" : ""}`}>
       <div className="border-b-[1px] border-neutral-300 py-3 flex items-center gap-x-2">
         {/* icon */}
         <span>{icon}</span>

@@ -16,6 +16,7 @@ const Profile = () => {
     {
       id: 0,
       href: "/profile/verfiy-email",
+      isVisible: !userData?.isVerify,
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -51,6 +52,29 @@ const Profile = () => {
       ),
       title: "Verify Email",
     },
+    {
+      id: 1,
+      href: "/profile/verfiy-email",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M2 2h1.74c1.08 0 1.93.93 1.84 2l-.83 9.96a2.796 2.796 0 0 0 2.79 3.03h10.65c1.44 0 2.7-1.18 2.81-2.61l.54-7.5c.12-1.66-1.14-3.01-2.81-3.01H5.82M16.25 22a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM8.25 22a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM9 8h12"
+            stroke="var(--color-primary)"
+            stroke-width="1.5"
+            stroke-miterlimit="10"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      ),
+      title: "My Orders",
+    },
   ];
 
   const navigate = useNavigate();
@@ -73,83 +97,76 @@ const Profile = () => {
   }
 
   return (
-    <div className="flex flex-col items-start min-h-screen px-6 mt-4">
-      {/* detail */}
-
-      {/* profile summery */}
-      <div className="flex items-center justify-between w-full">
-        {/* user name */}
-        <div className="flex flex-col">
-          <span>
-            {userData?.firstName + " " + userData?.lastName}{" "}
+    <div className="container flex flex-col items-start min-h-screen px-6 mt-4 max-w-7xl md:px-0">
+      <div>
+        {/* detail */}
+        {/* profile summery */}
+        <div className="flex items-center justify-between w-full">
+          {/* user name */}
+          <div className="flex flex-col">
             <span>
-              {userData?.isVerify ? (
-                <Tag color="success">verify</Tag>
-              ) : (
-                <Tag color="error">not verify</Tag>
-              )}
+              {userData?.firstName + " " + userData?.lastName}{" "}
+              <span>
+                {userData?.isVerify ? (
+                  <Tag color="success">verify</Tag>
+                ) : (
+                  <Tag color="error">not verify</Tag>
+                )}
+              </span>
             </span>
-          </span>
-          <span className="text-xs text-neutral-500">{userData?.email}</span>
+            <span className="text-xs text-neutral-500">{userData?.email}</span>
+          </div>
+          {/* edit profile icon */}
+          <div>
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"
+                  stroke="var(--color-primary)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>
+                <path
+                  d="m19.21 15.74-3.54 3.54c-.14.14-.27.4-.3.59l-.19 1.35c-.07.49.27.83.76.76l1.35-.19c.19-.03.46-.16.59-.3l3.54-3.54c.61-.61.9-1.32 0-2.22-.89-.89-1.6-.6-2.21.01Z"
+                  stroke="var(--color-primary)"
+                  strokeWidth="1.5"
+                  stroke-miterlimit="10"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>
+                <path
+                  d="M18.7 16.25c.3 1.08 1.14 1.92 2.22 2.22"
+                  stroke="var(--color-primary)"
+                  strokeWidth="1.5"
+                  stroke-miterlimit="10"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>
+                <path
+                  d="M3.41 22c0-3.87 3.85-7 8.59-7 1.04 0 2.04.15 2.97.43"
+                  stroke="var(--color-primary)"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>
+              </svg>
+            </span>
+          </div>
         </div>
-        {/* edit profile icon */}
-        <div>
-          <span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"
-                stroke="var(--color-primary)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-              <path
-                d="m19.21 15.74-3.54 3.54c-.14.14-.27.4-.3.59l-.19 1.35c-.07.49.27.83.76.76l1.35-.19c.19-.03.46-.16.59-.3l3.54-3.54c.61-.61.9-1.32 0-2.22-.89-.89-1.6-.6-2.21.01Z"
-                stroke="var(--color-primary)"
-                strokeWidth="1.5"
-                stroke-miterlimit="10"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-              <path
-                d="M18.7 16.25c.3 1.08 1.14 1.92 2.22 2.22"
-                stroke="var(--color-primary)"
-                strokeWidth="1.5"
-                stroke-miterlimit="10"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-              <path
-                d="M3.41 22c0-3.87 3.85-7 8.59-7 1.04 0 2.04.15 2.97.43"
-                stroke="var(--color-primary)"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-            </svg>
-          </span>
+        {/* menu */}
+        <div className="w-full mt-4 md:min-w-72">
+          {/* menus */}
+          {profileMenuList.map((menu) => (
+            <ProfileMenuItem {...menu} />
+          ))}
         </div>
-      </div>
-
-      {/*  Drawer */}
-      {/* <div className="bg-neutral-300 h-[1px] w-full my-5"></div> */}
-
-      <div className="w-full mt-4">
-        {/* menus */}
-        {profileMenuList.map((menu) => (
-          <ProfileMenuItem
-            href={menu.href}
-            icon={menu.icon}
-            title={menu.title}
-            key={menu.id}
-          />
-        ))}
       </div>
     </div>
   );
