@@ -8,8 +8,7 @@ const ProductFilterContent: React.FC = ({content}) => {
     <form>
       <Controller name="sortBy" control={control} render={({ field: { onChange, value } }) => (
         <>
-        <label htmlFor="sortBy1"></label>
-          <Input onChange={onchange} value={value} type="checkbox"/>
+        
         </>
         )}/>
     </form>

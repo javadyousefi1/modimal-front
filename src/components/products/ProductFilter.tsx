@@ -1,5 +1,7 @@
 import { useState } from "react";
 import ProductFilterContent from "./ProductFilterContent";
+import SortByComponent from "./SortByComponent"
+import { FormProvider, useForm } from "react-hook-form";
 
 const plusIcon = (
   <svg
@@ -32,12 +34,7 @@ const filter = [
   {
     id: 1,
     title: "Sort By",
-    content: [
-      { id: 1, title: "Featured", relationId: 1 },
-      { id: 2, title: "Best Seller", relationId: 1 },
-      { id: 3, title: "Price: Low To Hight", relationId: 1 },
-      { id: 4, title: "Price: Hight To Low", relationId: 1 },
-    ],
+    content: ""
   },
   {
     id: 2,
@@ -86,6 +83,8 @@ const filter = [
 
 const ProductFilter: React.FC = () => {
   const [openFilter, setOpenFilter] = useState<{ [key: number]: boolean }>({});
+  const [filterData, setFilterData] = useState([])
+  const methods = useForm()
 
   // handle each opening of each filter with one state
   const handleClickDropDown = (id: number) => {
@@ -94,9 +93,14 @@ const ProductFilter: React.FC = () => {
       [id]: !prevState[id],
     }));
   };
+
+  const onSubmit = (data) => {
+console.log("data", data)
+  }
   return (
     <div>
       <span className="font-semibold text-[28px]">Filters</span>
+      {filterData.length > 0 && <button type="submit">salam</button>}
       {filter.map((item) => {
         return (
           <div
@@ -104,7 +108,7 @@ const ProductFilter: React.FC = () => {
               openFilter[item.id]
                 ? "border-[1px] border-primary"
                 : "bg-primary"
-            } py-2 px-4 mt-4 cursor-pointer`}
+            } py-2 px-4 mt-4 cursor-pointer transition ease-in-out duration-300`}
             key={item.id}
             onClick={() => handleClickDropDown(item.id)}
           >
@@ -119,10 +123,11 @@ const ProductFilter: React.FC = () => {
             <span>{openFilter[item.id] ? minusIcon : plusIcon}</span>
             </div>
             {openFilter[item.id] && (
-              <ProductFilterContent
-                mainFilterId={item.id}
-                content={item.content}
-              />
+              <FormProvider {...methods} >
+              <form onSubmit={methods.handleSubmit(onSubmit)}>
+              <SortByComponent/>
+              </form>
+            </FormProvider>
             )}
           </div>
         );
