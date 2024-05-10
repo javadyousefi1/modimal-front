@@ -1,9 +1,28 @@
-import { RootState } from "@/store/store";
+import { logout } from "@/api";
+import { AppDispatch, RootState } from "@/store/store";
 import { Tag } from "antd";
 import Alert from "antd/es/alert/Alert";
-import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout as logOutUser } from "@/features/auth";
+import ProfileMenuItem from "./ProfileMenuItem";
 
 const ProfileSidebar = () => {
+  const {  userData } = useSelector(
+    (state: RootState) => state.usersSlice
+  );
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const handleLogOut = () => {
+    logout()
+      .then(({ data }) => {
+        toast.success(data.message);
+        dispatch(logOutUser());
+        navigate("/");
+      })
+      .catch(() => toast.error("logout failed"));
+  };
     const profileMenuList = [
         {
           id: 0,
@@ -92,9 +111,7 @@ const ProfileSidebar = () => {
           title: "Log Out",
         },
       ];
-    const {  userData } = useSelector(
-        (state: RootState) => state.usersSlice
-      );
+
   return (
     <aside className="w-full md:max-w-72">
       {/* detail */}
@@ -173,7 +190,7 @@ const ProfileSidebar = () => {
           <ProfileMenuItem {...menu} />
         ))}
       </div>
-    </div>
+    </aside>
   );
 };
 
