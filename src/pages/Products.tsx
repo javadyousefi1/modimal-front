@@ -1,12 +1,15 @@
 import Breadcrumbs from "@components/shared/Breadcrumbs";
 // componenet
 import CartBox from "@components/cart/CartBox";
-import ProductFilter from "@components/products/ProductFilter"
+import ProductFilter from "@components/products/ProductFilter";
 // SVG
 import MobileBanner from "../assets/images/productswiper3.png";
 import DesktopBanner from "../assets/images/productswiper4.png";
 import product1 from "../assets/images/productImg(1).png";
+import { useState } from "react";
 const Products: React.FC = () => {
+  const [filterData, setFilterData] = useState([])
+
   let faqBreadcrumbs = [
     { id: 1, text: "Home", href: "/" },
     { id: 2, text: "shopAll", href: "/products" },
@@ -82,18 +85,24 @@ const Products: React.FC = () => {
     },
   ];
 
+  const handleFilter = () => {
+    setFilterData(() => {
+
+    })
+  }
+
   return (
     <div className="w-full px-5">
       <div className="my-6">
         <Breadcrumbs items={faqBreadcrumbs} />
       </div>
       {/* banner */}
-      <div className="flex justify-center items-center -mx-5">
-        <img src={MobileBanner} className="block customResolution:hidden" />
-        <img src={DesktopBanner} className="hidden customResolution:block" />
+      <div className="w-full flex justify-center items-center">
+        <img src={MobileBanner} className="w-full block customResolution:hidden" />
+        <img src={DesktopBanner} className="w-full hidden customResolution:block" />
       </div>
       {/*mobile filter */}
-      <div className="w-full flex flex-row-reverse justify-center items-center gap-x-1 mt-6 sm:hidden">
+      <div className="w-full flex flex-row-reverse justify-center items-center gap-x-1 mt-6 md:hidden">
         <span className="text-[14px]">Filter</span>
         <span>
           <svg
@@ -111,11 +120,13 @@ const Products: React.FC = () => {
         </span>
       </div>
       {/* product */}
-      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-6">
+      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-12 lg:mx-[108px]">
         {/* desktop filter */}
-        <ProductFilter />
-        <div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-4">
+        <div className="md:w-1/3 xl:w-1/3 hidden md:block">
+          <ProductFilter filterData={filterData}/>
+        </div>
+        <div className="md:w-2/3 xl:w-2/3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-2 gap-x-4">
             {products.map((item, index) => (
               <div key={index}>
                 <CartBox
@@ -133,7 +144,7 @@ const Products: React.FC = () => {
           </div>
           {/* button */}
           <div className="w-full flex justify-center items-center">
-            <button className="min-w-max flex justify-center items-center py-5 px-10 h-4 border-[1px] border-primary-600 text-[14px] text-primary-600">
+            <button className="min-w-max flex justify-center items-center py-5 px-10 h-4 border-[1px] border-primary-600 text-[14px] text-primary-600 transition ease-in-out duration-300 hover:bg-primary-600 hover:text-white">
               Load More
             </button>
           </div>

@@ -35,7 +35,7 @@ const DropDown: React.FC<DropDownProps> = ({ item }) => {
   return (
     <div>
       <div
-        className="flex justify-between items-center gap-x-2 cursor-pointer"
+        className="h-[73px] flex justify-between items-center gap-x-2 cursor-pointer"
         onMouseEnter={handleOpenDropDown}
         onMouseLeave={handleCloseDropDown}
       >
@@ -63,8 +63,8 @@ const DropDown: React.FC<DropDownProps> = ({ item }) => {
         )}
       </div>
       <div
-        className={`transition-max-h duration-500 ease-in-out overflow-hidden absolute top-12 bg-white ${
-          isOpenDropDown ? "max-h-96" : "max-h-0"
+        className={`transition-max-h duration-500 ease-in-out overflow-hidden absolute top-[73px] bg-white ${
+          isOpenDropDown ? "max-h-66" : "max-h-0"
         }`}
       >
         {isOpenDropDown &&

@@ -1,5 +1,11 @@
 import { useState } from "react";
-import ProductFilterContent from "./ProductFilterContent";
+// import ProductFilterContent from "./ProductFilterContent";
+import SortByComponent from "./SortByComponent"
+import { FormProvider, useForm } from "react-hook-form";
+import SizeComponent from "./SizeComponent";
+import ColorComponent from "./ColorComponent";
+import CollectionComponent from "./CollectionComponent";
+import Button from "@components/elements/Button";
 
 const plusIcon = (
   <svg
@@ -32,60 +38,33 @@ const filter = [
   {
     id: 1,
     title: "Sort By",
-    content: [
-      { id: 1, title: "Featured", relationId: 1 },
-      { id: 2, title: "Best Seller", relationId: 1 },
-      { id: 3, title: "Price: Low To Hight", relationId: 1 },
-      { id: 4, title: "Price: Hight To Low", relationId: 1 },
-    ],
+    content: <SortByComponent/>
   },
   {
     id: 2,
     title: "Size",
-    content: [
-      { id: 1, title: "XS / US (0-4)", relationId: 2 },
-      { id: 2, title: "S / US (4-6)", relationId: 2 },
-      { id: 3, title: "M / US (6-10)", relationId: 2 },
-      { id: 4, title: "L / US (10-14)", relationId: 2 },
-      { id: 5, title: "XL / US (12-16)", relationId: 2 },
-    ],
+    content: <SizeComponent/>
   },
   {
     id: 3,
     title: "Color",
-    content: [
-      { id: 1, title: "Black", color: "#0C0C0C", relationId: 3 },
-      { id: 2, title: "Red", color: "#CA2929", relationId: 3 },
-      { id: 3, title: "Green", color: "#748C70", relationId: 3 },
-      { id: 4, title: "Yellow", color: "#909225", relationId: 3 },
-      { id: 5, title: "Dark Blue", color: "#19418E", relationId: 3 },
-      { id: 6, title: "Purple", color: "#D0A5EA", relationId: 3 },
-      { id: 7, title: "Pink", color: "#CA2980", relationId: 3 },
-      { id: 8, title: "Light Blue", color: "#7DC3EB", relationId: 3 },
-      { id: 9, title: "Orange", color: "#CA6D29", relationId: 3 },
-      { id: 10, title: "white", color: "#FFFFFF", relationId: 3 },
-    ],
+    content: <ColorComponent/>
   },
   {
     id: 4,
     title: "Collection",
-    content: [
-      { id: 1, title: "In stock ", relationId: 4 },
-      { id: 2, title: "Out of stock", relationId: 4 },
-    ],
+    content: <CollectionComponent/>
   },
   {
     id: 5,
     title: "price",
-    content: [
-      { id: 1, title: "In stock ", relationId: 5 },
-      { id: 2, title: "Out of stock", relationId: 5 },
-    ],
+    content: ""
   },
 ];
 
-const ProductFilter: React.FC = () => {
+const ProductFilter: React.FC = ({filterData}) => {
   const [openFilter, setOpenFilter] = useState<{ [key: number]: boolean }>({});
+  const methods = useForm()
 
   // handle each opening of each filter with one state
   const handleClickDropDown = (id: number) => {
@@ -94,9 +73,28 @@ const ProductFilter: React.FC = () => {
       [id]: !prevState[id],
     }));
   };
+
+  const onSubmit = (data) => {
+console.log("data", data)
+  }
   return (
-    <div className="w-1/4 hidden sm:block">
-      <span className="font-semibold text-[28px]">Filters</span>
+    <div>
+      <div className="font-semibold text-[28px]">Filters</div>
+      {/* <div className="flex justify-center items-center">
+      <Button
+      type="button"
+      className= "min-w-max text-[14px]"
+    >
+      Clear Filter
+    </Button>
+    <Button
+      type="submit"
+      className="min-w-max text-[14px]"
+      theme
+    >
+      Apply Filter
+    </Button>
+      </div> */}
       {filter.map((item) => {
         return (
           <div
@@ -104,7 +102,7 @@ const ProductFilter: React.FC = () => {
               openFilter[item.id]
                 ? "border-[1px] border-primary"
                 : "bg-primary"
-            } py-2 px-4 mt-4 cursor-pointer`}
+            } py-2 px-4 mt-4 cursor-pointer transition ease-in-out duration-300`}
             key={item.id}
             onClick={() => handleClickDropDown(item.id)}
           >
@@ -119,10 +117,11 @@ const ProductFilter: React.FC = () => {
             <span>{openFilter[item.id] ? minusIcon : plusIcon}</span>
             </div>
             {openFilter[item.id] && (
-              <ProductFilterContent
-                mainFilterId={item.id}
-                content={item.content}
-              />
+              <FormProvider {...methods} >
+              <form onSubmit={methods.handleSubmit(onSubmit)}>
+              {item.content}
+              </form>
+            </FormProvider>
             )}
           </div>
         );

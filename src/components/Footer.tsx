@@ -9,8 +9,8 @@ const style = {
 const Footer = () => {
   return (
     <>
-      <footer className="container flex justify-center items-center flex-col bg-neutral-8 mt-6 py-8 px-5 md:px-16">
-        <div className="w-full sm:w-3/4 md:w-full md:flex md:justify-center md:items-center md:flex-row md:gap-x-24">
+      <footer className=" flex justify-center items-center flex-col bg-neutral-8 mt-6 py-8 px-5 md:px-16">
+        <div className="w-full container sm:w-3/4 md:w-full md:flex md:justify-center md:items-center md:flex-row md:gap-x-24">
           <div className="w-full md:w-1/3">
             <p className="w-full text-center text-white text-[13px] whitespace-nowrap font-semibold">
               Join our club, get 15% off for your Birthday
@@ -105,7 +105,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="w-full sm:w-3/4 md:w-full mt-4">
+        <div className="w-full container sm:w-3/4 md:w-full mt-4">
             <div className="flex justify-start items-center gap-x-4">
               {/* instagram */}
               <a href="#">

@@ -76,7 +76,7 @@ const HomePage: React.FC = () => {
             <img
               src={mainHomePageImg}
               alt="main-home-page-image"
-              className="object-cover h-full object-[27%_0] w-full"
+              className="object-cover h-calc(100vh - 18px) object-[27%_0] w-full"
             />
           </div>
           {/* text & button */}

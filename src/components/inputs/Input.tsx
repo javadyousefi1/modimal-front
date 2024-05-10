@@ -2,10 +2,10 @@ import { ChangeEvent } from "react";
 
 type InputPropType ={
     type: "text" | "email" | "checkbox",
-    onChange: (event: ChangeEvent<HTMLInputElement>) => void,
-    value: string | number
-    name: string,
-    placeHolder: string,
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
+    value?: string | number
+    name?: string,
+    placeHolder?: string,
     className?: string,
     error?: boolean,
     disabled?: boolean,
