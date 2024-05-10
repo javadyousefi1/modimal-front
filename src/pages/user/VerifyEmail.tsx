@@ -6,10 +6,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { Spin } from "antd";
 
 const VerifyEmail = () => {
   const navigate = useNavigate();
-  const { userData } = useSelector((state: RootState) => state.usersSlice);
+  const { userData, loading } = useSelector(
+    (state: RootState) => state.usersSlice
+  );
 
   // redirect user to profile page if is user already verify
   useEffect(() => {
@@ -17,6 +20,17 @@ const VerifyEmail = () => {
       navigate("/profile");
     }
   }, [userData]);
+
+  // dont show any jsx and show loading if user already verify
+  if (!loading && userData?.isVerify) {
+    return (
+      <div className="container flex flex-col items-start min-h-screen px-6 mt-4 max-w-7xl md:px-0">
+        <Spin spinning={loading} fullscreen />
+      </div>
+    );
+  }
+  console.log(loading, "loading");
+  console.log(userData?.isVerify, "userData?.isVerify");
 
   return (
     <div className="container md:mt-8 md:px-5">
