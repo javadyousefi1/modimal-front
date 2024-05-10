@@ -1,0 +1,12 @@
+import { verifyEmailFormType } from "@types";
+import axios from "./axios";
+
+export async function verifyUserEmail(userData: verifyEmailFormType): Promise<any> {
+    return axios.post(`/verifyEmail`, userData)
+}
+
+
+export async function logout(): Promise<any> {
+    return axios.get(`/users/logout`,)
+}
+

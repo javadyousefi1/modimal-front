@@ -4,7 +4,7 @@ type TablePropType = {
 };
 const Table: React.FC<TablePropType> = ({ tableData, deletedColumns: tableOrder }) => {
   // show loading on wating data
-  if (tableData.length === 0) {
+  if (tableData?.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center mt-10">
         <svg
