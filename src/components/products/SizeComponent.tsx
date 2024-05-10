@@ -1,14 +1,15 @@
 import Input from "@components/inputs/Input";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
-const SortByComponent: React.FC = () => {
+const SizeComponent: React.FC = () => {
   const { control } = useFormContext<FormData>();
   const content = [
-    { id: 1, title: "Featured", relationId: 1 },
-    { id: 2, title: "Best Seller", relationId: 1 },
-    { id: 3, title: "Price: Low To Hight", relationId: 1 },
-    { id: 4, title: "Price: Hight To Low", relationId: 1 },
-  ];
+    { id: 1, title: "XS / US (0-4)", relationId: 2 },
+    { id: 2, title: "S / US (4-6)", relationId: 2 },
+    { id: 3, title: "M / US (6-10)", relationId: 2 },
+    { id: 4, title: "L / US (10-14)", relationId: 2 },
+    { id: 5, title: "XL / US (12-16)", relationId: 2 },
+  ]
   return (
     <>
       <Controller
@@ -48,4 +49,4 @@ const SortByComponent: React.FC = () => {
   );
 };
 
-export default SortByComponent;
+export default SizeComponent;

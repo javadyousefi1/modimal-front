@@ -6,7 +6,10 @@ import ProductFilter from "@components/products/ProductFilter";
 import MobileBanner from "../assets/images/productswiper3.png";
 import DesktopBanner from "../assets/images/productswiper4.png";
 import product1 from "../assets/images/productImg(1).png";
+import { useState } from "react";
 const Products: React.FC = () => {
+  const [filterData, setFilterData] = useState([])
+
   let faqBreadcrumbs = [
     { id: 1, text: "Home", href: "/" },
     { id: 2, text: "shopAll", href: "/products" },
@@ -82,6 +85,12 @@ const Products: React.FC = () => {
     },
   ];
 
+  const handleFilter = () => {
+    setFilterData(() => {
+
+    })
+  }
+
   return (
     <div className="w-full px-5">
       <div className="my-6">
@@ -114,7 +123,7 @@ const Products: React.FC = () => {
       <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-12 lg:mx-[108px]">
         {/* desktop filter */}
         <div className="md:w-1/3 xl:w-1/3 hidden md:block">
-          <ProductFilter />
+          <ProductFilter filterData={filterData}/>
         </div>
         <div className="md:w-2/3 xl:w-2/3">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-2 gap-x-4">

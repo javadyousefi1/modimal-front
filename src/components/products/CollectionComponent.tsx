@@ -1,14 +1,12 @@
 import Input from "@components/inputs/Input";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
-const SortByComponent: React.FC = () => {
+const CollectionComponent: React.FC = () => {
   const { control } = useFormContext<FormData>();
   const content = [
-    { id: 1, title: "Featured", relationId: 1 },
-    { id: 2, title: "Best Seller", relationId: 1 },
-    { id: 3, title: "Price: Low To Hight", relationId: 1 },
-    { id: 4, title: "Price: Hight To Low", relationId: 1 },
-  ];
+    { id: 1, title: "In stock ", relationId: 4 },
+    { id: 2, title: "Out of stock", relationId: 4 },
+  ]
   return (
     <>
       <Controller
@@ -48,4 +46,4 @@ const SortByComponent: React.FC = () => {
   );
 };
 
-export default SortByComponent;
+export default CollectionComponent;
