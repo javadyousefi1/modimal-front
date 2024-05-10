@@ -25,7 +25,7 @@ const ColorComponent: React.FC = () => {
             {content.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-end items-center flex-row-reverse gap-x-1"
+                className="flex justify-end items-center flex-row-reverse gap-xx-1"
                 onClick={(e) => e.stopPropagation()}
               >
                 <label
@@ -34,11 +34,12 @@ const ColorComponent: React.FC = () => {
                 >
                   {item.title}
                 </label>
-                <span className="w-4 h-4 rounded-full border-[1px] border-neutral-3" style={{ backgroundColor: item.color }}></span>
+                <div className="min-w-4 min-h-4 rounded-full border-[1px] border-neutral-3 bg-red-400" style={{ backgroundColor: item.color }}></div>
+                <div className="w-5">
                 <Input
                   value={value}
                   type="checkbox"
-                  className="w-5 cursor-pointer"
+                  className=" cursor-pointer"
                   id={item.title}
                   name={item.title}
                   onChange={(e) => {
@@ -46,6 +47,7 @@ const ColorComponent: React.FC = () => {
                     onChange(e.target.checked);
                   }}
                 />
+                </div>
               </div>
             ))}
           </div>
