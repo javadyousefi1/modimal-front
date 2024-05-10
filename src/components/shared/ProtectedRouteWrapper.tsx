@@ -19,7 +19,7 @@ const ProtectedRouteWrapper: React.FC<{ children: ReactNode }> = ({
     if (!loading && !loggedIn) {
       navigate("/");
     }
-  }, [loggedIn]);
+  }, [loggedIn,loading]);
 
   if (loading) {
     return (

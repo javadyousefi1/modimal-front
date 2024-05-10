@@ -1,19 +1,28 @@
+// api
 import { logout } from "@/api";
-import { AppDispatch, RootState } from "@/store/store";
+// antd
 import { Tag } from "antd";
 import Alert from "antd/es/alert/Alert";
+import { Button, Popconfirm } from "antd";
+import { PoweroffOutlined } from "@ant-design/icons";
+// toast
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// redux
+import { AppDispatch, RootState } from "@/store/store";
 import { logout as logOutUser } from "@/features/auth";
+import { useDispatch, useSelector } from "react-redux";
+// rrd
+import { useNavigate } from "react-router-dom";
+// components
 import ProfileMenuItem from "./ProfileMenuItem";
 
 const ProfileSidebar = () => {
-  const {  userData } = useSelector(
-    (state: RootState) => state.usersSlice
-  );
+  // redux
+  const { userData } = useSelector((state: RootState) => state.usersSlice);
   const dispatch = useDispatch<AppDispatch>();
+  // rrd
   const navigate = useNavigate();
+  // logout handler
   const handleLogOut = () => {
     logout()
       .then(({ data }) => {
@@ -23,94 +32,71 @@ const ProfileSidebar = () => {
       })
       .catch(() => toast.error("logout failed"));
   };
-    const profileMenuList = [
-        {
-          id: 0,
-          href: "/profile/verfiy-email",
-          isVisible: !userData?.isVerify,
-          icon: (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M17.98 10.79v4c0 .26-.01.51-.04.75-.23 2.7-1.82 4.04-4.75 4.04h-.4c-.25 0-.49.12-.64.32l-1.2 1.6c-.53.71-1.39.71-1.92 0l-1.2-1.6a.924.924 0 0 0-.64-.32h-.4C3.6 19.58 2 18.79 2 14.79v-4c0-2.93 1.35-4.52 4.04-4.75.24-.03.49-.04.75-.04h6.4c3.19 0 4.79 1.6 4.79 4.79Z"
-                stroke="var(--color-primary)"
-                strokeWidth="1.5"
-                strokeMiterlimit="10"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-              <path
-                d="M21.98 6.79v4c0 2.94-1.35 4.52-4.04 4.75.03-.24.04-.49.04-.75v-4c0-3.19-1.6-4.79-4.79-4.79h-6.4c-.26 0-.51.01-.75.04C6.27 3.35 7.86 2 10.79 2h6.4c3.19 0 4.79 1.6 4.79 4.79Z"
-                stroke="var(--color-primary)"
-                strokeWidth="1.5"
-                strokeMiterlimit="10"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-              <path
-                d="M13.495 13.25h.01M9.995 13.25h.01M6.495 13.25h.01"
-                stroke="var(--color-primary)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-            </svg>
-          ),
-          title: "Verify Email",
-        },
-        {
-          id: 1,
-          href: "/profile/verfiy-email",
-          icon: (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                d="M2 2h1.74c1.08 0 1.93.93 1.84 2l-.83 9.96a2.796 2.796 0 0 0 2.79 3.03h10.65c1.44 0 2.7-1.18 2.81-2.61l.54-7.5c.12-1.66-1.14-3.01-2.81-3.01H5.82M16.25 22a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM8.25 22a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM9 8h12"
-                stroke="var(--color-primary)"
-                strokeWidth="1.5"
-                strokeMiterlimit="10"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              ></path>
-            </svg>
-          ),
-          title: "My Orders",
-        },
-        {
-          id: 2,
-          href: "",
-          action: handleLogOut,
-          icon: (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
-              <path
-                stroke="red"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeMiterlimit="10"
-                strokeWidth="1.5"
-                d="M17.44 14.62L20 12.06 17.44 9.5M9.76 12.06h10.17M11.76 20c-4.42 0-8-3-8-8s3.58-8 8-8"
-              ></path>
-            </svg>
-          ),
-          title: "Log Out",
-        },
-      ];
+  
+  const profileMenuList = [
+    {
+      id: 0,
+      href: "/profile/verfiy-email",
+      isVisible: !userData?.isVerify,
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M17.98 10.79v4c0 .26-.01.51-.04.75-.23 2.7-1.82 4.04-4.75 4.04h-.4c-.25 0-.49.12-.64.32l-1.2 1.6c-.53.71-1.39.71-1.92 0l-1.2-1.6a.924.924 0 0 0-.64-.32h-.4C3.6 19.58 2 18.79 2 14.79v-4c0-2.93 1.35-4.52 4.04-4.75.24-.03.49-.04.75-.04h6.4c3.19 0 4.79 1.6 4.79 4.79Z"
+            stroke="var(--color-primary)"
+            strokeWidth="1.5"
+            strokeMiterlimit="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M21.98 6.79v4c0 2.94-1.35 4.52-4.04 4.75.03-.24.04-.49.04-.75v-4c0-3.19-1.6-4.79-4.79-4.79h-6.4c-.26 0-.51.01-.75.04C6.27 3.35 7.86 2 10.79 2h6.4c3.19 0 4.79 1.6 4.79 4.79Z"
+            stroke="var(--color-primary)"
+            strokeWidth="1.5"
+            strokeMiterlimit="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+          <path
+            d="M13.495 13.25h.01M9.995 13.25h.01M6.495 13.25h.01"
+            stroke="var(--color-primary)"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+        </svg>
+      ),
+      title: "Verify Email",
+    },
+    {
+      id: 1,
+      href: "/profile/verfiy-email",
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <path
+            d="M2 2h1.74c1.08 0 1.93.93 1.84 2l-.83 9.96a2.796 2.796 0 0 0 2.79 3.03h10.65c1.44 0 2.7-1.18 2.81-2.61l.54-7.5c.12-1.66-1.14-3.01-2.81-3.01H5.82M16.25 22a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM8.25 22a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM9 8h12"
+            stroke="var(--color-primary)"
+            strokeWidth="1.5"
+            strokeMiterlimit="10"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          ></path>
+        </svg>
+      ),
+      title: "My Orders",
+    },
+  ];
 
   return (
     <aside className="w-full md:max-w-72">
@@ -183,13 +169,27 @@ const ProfileSidebar = () => {
           className="mt-4"
         />
       )}
-      {/* menu */}
       <div className="w-full mt-4 ">
         {/* menus */}
-        {profileMenuList.map((menu) => (
-          <ProfileMenuItem {...menu} />
+        {profileMenuList.map((menu, index) => (
+          <ProfileMenuItem key={index} {...menu} />
         ))}
       </div>
+      {/* logout */}
+      <Popconfirm
+        title="Log out?"
+        description="Are you sure to delete this task?"
+        okText="Yes"
+        cancelText="No"
+        placement="topRight"
+        style={{ backgroundColor: "grey", borderColor: "grey" }}
+        onConfirm={handleLogOut}
+        className="mt-4"
+      >
+        <Button danger icon={<PoweroffOutlined />}>
+          Log out
+        </Button>
+      </Popconfirm>
     </aside>
   );
 };
