@@ -1,4 +1,4 @@
-import Input from "@components/inputs/Input";
+import Input from "@components/user/inputs/Input";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 const ColorComponent: React.FC = () => {

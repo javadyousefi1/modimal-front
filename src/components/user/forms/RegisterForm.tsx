@@ -1,7 +1,7 @@
 import { useState } from "react";
 // inputs
-import PasswordInput from "@components/inputs/PasswordInput";
-import Input from "@components/inputs/Input";
+import PasswordInput from "@components/user/inputs/PasswordInput";
+import Input from "@components/user/inputs/Input";
 // button
 import Button from "@components/elements/Button";
 // hook form
@@ -15,12 +15,12 @@ import { registerFormSchema } from "@lib/yupSchema";
 // rrd
 import { Link, useNavigate } from "react-router-dom";
 // api
-import { registerUser } from "../../api/index";
+import { registerUser } from "../../../api/index";
 // toast
 import toast from "react-hot-toast";
 // redux
 import { useDispatch } from "react-redux";
-import { setUserData } from "../../features/auth";
+import { setUserData } from "../../../features/auth";
 import { AppDispatch } from "src/store/store";
 
 const RegisterForm: React.FC = () => {

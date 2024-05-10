@@ -1,4 +1,4 @@
-import Input from "./inputs/Input";
+import Input from "./user/inputs/Input";
 
 const style = {
   eachItems: "w-1/2 flex justify-center items-start flex-col gap-y-2",

@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import FaqBox from '@components/faq/FaqBox';
+import FaqBox from '@components/user/faq/FaqBox';
 
 
 describe('FaqBox Component', () => {

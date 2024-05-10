@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllUsers } from "../../api";
-import Table from "@components/table/Table";
+import Table from "@components/admin/table/Table";
 
 const Users = () => {
   const [users, setUser] = useState([]);

@@ -1,4 +1,4 @@
-import FaqBox from "@components/faq/FaqBox";
+import FaqBox from "@components/user/faq/FaqBox";
 import Breadcrumbs from "@components/shared/Breadcrumbs";
 
 const Faq : React.FC = () => {

@@ -3,8 +3,8 @@ import Button from "@components/elements/Button";
 // rrd
 import { Link } from "react-router-dom";
 // silder
-import ModiWeekSlider from "@components/sliders/ModiWeekSlider";
-import BestSellerSlider from "@components/sliders/BestSellerSlider";
+import ModiWeekSlider from "@components/user/sliders/ModiWeekSlider";
+import BestSellerSlider from "@components/user/sliders/BestSellerSlider";
 // mainHomePage image
 import mainHomePageImg from "@assets/images/mainLandingImg.png";
 // sustainability image
@@ -20,7 +20,7 @@ import collection1 from "@assets/images/collection1.jfif";
 import collection2 from "@assets/images/collection2.png";
 import collection3 from "@assets/images/collection3.png";
 import collection4 from "@assets/images/collection4.png";
-import ChildrenModal from "@components/modal/ChildrenModal";
+import ChildrenModal from "@components/user/modal/ChildrenModal";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
@@ -76,7 +76,7 @@ const HomePage: React.FC = () => {
             <img
               src={mainHomePageImg}
               alt="main-home-page-image"
-              className="object-cover h-calc(100vh - 18px) object-[27%_0] w-full"
+              className="object-cover h-full object-[27%_0] w-full"
             />
           </div>
           {/* text & button */}

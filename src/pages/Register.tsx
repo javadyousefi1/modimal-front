@@ -1,7 +1,7 @@
 // Register page image
 import RegisterImage from "@assets/images/register.jpg";
 // from
-import RegisterForm from "@components/forms/RegisterForm";
+import RegisterForm from "@components/user/forms/RegisterForm";
 const Register: React.FC = () => {
   return (
     <div className="container md:mt-8 md:px-5">

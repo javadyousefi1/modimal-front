@@ -1,4 +1,4 @@
-import VerifyEmailForm from "@components/forms/VerifyEmailForm";
+import VerifyEmailForm from "@components/user/forms/VerifyEmailForm";
 // Register page image
 import verifyEmail from "@assets/images/register.jpg";
 // redux

@@ -1,7 +1,7 @@
 import Breadcrumbs from "@components/shared/Breadcrumbs";
 // componenet
-import CartBox from "@components/cart/CartBox";
-import ProductFilter from "@components/products/ProductFilter";
+import CartBox from "@components/user/cart/CartBox";
+import ProductFilter from "@components/user/products/ProductFilter";
 // SVG
 import MobileBanner from "../assets/images/productswiper3.png";
 import DesktopBanner from "../assets/images/productswiper4.png";

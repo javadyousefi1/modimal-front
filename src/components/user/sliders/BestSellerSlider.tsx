@@ -1,5 +1,5 @@
 // components
-import CartBox from "@components/cart/CartBox";
+import CartBox from "@components/user/cart/CartBox";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles

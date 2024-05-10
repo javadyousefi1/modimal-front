@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import CartBox from '@components/cart/CartBox'; // Adjust the import path as necessary
+import CartBox from '@components/user/cart/CartBox'; // Adjust the import path as necessary
 
 
 describe('CartBox Component', () => {

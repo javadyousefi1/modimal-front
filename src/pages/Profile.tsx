@@ -6,7 +6,7 @@ import { AppDispatch, RootState } from "../store/store";
 import { useNavigate } from "react-router-dom";
 // antd
 import { Alert, Spin, Tag } from "antd";
-import ProfileMenuItem from "@components/profile/ProfileMenuItem";
+import ProfileMenuItem from "@components/user/profile/ProfileMenuItem";
 import { useEffect } from "react";
 import { logout } from "../api";
 import toast from "react-hot-toast";
