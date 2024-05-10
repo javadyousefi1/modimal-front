@@ -381,10 +381,12 @@ const Header = () => {
         </div>
         {/* desktop design */}
         <div className="hidden md:flex justify-around items-center bg-white border-b-[1px] border-neutral-2">
-          <div>{modimalIcon}</div>
+          <Link to="/">
+            <div>{modimalIcon}</div>
+          </Link>
           <div className="flex items-center justify-center gap-x-4 lg:gap-x-6">
             {menus.map((item) => (
-                <DropDown item={item} key={item.id} />
+              <DropDown item={item} key={item.id} />
             ))}
           </div>
           <div className="flex items-center justify-center gap-x-2 lg:gap-x-4">
