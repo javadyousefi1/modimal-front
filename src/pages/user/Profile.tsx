@@ -1,16 +1,16 @@
 // redux
 import { useDispatch, useSelector } from "react-redux";
 // store
-import { AppDispatch, RootState } from "../store/store";
+import { AppDispatch, RootState } from "../../store/store";
 // rrd
 import { useNavigate } from "react-router-dom";
 // antd
 import { Alert, Spin, Tag } from "antd";
 import ProfileMenuItem from "@components/user/profile/ProfileMenuItem";
 import { useEffect } from "react";
-import { logout } from "../api";
+import { logout } from "../../api";
 import toast from "react-hot-toast";
-import { logout as logOutUser } from "../features/auth";
+import { logout as logOutUser } from "../../features/auth";
 
 const Profile = () => {
   const dispatch = useDispatch<AppDispatch>();

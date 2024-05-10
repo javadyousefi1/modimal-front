@@ -1,5 +1,5 @@
 import Input from "@components/user/inputs/Input";
-import { Controller, FormProvider, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 const SortByComponent: React.FC = () => {
   const { control } = useFormContext<{sortby:string}>();
@@ -30,14 +30,13 @@ const SortByComponent: React.FC = () => {
                 </label>
                 <div className="w-5">
                   <Input
-                    value={value}
-                    type="checkbox"
+                    value={item.title}
+                    type="radio"
                     className="cursor-pointer"
                     id={item.title}
-                    name={item.title}
+                    name="sortby"
                     onChange={(e) => {
-                      // Update the value in the form state
-                      onChange(e.target.checked);
+                      onChange(e.target.value);
                     }}
                   />
                 </div>

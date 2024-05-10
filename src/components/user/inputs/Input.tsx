@@ -1,7 +1,7 @@
 import { ChangeEvent } from "react";
 
 type InputPropType ={
-    type: "text" | "email" | "checkbox",
+    type: "text" | "email" | "checkbox" | "radio",
     onChange?: (event: ChangeEvent<HTMLInputElement>) => void,
     value?: string | number
     name?: string,

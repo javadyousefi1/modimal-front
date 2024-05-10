@@ -3,9 +3,9 @@ import Breadcrumbs from "@components/shared/Breadcrumbs";
 import CartBox from "@components/user/cart/CartBox";
 import ProductFilter from "@components/user/products/ProductFilter";
 // SVG
-import MobileBanner from "../assets/images/productswiper3.png";
-import DesktopBanner from "../assets/images/productswiper4.png";
-import product1 from "../assets/images/productImg(1).png";
+import MobileBanner from "@/assets/images/productswiper3.png";
+import DesktopBanner from "@/assets/images/productswiper4.png";
+import product1 from "@/assets/images/productImg(1).png";
 import { useState } from "react";
 const Products: React.FC = () => {
   const [filterData, setFilterData] = useState([])

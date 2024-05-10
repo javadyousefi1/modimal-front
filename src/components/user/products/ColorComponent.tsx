@@ -2,7 +2,7 @@ import Input from "@components/user/inputs/Input";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 const ColorComponent: React.FC = () => {
-  const { control } = useFormContext<{color:string}>();
+  const { control, setValue, getValues } = useFormContext<{color:string[]}>();
   const content = [
     { id: 1, title: "Black", color: "#0C0C0C", relationId: 3 },
     { id: 2, title: "Red", color: "#CA2929", relationId: 3 },
@@ -15,12 +15,25 @@ const ColorComponent: React.FC = () => {
     { id: 9, title: "Orange", color: "#CA6D29", relationId: 3 },
     { id: 10, title: "white", color: "#FFFFFF", relationId: 3 },
   ]
+
+  const handleCheckboxChange = (isChecked: boolean, color: string) => {
+    const currentColors = getValues("color") || [];
+    let updatedColors;
+    if (isChecked) {
+      updatedColors = [...currentColors, color];
+    } else {
+      updatedColors = currentColors.filter((c) => c !== color);
+    }
+    setValue("color", updatedColors);
+  };
+
+  
   return (
     <>
       <Controller
         control={control}
         name="color"
-        render={({ field: { onChange, value } }) => (
+        render={({ field: {onChange} }) => (
           <div className="mt-4">
             {content.map((item) => (
               <div
@@ -37,14 +50,13 @@ const ColorComponent: React.FC = () => {
                 <div className="min-w-4 min-h-4 rounded-full border-[1px] border-neutral-3" style={{ backgroundColor: item.color }}></div>
                 <div className="w-5">
                 <Input
-                  value={value}
+                  value={item.color}
                   type="checkbox"
                   className="cursor-pointer"
                   id={item.title}
                   name={item.title}
                   onChange={(e) => {
-                    // Update the value in the form state
-                    onChange(e.target.checked);
+                    handleCheckboxChange(e.target.checked, item.color);
                   }}
                 />
                 </div>

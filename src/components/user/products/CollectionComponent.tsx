@@ -33,10 +33,7 @@ const CollectionComponent: React.FC = () => {
                     className="cursor-pointer"
                     id={item.title}
                     name={item.title}
-                    onChange={(e) => {
-                      // Update the value in the form state
-                      onChange(e.target.checked);
-                    }}
+                    onChange={onChange}
                   />
                 </div>
               </div>
