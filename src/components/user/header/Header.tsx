@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // framer-motion
 import { motion } from "framer-motion";
@@ -145,6 +145,31 @@ const profileIcon = (
       d="M12 13.0176C14.21 13.0176 16 11.2276 16 9.01758C16 7.64758 16 5.51758 16 5.51758C16 4.68758 15.33 4.01758 14.5 4.01758C13.98 4.01758 13.52 4.28758 13.25 4.68758C12.98 4.28758 12.52 4.01758 12 4.01758C11.48 4.01758 11.02 4.28758 10.75 4.68758C10.48 4.28758 10.02 4.01758 9.5 4.01758C8.67 4.01758 8 4.68758 8 5.51758C8 5.51758 8 7.63758 8 9.01758C8 11.2276 9.79 13.0176 12 13.0176ZM10 6.51758H14V9.01758C14 10.1176 13.1 11.0176 12 11.0176C10.9 11.0176 10 10.1176 10 9.01758V6.51758Z"
       fill="#202020"
     />
+  </svg>
+);
+
+const loginIcon = (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+  >
+    <path
+      stroke="#111"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2.0"
+      d="M8.9 7.56c.31-3.6 2.16-5.07 6.21-5.07h.13c4.47 0 6.26 1.79 6.26 6.26v6.52c0 4.47-1.79 6.26-6.26 6.26h-.13c-4.02 0-5.87-1.45-6.2-4.99M2 12h12.88"
+    ></path>
+    <path
+      stroke="#111"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2.0"
+      d="M12.65 8.65L16 12l-3.35 3.35"
+    ></path>
   </svg>
 );
 
@@ -395,7 +420,10 @@ const Header = () => {
             {/* favorites icon */}
             <Link to="#">{favoriteIcon}</Link>
             {/* profile icon */}
-            <button onClick={() => navigate("/profile")}>{profileIcon}</button>
+            <Link to={loggedIn ? "/profile" : "/login"}>
+              {loggedIn ? profileIcon : loginIcon}
+            </Link>
+
             {/* search icon */}
             <div>{searchIcon}</div>
           </div>
