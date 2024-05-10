@@ -51,9 +51,9 @@ const HomePage: React.FC = () => {
               Verify your Email
             </h1>
             <p className="mt-4 text-xs font-normal text-center">
-              We’ve sent an email to {userData?.email} to verify your email address
-              and activate your account. the link in the email will expire in 24
-              hours.
+              We’ve sent an email to {userData?.email} to verify your email
+              address and activate your account. the link in the email will
+              expire in 24 hours.
             </p>
             <p className="mt-4 text-xs font-normal text-center">
               <Link to="">
@@ -72,19 +72,22 @@ const HomePage: React.FC = () => {
         {/* first section */}
         <section className="relative">
           {/* main header img */}
-          <div className="w-full h-screen md:h-[600px]">
+          <div className="w-full h-screen md:h-[calc(100vh-91px)]">
             <img
               src={mainHomePageImg}
               alt="main-home-page-image"
               className="object-cover h-full object-[27%_0] w-full"
             />
           </div>
+
           {/* text & button */}
-          <div className="absolute left-0 flex flex-col items-start p-2 md:left bottom-10 gap-y-8 md:left-[108px] ">
-            <h2 className="font-normal w-[210px] md:w-[300px] md:text-2xl text-xl italic">
-              Elegance in simplicity, Earth’s harmony
-            </h2>
-            <Button className="w-[93px] !px-3 md:w-[200px]">New In</Button>
+          <div className="container relative">
+            <div className="absolute left-0 flex flex-col items-start p-2 md:left bottom-10 gap-y-8 md:left-[108px]">
+              <h2 className="font-normal w-[210px] md:w-[300px] md:text-2xl text-xl italic">
+                Elegance in simplicity, Earth’s harmony
+              </h2>
+              <Button className="w-[93px] !px-3 md:w-[200px]">New In</Button>
+            </div>
           </div>
         </section>
 
