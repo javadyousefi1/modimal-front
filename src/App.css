@@ -1,3 +1,9 @@
 .swiper-pagination {
-    top: 20px;
+  top: 20px;
+}
+
+/* Add this to your global CSS file */
+.ant-btn-primary {
+  background-color: var(--color-primary) !important;
+  border-color: var(--color-primary) !important;
 }
