@@ -32,7 +32,7 @@ const SizeComponent: React.FC = () => {
                 <Input
                   value={value}
                   type="checkbox"
-                  className="w-[22px] cursor-pointer"
+                  className="w-5 cursor-pointer"
                   id={item.title}
                   name={item.title}
                   onChange={(e) => {

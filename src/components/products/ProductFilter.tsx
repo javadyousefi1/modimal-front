@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ProductFilterContent from "./ProductFilterContent";
+// import ProductFilterContent from "./ProductFilterContent";
 import SortByComponent from "./SortByComponent"
 import { FormProvider, useForm } from "react-hook-form";
 import SizeComponent from "./SizeComponent";
@@ -80,21 +80,21 @@ console.log("data", data)
   return (
     <div>
       <div className="font-semibold text-[28px]">Filters</div>
-      <div className="flex justify-center items-center">
+      {/* <div className="flex justify-center items-center">
       <Button
       type="button"
-      className= "w-36 h-10 border-[1px] border-primary-600 text-[14px] text-primary-600"
-
+      className= "min-w-max text-[14px]"
     >
       Clear Filter
     </Button>
     <Button
-      type="button"
-      className="w-36 h-10 border-primary-400"
+      type="submit"
+      className="min-w-max text-[14px]"
+      theme
     >
       Apply Filter
     </Button>
-      </div>
+      </div> */}
       {filter.map((item) => {
         return (
           <div
