@@ -45,7 +45,6 @@ const RegisterForm: React.FC = () => {
       .then(({ data }) => {
         // save user data in redux
         dispatch(setUserData(data.data));
-        
         toast.success(data?.message);
         setTimeout(() => {
           navigate("/?register=ok");
