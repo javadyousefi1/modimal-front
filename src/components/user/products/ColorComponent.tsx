@@ -1,8 +1,11 @@
 import Input from "@components/user/inputs/Input";
+import { Checkbox } from "antd";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 const ColorComponent: React.FC = () => {
-  const { control } = useFormContext<FormData>();
+  const { control, setValue, getValues } = useFormContext<{
+    color: string[];
+  }>();
   const content = [
     { id: 1, title: "Black", color: "#0C0C0C", relationId: 3 },
     { id: 2, title: "Red", color: "#CA2929", relationId: 3 },
@@ -14,18 +17,30 @@ const ColorComponent: React.FC = () => {
     { id: 8, title: "Light Blue", color: "#7DC3EB", relationId: 3 },
     { id: 9, title: "Orange", color: "#CA6D29", relationId: 3 },
     { id: 10, title: "white", color: "#FFFFFF", relationId: 3 },
-  ]
+  ];
+
+  const handleCheckboxChange = (isChecked: boolean, color: string) => {
+    const currentColors = getValues("color") || [];
+    let updatedColors;
+    if (isChecked) {
+      updatedColors = [...currentColors, color];
+    } else {
+      updatedColors = currentColors.filter((c) => c !== color);
+    }
+    setValue("color", updatedColors);
+  };
+
   return (
     <>
       <Controller
         control={control}
-        name="sortby"
-        render={({ field: { onChange, value } }) => (
+        name="color"
+        render={({ field: { onChange } }) => (
           <div className="mt-4">
             {content.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-end items-center flex-row-reverse gap-xx-1"
+                className="flex justify-end items-center flex-row-reverse gap-x-1"
                 onClick={(e) => e.stopPropagation()}
               >
                 <label
@@ -34,19 +49,18 @@ const ColorComponent: React.FC = () => {
                 >
                   {item.title}
                 </label>
-                <div className="min-w-4 min-h-4 rounded-full border-[1px] border-neutral-3 bg-red-400" style={{ backgroundColor: item.color }}></div>
+                <div
+                  className="min-w-4 min-h-4 rounded-full border-[1px] border-neutral-3"
+                  style={{ backgroundColor: item.color }}
+                ></div>
                 <div className="w-5">
-                <Input
-                  value={value}
-                  type="checkbox"
-                  className=" cursor-pointer"
+                  <Checkbox
                   id={item.title}
-                  name={item.title}
-                  onChange={(e) => {
-                    // Update the value in the form state
-                    onChange(e.target.checked);
-                  }}
-                />
+                    onChange={(e) => {
+                      handleCheckboxChange(e.target.checked, item.color);
+                    }}
+                  >
+                  </Checkbox>
                 </div>
               </div>
             ))}

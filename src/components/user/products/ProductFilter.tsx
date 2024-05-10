@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import ProductFilterContent from "./ProductFilterContent";
-import SortByComponent from "./SortByComponent"
+import SortByComponent from "./SortByComponent";
 import { FormProvider, useForm } from "react-hook-form";
 import SizeComponent from "./SizeComponent";
 import ColorComponent from "./ColorComponent";
@@ -34,38 +34,35 @@ const minusIcon = (
   </svg>
 );
 
-const filter = [
-  {
-    id: 1,
-    title: "Sort By",
-    content: <SortByComponent/>
-  },
-  {
-    id: 2,
-    title: "Size",
-    content: <SizeComponent/>
-  },
-  {
-    id: 3,
-    title: "Color",
-    content: <ColorComponent/>
-  },
-  {
-    id: 4,
-    title: "Collection",
-    content: <CollectionComponent/>
-  },
-  {
-    id: 5,
-    title: "price",
-    content: ""
-  },
-];
+const sortBy = {
+  id: 1,
+  title: "Sort By",
+  content: <SortByComponent />,
+};
 
-const ProductFilter: React.FC = ({filterData}) => {
+const size = {
+  id: 2,
+  title: "Size",
+  content: <SizeComponent />,
+};
+
+const color = {
+  id: 3,
+  title: "Color",
+  content: <ColorComponent />,
+}
+
+const collection = {
+  id: 4,
+  title: "Collection",
+  content: <CollectionComponent />,
+}
+
+const ProductFilter: React.FC = ({ filterData, handleFilter }) => {
   const [openFilter, setOpenFilter] = useState<{ [key: number]: boolean }>({});
-  const methods = useForm()
+  const [resetTrigger, setResetTrigger] = useState(0);
 
+  const methods = useForm();
   // handle each opening of each filter with one state
   const handleClickDropDown = (id: number) => {
     setOpenFilter((prevState) => ({
@@ -74,58 +71,144 @@ const ProductFilter: React.FC = ({filterData}) => {
     }));
   };
 
-  const onSubmit = (data) => {
-console.log("data", data)
-  }
+  const onSubmit = (data: any) => {
+    console.log(methods.getValues());
+    handleFilter();
+  };
+
+  const handleClear = () => {
+    methods.reset()
+    setResetTrigger(prev => prev + 1); // Increment the reset trigger
+  };
+  
   return (
     <div>
       <div className="font-semibold text-[28px]">Filters</div>
-      {/* <div className="flex justify-center items-center">
-      <Button
-      type="button"
-      className= "min-w-max text-[14px]"
-    >
-      Clear Filter
-    </Button>
-    <Button
-      type="submit"
-      className="min-w-max text-[14px]"
-      theme
-    >
-      Apply Filter
-    </Button>
-      </div> */}
-      {filter.map((item) => {
-        return (
-          <div
+      <div
+        className={`${
+          openFilter[sortBy.id] ? "border-[1px] border-primary " : "bg-primary"
+        } py-2 px-4 mt-4 cursor-pointer transition ease-in-out duration-300`}
+        key={sortBy.id}
+        onClick={() => handleClickDropDown(sortBy.id)}
+      >
+        <div className={`w-full ${openFilter[sortBy.id] ? "" : "flex justify-center items-center"} `}>
+          <div className="w-full flex justify-between items-center flex-1">
+          <span
             className={`${
-              openFilter[item.id]
-                ? "border-[1px] border-primary"
-                : "bg-primary"
-            } py-2 px-4 mt-4 cursor-pointer transition ease-in-out duration-300`}
-            key={item.id}
-            onClick={() => handleClickDropDown(item.id)}
+              openFilter[sortBy.id] ? "text-primary" : "text-white"
+            }  font-bold text-[16px]`}
           >
-            <div className="flex justify-between items-center">
-            <span
-              className={`${
-                openFilter[item.id] ? "text-primary" : "text-white"
-              }  font-bold text-[16px]`}
-            >
-              {item.title}
-            </span>
-            <span>{openFilter[item.id] ? minusIcon : plusIcon}</span>
-            </div>
-            {openFilter[item.id] && (
-              <FormProvider {...methods} >
-              <form onSubmit={methods.handleSubmit(onSubmit)}>
-              {item.content}
-              </form>
-            </FormProvider>
-            )}
+            {sortBy.title}
+          </span>
+          <span>{openFilter[sortBy.id] ? minusIcon : plusIcon}</span>
           </div>
-        );
-      })}
+        <div className={openFilter[sortBy.id] ? "visible" : "invisible h-0 w-0 !flex-none"}>
+          {
+            <FormProvider {...methods}>
+              <form key={resetTrigger}>{sortBy.content}</form>
+            </FormProvider>
+          }
+        </div>
+        </div>
+      </div>
+      <div
+        className={`${
+          openFilter[size.id] ? "border-[1px] border-primary " : "bg-primary"
+        } py-2 px-4 mt-4 cursor-pointer transition ease-in-out duration-300`}
+        key={size.id}
+        onClick={() => handleClickDropDown(size.id)}
+      >
+        <div className={`w-full ${openFilter[size.id] ? "" : "flex justify-center items-center"} `}>
+          <div className="w-full flex justify-between items-center flex-1">
+          <span
+            className={`${
+              openFilter[size.id] ? "text-primary" : "text-white"
+            }  font-bold text-[16px]`}
+          >
+            {size.title}
+          </span>
+          <span>{openFilter[size.id] ? minusIcon : plusIcon}</span>
+          </div>
+        <div className={openFilter[size.id] ? "visible" : "invisible h-0 w-0 !flex-none"}>
+          {
+            <FormProvider {...methods}>
+              <form key={resetTrigger}>{size.content}</form>
+            </FormProvider>
+          }
+        </div>
+        </div>
+      </div>
+      <div
+        className={`${
+          openFilter[color.id] ? "border-[1px] border-primary " : "bg-primary"
+        } py-2 px-4 mt-4 cursor-pointer transition ease-in-out duration-300`}
+        key={color.id}
+        onClick={() => handleClickDropDown(color.id)}
+      >
+        <div className={`w-full ${openFilter[color.id] ? "" : "flex justify-center items-center"} `}>
+          <div className="w-full flex justify-between items-center flex-1">
+          <span
+            className={`${
+              openFilter[color.id] ? "text-primary" : "text-white"
+            }  font-bold text-[16px]`}
+          >
+            {color.title}
+          </span>
+          <span>{openFilter[color.id] ? minusIcon : plusIcon}</span>
+          </div>
+        <div className={openFilter[color.id] ? "visible" : "invisible h-0 w-0 !flex-none"}>
+          {
+            <FormProvider {...methods}>
+              <form key={resetTrigger}>{color.content}</form>
+            </FormProvider>
+          }
+        </div>
+        </div>
+      </div>
+      <div
+        className={`${
+          openFilter[collection.id] ? "border-[1px] border-primary " : "bg-primary"
+        } py-2 px-4 mt-4 cursor-pointer transition ease-in-out duration-300`}
+        key={collection.id}
+        onClick={() => handleClickDropDown(collection.id)}
+      >
+        <div className={`w-full ${openFilter[collection.id] ? "" : "flex justify-center items-center"} `}>
+          <div className="w-full flex justify-between items-center flex-1">
+          <span
+            className={`${
+              openFilter[collection.id] ? "text-primary" : "text-white"
+            }  font-bold text-[16px]`}
+          >
+            {collection.title}
+          </span>
+          <span>{openFilter[collection.id] ? minusIcon : plusIcon}</span>
+          </div>
+        <div className={openFilter[collection.id] ? "visible" : "invisible h-0 w-0 !flex-none"}>
+          {
+            <FormProvider {...methods}>
+              <form key={resetTrigger}>{collection.content}</form>
+            </FormProvider>
+          }
+        </div>
+        </div>
+      </div>
+      <div className="flex justify-center items-center mt-2 gap-x-2">
+        <Button
+          type="button"
+          className="min-w-max text-[14px] border-[1px] border-primary-600"
+          onClick={handleClear}
+        >
+          Clear Filter
+        </Button>
+        <Button
+          type="button"
+          className="min-w-max text-[14px]"
+          theme="primary"
+          onClick={onSubmit}
+        >
+          Apply Filter
+        </Button>
+      </div>
     </div>
   );
 };

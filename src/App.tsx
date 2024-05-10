@@ -41,7 +41,6 @@ function App() {
             // Seed Token
             colorPrimary: "var(  --color-primary-800  )",
             // borderRadius: 2,
-
             // Alias Token
             // colorBgContainer: "#f6ffed",
           },

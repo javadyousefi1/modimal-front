@@ -1,4 +1,3 @@
-// components
 import ProfileSidebar from "@/components/user/profile/ProfileSidebar";
 import ProtectedRouteWrapper from "@/components/shared/ProtectedRouteWrapper";
 

@@ -1,8 +1,9 @@
 import Input from "@components/user/inputs/Input";
-import { Controller, FormProvider, useFormContext } from "react-hook-form";
+import { Radio, Space } from "antd";
+import { Controller, useFormContext } from "react-hook-form";
 
 const SortByComponent: React.FC = () => {
-  const { control } = useFormContext<FormData>();
+  const { control } = useFormContext<{ sortby: string }>();
   const content = [
     { id: 1, title: "Featured", relationId: 1 },
     { id: 2, title: "Best Seller", relationId: 1 },
@@ -16,31 +17,30 @@ const SortByComponent: React.FC = () => {
         name="sortby"
         render={({ field: { onChange, value } }) => (
           <div className="mt-4">
-            {content.map((item) => (
-              <div
-                key={item.id}
-                className="flex justify-end items-center flex-row-reverse "
-                onClick={(e) => e.stopPropagation()}
+            <div
+              className="flex justify-end items-center flex-row-reverse"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Radio.Group
+                onChange={(e) => {
+                  onChange(e.target.value);
+                }}
+                value={value}
               >
-                <label
-                  htmlFor={item.title}
-                  className="w-full text-[16px] cursor-pointer"
-                >
-                  {item.title}
-                </label>
-                <Input
-                  value={value}
-                  type="checkbox"
-                  className="w-5 cursor-pointer"
-                  id={item.title}
-                  name={item.title}
-                  onChange={(e) => {
-                    // Update the value in the form state
-                    onChange(e.target.checked);
-                  }}
-                />
-              </div>
-            ))}
+                <Space direction="vertical">
+                  {content.map((item) => {
+                    return (
+                      <Radio
+                        value={item.title}
+                        className="min-w-max font-normal text-[16px]"
+                      >
+                        {item.title}
+                      </Radio>
+                    );
+                  })}
+                </Space>
+              </Radio.Group>
+            </div>
           </div>
         )}
       />
