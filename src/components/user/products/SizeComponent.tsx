@@ -1,8 +1,9 @@
 import Input from "@components/user/inputs/Input";
+import { Checkbox, Radio, Space } from "antd";
 import { Controller, useFormContext } from "react-hook-form";
 
 const SizeComponent: React.FC = () => {
-  const { control } = useFormContext<{size:string}>();
+  const { control } = useFormContext<{ size: string }>();
   const content = [
     { id: "xs", title: "XS / US (0-4)", relationId: 2 },
     { id: "s", title: "S / US (4-6)", relationId: 2 },
@@ -17,32 +18,32 @@ const SizeComponent: React.FC = () => {
         name="size"
         render={({ field: { onChange, value } }) => (
           <div className="mt-4">
-            {content.map((item) => (
-              <div
-                key={item.id}
-                className="flex justify-end items-center flex-row-reverse "
-                onClick={(e) => e.stopPropagation()}
-              >
-                <label
-                  htmlFor={item.title}
-                  className="w-full text-[16px] cursor-pointer"
+            <div
+              className="flex justify-end items-center flex-row-reverse "
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="w-5">
+                <Radio.Group
+                  onChange={(e) => {
+                    onChange(e.target.value);
+                  }}
+                  value={value}
                 >
-                  {item.title}
-                </label>
-                <div className="w-5">
-                  <Input
-                    value={item.id}
-                    type="checkbox"
-                    className="cursor-pointer"
-                    id={item.title}
-                    name={item.title}
-                    onChange={(e) => {
-                      onChange(e.target.value);
-                    }}
-                  />
-                </div>
+                  <Space direction="vertical">
+                    {content.map((item) => {
+                      return (
+                        <Radio
+                          value={item.id}
+                          className="min-w-max font-normal text-[16px]"
+                        >
+                          {item.title}
+                        </Radio>
+                      );
+                    })}
+                  </Space>
+                </Radio.Group>
               </div>
-            ))}
+            </div>
           </div>
         )}
       />
