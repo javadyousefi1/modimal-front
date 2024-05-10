@@ -11,7 +11,7 @@ const ProtectedRouteWrapper: React.FC<{ children: ReactNode }> = ({
 }) => {
   const navigate = useNavigate();
 
-  const { loggedIn, loading } = useSelector(
+  const { loggedIn, loading, userData } = useSelector(
     (state: RootState) => state.usersSlice
   );
 
@@ -19,9 +19,12 @@ const ProtectedRouteWrapper: React.FC<{ children: ReactNode }> = ({
     if (!loading && !loggedIn) {
       navigate("/");
     }
-  }, [loggedIn, loading]);
+    if (!loading && !userData) {
+      navigate("/");
+    }
+  }, [loggedIn, loading,userData]);
 
-  if (loading) {
+  if (loading || !userData) {
     return (
       <div className="container flex flex-col items-start min-h-screen px-6 mt-4 max-w-7xl md:px-0">
         <Spin spinning={loading} fullscreen />
