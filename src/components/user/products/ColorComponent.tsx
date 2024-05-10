@@ -2,7 +2,7 @@ import Input from "@components/user/inputs/Input";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 const ColorComponent: React.FC = () => {
-  const { control } = useFormContext<FormData>();
+  const { control } = useFormContext<{color:string}>();
   const content = [
     { id: 1, title: "Black", color: "#0C0C0C", relationId: 3 },
     { id: 2, title: "Red", color: "#CA2929", relationId: 3 },
@@ -19,13 +19,13 @@ const ColorComponent: React.FC = () => {
     <>
       <Controller
         control={control}
-        name="sortby"
+        name="color"
         render={({ field: { onChange, value } }) => (
           <div className="mt-4">
             {content.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-end items-center flex-row-reverse gap-xx-1"
+                className="flex justify-end items-center flex-row-reverse gap-x-1"
                 onClick={(e) => e.stopPropagation()}
               >
                 <label
@@ -34,12 +34,12 @@ const ColorComponent: React.FC = () => {
                 >
                   {item.title}
                 </label>
-                <div className="min-w-4 min-h-4 rounded-full border-[1px] border-neutral-3 bg-red-400" style={{ backgroundColor: item.color }}></div>
+                <div className="min-w-4 min-h-4 rounded-full border-[1px] border-neutral-3" style={{ backgroundColor: item.color }}></div>
                 <div className="w-5">
                 <Input
                   value={value}
                   type="checkbox"
-                  className=" cursor-pointer"
+                  className="cursor-pointer"
                   id={item.title}
                   name={item.title}
                   onChange={(e) => {

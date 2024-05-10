@@ -86,14 +86,14 @@ const Products: React.FC = () => {
   ];
 
   const handleFilter = () => {
-    setFilterData(() => {
+    
 
-    })
+    
   }
 
   return (
-    <div className="w-full px-5">
-      <div className="my-6">
+    <div className="w-full">
+      <div className="my-6 px-5">
         <Breadcrumbs items={faqBreadcrumbs} />
       </div>
       {/* banner */}
@@ -120,10 +120,10 @@ const Products: React.FC = () => {
         </span>
       </div>
       {/* product */}
-      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-12 lg:mx-[108px]">
+      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-12 container">
         {/* desktop filter */}
         <div className="md:w-1/3 xl:w-1/3 hidden md:block">
-          <ProductFilter filterData={filterData}/>
+          <ProductFilter filterData={filterData} handleFilter={handleFilter}/>
         </div>
         <div className="md:w-2/3 xl:w-2/3">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-2 gap-x-4">

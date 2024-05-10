@@ -2,7 +2,7 @@ import Input from "@components/user/inputs/Input";
 import { Controller, FormProvider, useFormContext } from "react-hook-form";
 
 const SortByComponent: React.FC = () => {
-  const { control } = useFormContext<FormData>();
+  const { control } = useFormContext<{sortby:string}>();
   const content = [
     { id: 1, title: "Featured", relationId: 1 },
     { id: 2, title: "Best Seller", relationId: 1 },
@@ -19,7 +19,7 @@ const SortByComponent: React.FC = () => {
             {content.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-end items-center flex-row-reverse "
+                className="flex justify-end items-center flex-row-reverse"
                 onClick={(e) => e.stopPropagation()}
               >
                 <label
@@ -28,17 +28,19 @@ const SortByComponent: React.FC = () => {
                 >
                   {item.title}
                 </label>
-                <Input
-                  value={value}
-                  type="checkbox"
-                  className="w-5 cursor-pointer"
-                  id={item.title}
-                  name={item.title}
-                  onChange={(e) => {
-                    // Update the value in the form state
-                    onChange(e.target.checked);
-                  }}
-                />
+                <div className="w-5">
+                  <Input
+                    value={value}
+                    type="checkbox"
+                    className="cursor-pointer"
+                    id={item.title}
+                    name={item.title}
+                    onChange={(e) => {
+                      // Update the value in the form state
+                      onChange(e.target.checked);
+                    }}
+                  />
+                </div>
               </div>
             ))}
           </div>

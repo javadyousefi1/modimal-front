@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import ProductFilterContent from "./ProductFilterContent";
-import SortByComponent from "./SortByComponent"
+import SortByComponent from "./SortByComponent";
 import { FormProvider, useForm } from "react-hook-form";
 import SizeComponent from "./SizeComponent";
 import ColorComponent from "./ColorComponent";
@@ -38,33 +38,33 @@ const filter = [
   {
     id: 1,
     title: "Sort By",
-    content: <SortByComponent/>
+    content: <SortByComponent />,
   },
   {
     id: 2,
     title: "Size",
-    content: <SizeComponent/>
+    content: <SizeComponent />,
   },
   {
     id: 3,
     title: "Color",
-    content: <ColorComponent/>
+    content: <ColorComponent />,
   },
   {
     id: 4,
     title: "Collection",
-    content: <CollectionComponent/>
+    content: <CollectionComponent />,
   },
   {
     id: 5,
     title: "price",
-    content: ""
+    content: "",
   },
 ];
 
-const ProductFilter: React.FC = ({filterData}) => {
+const ProductFilter: React.FC = ({ filterData, handleFilter }) => {
   const [openFilter, setOpenFilter] = useState<{ [key: number]: boolean }>({});
-  const methods = useForm()
+  const methods = useForm();
 
   // handle each opening of each filter with one state
   const handleClickDropDown = (id: number) => {
@@ -74,58 +74,52 @@ const ProductFilter: React.FC = ({filterData}) => {
     }));
   };
 
-  const onSubmit = (data) => {
-console.log("data", data)
-  }
+  const onSubmit = (data: any) => {
+    console.log("data", data);
+  };
   return (
     <div>
       <div className="font-semibold text-[28px]">Filters</div>
-      {/* <div className="flex justify-center items-center">
-      <Button
-      type="button"
-      className= "min-w-max text-[14px]"
-    >
-      Clear Filter
-    </Button>
-    <Button
-      type="submit"
-      className="min-w-max text-[14px]"
-      theme
-    >
-      Apply Filter
-    </Button>
-      </div> */}
       {filter.map((item) => {
         return (
           <div
             className={`${
-              openFilter[item.id]
-                ? "border-[1px] border-primary"
-                : "bg-primary"
+              openFilter[item.id] ? "border-[1px] border-primary" : "bg-primary"
             } py-2 px-4 mt-4 cursor-pointer transition ease-in-out duration-300`}
             key={item.id}
             onClick={() => handleClickDropDown(item.id)}
           >
             <div className="flex justify-between items-center">
-            <span
-              className={`${
-                openFilter[item.id] ? "text-primary" : "text-white"
-              }  font-bold text-[16px]`}
-            >
-              {item.title}
-            </span>
-            <span>{openFilter[item.id] ? minusIcon : plusIcon}</span>
+              <span
+                className={`${
+                  openFilter[item.id] ? "text-primary" : "text-white"
+                }  font-bold text-[16px]`}
+              >
+                {item.title}
+              </span>
+              <span>{openFilter[item.id] ? minusIcon : plusIcon}</span>
             </div>
             {openFilter[item.id] && (
-              <FormProvider {...methods} >
-              <form onSubmit={methods.handleSubmit(onSubmit)}>
-              {item.content}
-              </form>
-            </FormProvider>
+              <FormProvider {...methods}>
+                <form onSubmit={methods.handleSubmit(onSubmit)}>
+                  {item.content}
+                </form>
+              </FormProvider>
             )}
           </div>
         );
       })}
+      <div className="flex justify-center items-center mt-2 gap-x-1">
+        <Button
+          type="button"
+          className="min-w-max text-[14px] border-[1px] border-primary-600"
+        >
+          Clear Filter
+        </Button>
+        <Button type="submit" className="min-w-max text-[14px]" theme="primary">
+          Apply Filter
+        </Button>
+      </div>
     </div>
   );
 };
