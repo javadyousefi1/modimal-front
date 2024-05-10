@@ -7,7 +7,8 @@ const Users = () => {
   let deletedColumns = ["_id"];
   useEffect(() => {
     getAllUsers().then((res) => {
-      setUser(res.data.userData);
+      setUser(res.data.data);
+      console.log(res);
     });
   }, []);
 

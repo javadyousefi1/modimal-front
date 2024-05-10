@@ -17,3 +17,7 @@ export const loginFormSchema = yup.object().shape({
   ),
   password: yup.string().min(6).required('password is required'),
 });
+
+export const verifyEmailSchema = yup.object().shape({
+  otp: yup.string().min(6).required('verify email is required'),
+});

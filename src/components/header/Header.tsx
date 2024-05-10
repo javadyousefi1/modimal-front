@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // framer-motion
 import { motion } from "framer-motion";
 import MenuDropDown from "./MenuDropDown";
 import Button from "../elements/Button";
 import DropDown from "@components/shared/DropDown";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { RootState } from "../../store/store";
 
 const style = {
   button:
@@ -146,6 +149,10 @@ const profileIcon = (
 );
 
 const Header = () => {
+  const { loggedIn } = useSelector((state: RootState) => state.usersSlice);
+
+  const navigate = useNavigate();
+
   const [isOpenMobileMenu, setIsOpenMobileMenu] = useState(false);
 
   const menus = [
@@ -271,9 +278,9 @@ const Header = () => {
         Enjoy Free Shipping On All Orders
       </div>
       {/* mobile design */}
-      <header className="w-full sticky top-0 z-50">
+      <header className="sticky top-0 z-50 w-full">
         <div className="flex justify-between items-center flex-row-reverse px-5 bg-white py-2 border-b-[1px] border-neutral-2 md:hidden">
-          <div className="flex justify-center items-center gap-x-2 flex-row-reverse">
+          <div className="flex flex-row-reverse items-center justify-center gap-x-2">
             {/* my shopping icon */}
             <div>{myShoppingIcon}</div>
             {/* favorites icon */}
@@ -281,7 +288,7 @@ const Header = () => {
           </div>
           {/* modimal icon */}
           <div>{modimalIcon}</div>
-          <div className="flex justify-center items-center flex-row-reverse gap-x-2">
+          <div className="flex flex-row-reverse items-center justify-center gap-x-2">
             {/* search icon */}
             <div>{searchIcon}</div>
             {/* menu */}
@@ -315,59 +322,89 @@ const Header = () => {
             exit={{ opacity: 0 }}
             className="fixed left-0 w-full top-[57px] bg-white z-50 overflow-auto"
           >
-            <div className="flex flex-col items-center mt-12"> {/* Set height to full screen */}
-  <div className="w-full overflow-auto max-h-[calc(100dvh-200px)] flex flex-col items-center gap-y-4"> {/* Allow content to scroll */}
-    {menus.map((item) => (
-      <MenuDropDown item={item} key={item.id} />
-    ))}
-  </div>
-  <div className="w-full absolute bottom-0 flex justify-center items-center gap-x-4 py-4 px-4 border-t-[1px]">
-    <Button
-      type="button"
-      children={
-        <div className="flex justify-center items-center gap-x-2">
-          <div>{profileIcon}</div>
-          <p>Log In</p>
-        </div>
-      }
-      className={style.button}
-    />
-    <Button
-      type="button"
-      children={"Create Account"}
-      className={style.button}
-    />
-  </div>
-</div>
-
+            <div className="flex flex-col items-center mt-12">
+              {" "}
+              {/* Set height to full screen */}
+              <div className="w-full overflow-auto max-h-[calc(100dvh-200px)] flex flex-col items-center gap-y-4">
+                {" "}
+                {/* Allow content to scroll */}
+                {menus.map((item) => (
+                  <MenuDropDown item={item} key={item.id} />
+                ))}
+              </div>
+              <div className="w-full absolute bottom-0 flex justify-center items-center gap-x-4 py-4 px-4 border-t-[1px]">
+                {loggedIn ? (
+                  <div className="flex items-center justify-center w-full gap-x-4">
+                    <Link to="/profile" className="w-full">
+                      <Button
+                        type="button"
+                        className={style.button}
+                        onClick={closeMenu}
+                      >
+                        <div className="flex items-center justify-center gap-x-2">
+                          <div>{profileIcon}</div>
+                          <p>profile</p>
+                        </div>
+                      </Button>
+                    </Link>
+                  </div>
+                ) : (
+                  <div className="flex items-center justify-center w-full gap-x-4 ">
+                    <Link to="login" className="w-full">
+                      <Button
+                        type="button"
+                        className={style.button}
+                        onClick={closeMenu}
+                      >
+                        <div className="flex items-center justify-center gap-x-2">
+                          <div>{profileIcon}</div>
+                          <p>Log In</p>
+                        </div>
+                      </Button>
+                    </Link>
+                    <Link to="/register" className="w-full">
+                      <Button
+                        type="button"
+                        className={style.button}
+                        onClick={closeMenu}
+                      >
+                        <span className="whitespace-nowrap">
+                          Create Account
+                        </span>
+                      </Button>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
           </motion.div>
         </div>
         {/* desktop design */}
         <div className="hidden md:flex justify-around items-center py-4 bg-white border-b-[1px] border-neutral-2">
           <div>{modimalIcon}</div>
-          <div className="flex justify-center items-center gap-x-4 lg:gap-x-6">
+          <div className="flex items-center justify-center gap-x-4 lg:gap-x-6">
             {menus.map((item) => (
-                <DropDown item={item} key={item.id} />
-              ))}
+              <DropDown item={item} key={item.id} />
+            ))}
             {/* <a href="#">Collection</a>
             <a href="#">New In</a>
             <a href="#">ModiWeek</a>
             <a href="#">Plus Size</a>
             <a href="#">Sustainability</a> */}
           </div>
-          <div className="flex justify-center items-center gap-x-2 lg:gap-x-4">
+          <div className="flex items-center justify-center gap-x-2 lg:gap-x-4">
             {/* my shopping icon */}
-            <a href="#">{myShoppingIcon}</a>
+            <Link to="#">{myShoppingIcon}</Link>
             {/* favorites icon */}
-            <a href="#">{favoriteIcon}</a>
+            <Link to="#">{favoriteIcon}</Link>
             {/* profile icon */}
-            <a href="#">{profileIcon}</a>
+            <button onClick={() => navigate("/profile")}>{profileIcon}</button>
             {/* search icon */}
             <div>{searchIcon}</div>
           </div>
         </div>
       </header>
-      <a href="#" className="fixed bottom-5 right-4 z-10">
+      <a href="#" className="fixed z-10 bottom-5 right-4">
         <svg
           width="56"
           height="48"
