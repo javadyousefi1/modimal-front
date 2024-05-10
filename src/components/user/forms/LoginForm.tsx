@@ -3,7 +3,7 @@ import { useState } from "react";
 import PasswordInput from "@components/user/inputs/PasswordInput";
 import Input from "@components/user/inputs/Input";
 // button
-import Button from "@components/elements/Button";
+import Button from "@components/shared/Button";
 // hook form
 import { useForm, Controller } from "react-hook-form";
 // yup

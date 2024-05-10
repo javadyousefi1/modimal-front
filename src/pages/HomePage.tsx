@@ -1,5 +1,5 @@
 // elements
-import Button from "@components/elements/Button";
+import Button from "@components/shared/Button";
 // rrd
 import { Link } from "react-router-dom";
 // silder

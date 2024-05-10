@@ -2,7 +2,7 @@ import { Input } from "antd";
 // hook form
 import { useForm, Controller } from "react-hook-form";
 // components
-import Button from "@components/elements/Button";
+import Button from "@components/shared/Button.tsx";
 // schema
 import { verifyEmailSchema } from "@lib/yupSchema";
 // yup

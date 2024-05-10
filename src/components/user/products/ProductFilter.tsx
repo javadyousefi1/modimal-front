@@ -5,7 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import SizeComponent from "./SizeComponent";
 import ColorComponent from "./ColorComponent";
 import CollectionComponent from "./CollectionComponent";
-import Button from "@components/elements/Button";
+import Button from "@components/shared/Button";
 
 const plusIcon = (
   <svg
