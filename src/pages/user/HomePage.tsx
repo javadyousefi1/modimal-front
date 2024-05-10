@@ -23,7 +23,7 @@ import collection4 from "@assets/images/collection4.png";
 import ChildrenModal from "@components/user/modal/ChildrenModal";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { RootState } from "../../store/store";
 
 const HomePage: React.FC = () => {
   const { userData } = useSelector((state: RootState) => state.usersSlice);

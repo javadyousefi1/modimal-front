@@ -1,14 +1,14 @@
 // page
-import HomePage from "../pages/HomePage";
-import NotFound from "../pages/NotFound";
-import Register from "../pages/Register";
-import Login from "../pages/Login";
-import Faq from "../pages/Faq";
+import HomePage from "../pages/user/HomePage";
+import NotFound from "../pages/user/NotFound";
+import Register from "../pages/user/Register";
+import Login from "../pages/user/Login";
+import Faq from "../pages/user/Faq";
 import Users from "../pages/admin/Users";
 import Main from "../pages/admin/Main";
-import Products from "../pages/Products";
-import Profile from "../pages/Profile";
-import VerifyEmail from "../pages/VerifyEmail";
+import Products from "../pages/user/Products";
+import Profile from "../pages/user/Profile";
+import VerifyEmail from "../pages/user/VerifyEmail";
 
 interface RouteType {
   id: number;

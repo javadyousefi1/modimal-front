@@ -3,7 +3,7 @@ import VerifyEmailForm from "@components/user/forms/VerifyEmailForm";
 import verifyEmail from "@assets/images/register.jpg";
 // redux
 import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+import { RootState } from "../../store/store";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
