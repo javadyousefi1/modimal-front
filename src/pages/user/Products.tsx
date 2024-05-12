@@ -121,12 +121,12 @@ const Products: React.FC = () => {
         </span>
       </div>
       {/* product */}
-      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-12 container">
+      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-12 px-5 container">
         {/* desktop filter */}
         <div className="md:w-1/3 xl:w-1/3 hidden md:block">
           <ProductFilter filterData={filterData} handleFilter={handleFilter}/>
         </div>
-        <div className="md:w-2/3 xl:w-2/3">
+        <div className="md:w-2/3 xl:w-2/3 px-5">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-2 gap-x-4">
             {products.map((item, index) => (
               <div key={index}>
