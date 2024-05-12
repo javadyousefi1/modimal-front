@@ -146,7 +146,7 @@ const Products: React.FC = () => {
               />
             </svg>
           </div>
-          <ProductFilter />
+          <ProductFilter handleOpenModalFilter={handleOpenModalFilter}/>
         </div>
       )}
       {/* product */}
