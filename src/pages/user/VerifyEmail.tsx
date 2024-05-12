@@ -8,12 +8,23 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Spin } from "antd";
 import ProtectedRouteWrapper from "@/components/shared/ProtectedRouteWrapper";
+import { resendEmailVerifyCode } from "@/api";
+import toast from "react-hot-toast";
+import Button from "@/components/shared/Button";
 
 const VerifyEmail = () => {
   const navigate = useNavigate();
   const { userData, loading } = useSelector(
     (state: RootState) => state.usersSlice
   );
+
+  const handleResendEmail= () => {
+    resendEmailVerifyCode({email: userData?.email})
+    .then((data) => {
+      toast(data)
+    })
+    .catch((e) => toast(e))
+  }
 
   // redirect user to profile page if is user already verify
   // useEffect(() => {
@@ -90,6 +101,9 @@ const VerifyEmail = () => {
             <div className="mt-4">
               <VerifyEmailForm />
             </div>
+              <Button className="hover:text-primary-200" onClick={handleResendEmail}>
+                if your verification is not success, click here
+              </Button>
           </div>
         </div>
       </div>
