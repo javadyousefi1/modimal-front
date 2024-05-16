@@ -1,6 +1,9 @@
-import { Input, Select, SelectProps, Space, Tag } from "antd";
+import { Image, Input, Select, SelectProps, Space, Tag, Upload, } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import { Controller, useForm } from "react-hook-form";
 
 const AddProduct = () => {
+  const { handleSubmit, control } = useForm();
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
   };
@@ -33,26 +36,42 @@ const AddProduct = () => {
     );
   };
 
+  const onSubmit = () => {};
+
   return (
-    <form className="flex justify-center items-center">
+    <form
+      className="flex justify-center items-center"
+      onSubmit={handleChange(onSubmit)}
+    >
       <div className="w-2/3">
         {/* basic information */}
-        <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-2">
+        <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-10">
           <h2 className="font-semibold text-[24px]">Basic Information</h2>
           <div className="w-full flex justify-between items-center">
             {/* product title */}
             <div>
               <label>Product Title</label>
-              <Input placeholder="Product Title" className="h-11" />
+              <Controller
+              control={control}
+                name="title"
+                render={({ field: { onChange, value } }) => (
+                  <Input placeholder="Product Title" className="h-11" onChange={onChange} value={value} />
+                )}
+              />
             </div>
             {/* product category */}
             <div className="flex justify-center items-start flex-col">
               <label>Product Category</label>
               <Space wrap>
+              <Controller
+              control={control}
+              name="category"
+              render={({field: {onChange, value}}) => (
                 <Select
                   className="h-11 w-72"
                   placeholder="Product Category"
-                  onChange={handleChange}
+                  onChange={onChange}
+                  value={value}
                   options={[
                     { value: "jack", label: "Jack" },
                     { value: "lucy", label: "Lucy" },
@@ -60,6 +79,8 @@ const AddProduct = () => {
                     { value: "disabled", label: "Disabled", disabled: true },
                   ]}
                 />
+              )}
+              />
               </Space>
             </div>
           </div>
@@ -67,23 +88,68 @@ const AddProduct = () => {
             {/* brand */}
             <div className="flex justify-center items-start flex-col">
               <label>Brand</label>
-              <Input placeholder="Product Title" className="h-11 w-72" />
+              <Controller
+              control={control}
+                name="title"
+                render={({ field: { onChange, value } }) => (
+                  <Input placeholder="Product Title" className="h-11 w-72" onChange={onChange} value={value}/>
+                )}
+              />
             </div>
             {/* tags */}
             <div className="flex justify-center items-start flex-col">
               <label>Tags</label>
-              <Select
+              <Controller
+              control={control}
+              name="category"
+              render={({field: {onChange, value}}) => (
+                <Select
+                onChange={onChange}
+                value={value}
                 className="h-11 w-72"
                 mode="multiple"
                 tagRender={tagRender}
                 defaultValue={["gold", "cyan"]}
                 options={options}
               />
+              )}
+              />
             </div>
           </div>
-          <div>
+          {/* description */}
+          <div className="w-full">
             <label>Description</label>
+            <Controller
+              control={control}
+                name="title"
+                render={({ field: { onChange, value } }) => (
+                  <TextArea placeholder="Product Title" allowClear className="h-44 w-full" onChange={onChange} value={value}/>
+                )}
+              />
           </div>
+        </div>
+        {/* upload image */}
+        <div>
+        <Upload
+        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+        listType="picture-card"
+        fileList={fileList}
+        onPreview={handlePreview}
+        onChange={handleChange}
+      >
+        {fileList.length >= 8 ? null : uploadButton}
+      </Upload>
+      {previewImage && (
+        <Image
+          wrapperStyle={{ display: 'none' }}
+          preview={{
+            visible: previewOpen,
+            onVisibleChange: (visible) => setPreviewOpen(visible),
+            afterOpenChange: (visible) => !visible && setPreviewImage(''),
+          }}
+          src={previewImage}
+        />
+      )}
         </div>
       </div>
       {/* product status */}
