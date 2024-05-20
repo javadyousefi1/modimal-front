@@ -3,6 +3,7 @@ import {
   Checkbox,
   Image,
   Input,
+  InputNumber,
   Select,
   SelectProps,
   Space,
@@ -14,14 +15,13 @@ import { Controller, useForm } from "react-hook-form";
 import type { GetProp, UploadFile, UploadProps } from "antd";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 
-
-type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
+type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
 const getBase64 = (img: FileType, callback: (url: string) => void) => {
   const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result as string));
+  reader.addEventListener("load", () => callback(reader.result as string));
   reader.readAsDataURL(img);
 };
 
@@ -42,7 +42,7 @@ const AddProduct = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
-  const [availableCount, setAvailableCount] = useState([]);
+  const [availableCount, setAvailableCount] = useState<{name: string, value: number}>([]);
 
   const { handleSubmit, control, getValues, setValue } = useForm();
 
@@ -140,11 +140,24 @@ const AddProduct = () => {
     setValue("color", updatedColors);
   };
 
-  const handleAvailableSize = (e) => {
-    console.log(e);
+  const handleAvailableSize = (e: any, name) => {
+
+    console.log(e)
+    // Create a new array entry with the input's name and value
+    const newValue = {
+      name: name,
+      value: e,
+    };
+
+    // Update the state by adding the new value to the existing array
+    setAvailableCount(newValue);
   };
 
-  const onSubmit = () => {};
+  console.log(availableCount)
+
+  const onSubmit = (data) => {
+    console.log(getValues())
+  };
 
   return (
     <form
@@ -223,7 +236,7 @@ const AddProduct = () => {
               <label>Tags</label>
               <Controller
                 control={control}
-                name="category"
+                name="tag"
                 render={({ field: { onChange, value } }) => (
                   <Select
                     onChange={onChange}
@@ -363,10 +376,11 @@ const AddProduct = () => {
                           </div>
                         </div>
                         <div>
-                          <Input
+                          <InputNumber
                             placeholder="Count..."
+                            min={1}
                             className="h-11"
-                            onChange={handleAvailableSize}
+                            onChange={(e) => handleAvailableSize(e ,item.id)}
                           />
                         </div>
                       </div>
