@@ -1,5 +1,6 @@
 import {
   Button,
+  Checkbox,
   Image,
   Input,
   Select,
@@ -12,62 +13,67 @@ import TextArea from "antd/es/input/TextArea";
 import { Controller, useForm } from "react-hook-form";
 import type { GetProp, UploadFile, UploadProps } from "antd";
 import { useState } from "react";
-import { PlusOutlined } from "@ant-design/icons";
 import toast from "react-hot-toast";
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
-type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
-const getBase64 = (file: FileType): Promise<string> =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = (error) => reject(error);
-  });
+type FileType = Parameters<GetProp<UploadProps, 'beforeUpload'>>[0];
+
+const getBase64 = (img: FileType, callback: (url: string) => void) => {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result as string));
+  reader.readAsDataURL(img);
+};
+
+const beforeUpload = (file: FileType) => {
+  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+  if (!isJpgOrPng) {
+    toast.error("You can only upload JPG/PNG file!");
+  }
+  const isLt2M = file.size / 1024 / 1024 < 2;
+  if (!isLt2M) {
+    toast.error("Image must smaller than 2MB!");
+  }
+  return isJpgOrPng && isLt2M;
+};
 
 const AddProduct = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [size, setSize] = useState([]);
-  const [selects, setSelects] = useState([{ id: 1 }]);
-  const [fileList, setFileList] = useState<UploadFile[]>([
-    {
-      uid: "-1",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-    {
-      uid: "-2",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-    {
-      uid: "-3",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-    {
-      uid: "-4",
-      name: "image.png",
-      status: "done",
-      url: "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
-    },
-  ]);
-  const { handleSubmit, control } = useForm();
-  const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
-  };
+  const [loading, setLoading] = useState(false);
+  const [imageUrl, setImageUrl] = useState<string>();
+  const [availableCount, setAvailableCount] = useState([]);
+
+  const { handleSubmit, control, getValues, setValue } = useForm();
+
+  const sizeContent = [
+    { id: "xs", title: "XS / US (0-4)", relationId: 2 },
+    { id: "s", title: "S / US (4-6)", relationId: 2 },
+    { id: "m", title: "M / US (6-10)", relationId: 2 },
+    { id: "l", title: "L / US (10-14)", relationId: 2 },
+    { id: "xl", title: "XL / US (12-16)", relationId: 2 },
+  ];
+
+  const colorContent = [
+    { id: 1, title: "Black", color: "#0C0C0C", relationId: 3 },
+    { id: 2, title: "Red", color: "#CA2929", relationId: 3 },
+    { id: 3, title: "Green", color: "#748C70", relationId: 3 },
+    { id: 4, title: "Yellow", color: "#909225", relationId: 3 },
+    { id: 5, title: "Dark Blue", color: "#19418E", relationId: 3 },
+    { id: 6, title: "Purple", color: "#D0A5EA", relationId: 3 },
+    { id: 7, title: "Pink", color: "#CA2980", relationId: 3 },
+    { id: 8, title: "Light Blue", color: "#7DC3EB", relationId: 3 },
+    { id: 9, title: "Orange", color: "#CA6D29", relationId: 3 },
+    { id: 10, title: "white", color: "#FFFFFF", relationId: 3 },
+  ];
 
   type TagRender = SelectProps["tagRender"];
 
   const options: SelectProps["options"] = [
-    { value: "gold" },
-    { value: "lime" },
-    { value: "green" },
-    { value: "cyan" },
+    { value: "Top" },
+    { value: "Pijamas" },
+    { value: "Coat" },
+    { value: "Underwear" },
   ];
 
   const tagRender: TagRender = (props) => {
@@ -89,53 +95,56 @@ const AddProduct = () => {
     );
   };
 
-  const beforeUpload = (file: FileType) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-    if (!isJpgOrPng) {
-      toast.error("You can only upload JPG/PNG file!");
+  const handleChange: UploadProps["onChange"] = (info) => {
+    if (info.file.status === "uploading") {
+      setLoading(true);
+      return;
     }
-    const isLt2M = file.size / 1024 / 1024 < 2;
-    if (!isLt2M) {
-      toast.error("Image must smaller than 2MB!");
+    if (info.file.status === "done") {
+      // Get this url from response in real world.
+      getBase64(info.file.originFileObj as FileType, (url) => {
+        setLoading(false);
+        setImageUrl(url);
+      });
     }
-    return isJpgOrPng && isLt2M;
   };
-
-  const handlePreview = async (file: UploadFile) => {
-    if (!file.url && !file.preview) {
-      file.preview = await getBase64(file.originFileObj as FileType);
-    }
-
-    setPreviewImage(file.url || (file.preview as string));
-    setPreviewOpen(true);
-  };
-
-  const handleChangeUpload: UploadProps["onChange"] = ({
-    fileList: newFileList,
-  }) => setFileList(newFileList);
 
   const uploadButton = (
     <button style={{ border: 0, background: "none" }} type="button">
-      <PlusOutlined />
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
       <div style={{ marginTop: 8 }}>Upload</div>
     </button>
   );
 
-  const addSelect = () => {
-    setSelects([...selects, { id: selects.length }]);
+  const handleCheckboxSizeChange = (isChecked: Boolean, size: String) => {
+    const currentSizes = getValues("size") || [];
+    let updatedSizes;
+
+    if (isChecked) {
+      updatedSizes = [...currentSizes, size];
+    } else {
+      updatedSizes = currentSizes.filter((s: String) => s !== size);
+    }
+
+    setValue("size", updatedSizes);
   };
 
-  const handleDeleteSelect = (selected : number) => {
-    const removeSelect = selects.filter((item) => item.id !== selected)
-    const removeSelectValue = size?.filter((item) => item.id !== selected)
-    setSelects(removeSelect)
-    setSize(removeSelectValue)
-  }
+  const handleCheckboxColorChange = (isChecked: boolean, color: string) => {
+    const currentColors = getValues("color") || [];
+    let updatedColors;
+    if (isChecked) {
+      updatedColors = [...currentColors, color];
+    } else {
+      updatedColors = currentColors.filter((c: string) => c !== color);
+    }
+    setValue("color", updatedColors);
+  };
+
+  const handleAvailableSize = (e) => {
+    console.log(e);
+  };
 
   const onSubmit = () => {};
-
-  console.log("size",size);
-  console.log("selects",selects)
 
   return (
     <form
@@ -251,29 +260,27 @@ const AddProduct = () => {
         <div className="border border-white p-10 mt-8">
           <h2 className="font-semibold text-[24px]">Media</h2>
 
-          <div className="w-full  flex justify-center items-start gap-y-4 mt-4">
-            <Upload
-              action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-              listType="picture-circle"
-              fileList={fileList}
-              onPreview={handlePreview}
-              onChange={handleChangeUpload}
-              beforeUpload={beforeUpload}
-            >
-              {fileList.length >= 8 ? null : uploadButton}
-            </Upload>
-            {previewImage && (
-              <Image
-                wrapperStyle={{ display: "none" }}
-                preview={{
-                  visible: previewOpen,
-                  onVisibleChange: (visible) => setPreviewOpen(visible),
-                  afterOpenChange: (visible) => !visible && setPreviewImage(""),
-                }}
-                src={previewImage}
-              />
+          <Controller
+            control={control}
+            name="uploadFile"
+            render={() => (
+              <Upload
+                name="uploadFile"
+                listType="picture-card"
+                className="avatar-uploader"
+                showUploadList={false}
+                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+                beforeUpload={beforeUpload}
+                onChange={handleChange}
+              >
+                {imageUrl ? (
+                  <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
+                ) : (
+                  uploadButton
+                )}
+              </Upload>
             )}
-          </div>
+          />
         </div>
         {/* sale information */}
         <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-10 mt-8">
@@ -319,57 +326,109 @@ const AddProduct = () => {
             <span className="font-semibold text-[24px]">Variation</span>
             <span>(sizes and colors)</span>
           </div>
-          <div className="w-full flex justify-between items-start border-t-[1px] border-neutral-300 pt-4">
+          <div className="w-full border-t-[1px] border-neutral-300 pt-4">
             {/* size */}
-            <div>
-              <h2>Size</h2>
+            <div className="flex justify-around items-center border-b-[1px] border-neutral-300">
+              <h2 className="font-semibold text-[16px]">Size</h2>
+              <h2 className="font-semibold text-[16px]">Available</h2>
             </div>
-            {/* size */}
-            <div className="flex justify-center items-start flex-col">
-              {selects.map((item) => (
-                <Space wrap className="mt-2" key={item.id}>
-                  <Controller
-                    control={control}
-                    name="size"
-                    render={({ field: { value } }) => (
-                      <Select
-                        className="h-11 w-96"
-                        placeholder="Size"
-                        onChange={(e) => {
-                          let count = 0
-                          count += 1
-                            setSize(prevSize => [...(prevSize || []), { id: count, value: e }])
-
-                        
-                        }}
-                        value={value}
-                        options={[
-                          { value: "small", label: "Small (S)", disabled: size?.includes("small") },
-                          { value: "medium", label: "Medium (M)", disabled: size?.includes("medium") },
-                          { value: "large", label: "Large (L)", disabled: size?.includes("large") },
-                        ]}
-                      />
-                    )}
-                  />
-                  {selects.length !== 1 && <Button onClick={() => handleDeleteSelect(item.id)}>+</Button> }
-                </Space>
-              ))}
-              <div className="w-full flex justify-start mt-2">
-                <Button
-                  color="blue"
-                  onClick={addSelect}
-                  className="text-blue-500"
-                  disabled={selects?.length == 3}
-                >
-                  Add values
-                </Button>
-              </div>
+            <div className="mt-4">
+              <Controller
+                control={control}
+                name="size"
+                render={({ field: { onChange } }) => (
+                  <div className="flex justify-around items-center flex-col gap-y-2">
+                    {sizeContent.map((item) => (
+                      <div
+                        key={item.id}
+                        className="w-full flex justify-around items-center"
+                      >
+                        <div className="w-32 flex justify-end items-center flex-row-reverse gap-x-1">
+                          <label
+                            htmlFor={item.title}
+                            className="w-full text-[16px] cursor-pointer"
+                          >
+                            {item.title}
+                          </label>
+                          <div className="w-5">
+                            <Checkbox
+                              id={item.title}
+                              onChange={(e) => {
+                                handleCheckboxSizeChange(
+                                  e.target.checked,
+                                  item.title
+                                );
+                              }}
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <Input
+                            placeholder="Count..."
+                            className="h-11"
+                            onChange={handleAvailableSize}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              />
+            </div>
+          </div>
+          <div className="w-full flex justify-between items-start border-t-[1px] border-neutral-300 pt-4">
+            {/* color */}
+            <div>
+              <h2 className="font-semibold text-[16px]">Color</h2>
+            </div>
+            <div className="flex justify-center items-start">
+              <Controller
+                control={control}
+                name="color"
+                render={({ field: { onChange } }) => (
+                  <div className="mt-4 flex justify-center flex-wrap gap-4">
+                    {colorContent.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex justify-end items-center flex-row-reverse gap-x-1"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <label
+                          htmlFor={item.title}
+                          className="w-full text-[16px] cursor-pointer"
+                        >
+                          {item.title}
+                        </label>
+                        <div
+                          className="min-w-4 min-h-4 rounded-full border-[1px] border-neutral-3"
+                          style={{ backgroundColor: item.color }}
+                        ></div>
+                        <div className="w-5">
+                          <Checkbox
+                            id={item.title}
+                            onChange={(e) => {
+                              handleCheckboxColorChange(
+                                e.target.checked,
+                                item.color
+                              );
+                            }}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              />
             </div>
           </div>
         </div>
+        <div className="w-full flex justify-end items-center gap-x-4 mt-4">
+          <Button type="primary" onClick={onSubmit}>
+            Product registration
+          </Button>
+          <Button className="hover:bg-primary-300">Clear All</Button>
+        </div>
       </div>
-      {/* product status */}
-      <div className="w-1/3">chetori</div>
     </form>
   );
 };
