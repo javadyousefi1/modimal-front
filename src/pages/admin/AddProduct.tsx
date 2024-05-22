@@ -1,23 +1,29 @@
+// antd
 import {
   Button,
   Checkbox,
   GetProp,
   Image,
   Input,
+  InputNumber,
   Select,
-  SelectProps,
-  Space,
-  Tag,
+  Spin,
   Upload,
   UploadFile,
   UploadProps,
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { Controller, useForm } from "react-hook-form";
-import { useState } from "react";
-import toast from "react-hot-toast";
 import { PlusOutlined } from "@ant-design/icons";
+// hook form
+import { Controller, useForm } from "react-hook-form";
+// react
+import { useState } from "react";
+// react hot toast
+import toast from "react-hot-toast";
+// api
+import { addProductApi } from "@/api/product";
 
+// define type for upload button
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
 const getBase64 = (file: FileType): Promise<string> =>
@@ -31,9 +37,16 @@ const getBase64 = (file: FileType): Promise<string> =>
 const AddProduct = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [fileList, setFileList] = useState<UploadFile[]>();
+  const [fileList, setFileList] = useState<UploadFile>();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { handleSubmit, control, getValues, setValue } = useForm();
+  const {
+    handleSubmit,
+    control,
+    getValues,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
   const sizeContent = [
     { id: "xs", title: "XS / US (0-4)", relationId: 2 },
@@ -54,15 +67,6 @@ const AddProduct = () => {
     { id: 8, title: "Light Blue", color: "#7DC3EB", relationId: 3 },
     { id: 9, title: "Orange", color: "#CA6D29", relationId: 3 },
     { id: 10, title: "white", color: "#FFFFFF", relationId: 3 },
-  ];
-
-  type TagRender = SelectProps["tagRender"];
-
-  const options: SelectProps["options"] = [
-    { value: "Top" },
-    { value: "Pijamas" },
-    { value: "Coat" },
-    { value: "Underwear" },
   ];
 
   const handleCheckboxSizeChange = (isChecked: Boolean, size: String) => {
@@ -89,6 +93,7 @@ const AddProduct = () => {
     setValue("color", updatedColors);
   };
 
+  // define condition for image that gonna be upload
   const handleBeforeUpload = (file: FileType) => {
     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
@@ -108,7 +113,7 @@ const AddProduct = () => {
     fileList: newFileList,
   }) => {
     setFileList(newFileList);
-    setValue("uploadFile", newFileList.originFileObj);
+    setValue("uploadFile", newFileList);
   };
 
   const uploadButton = (
@@ -127,14 +132,43 @@ const AddProduct = () => {
     setPreviewOpen(true);
   };
 
-  const onSubmit = (data) => {
-    console.log(getValues());
+  const onsubmit = () => {
+    const data = getValues();
+    const requestData = {
+      banner: data.uploadFile[0].originFileObj,
+      describtion: data.description,
+      price: data.price,
+      count: data.count,
+      productName: data.title,
+      size: JSON.stringify(data.size),
+      color: JSON.stringify(data.color),
+    };
+
+    for (let element in requestData) {
+      if (requestData[element] === null || requestData[element] === undefined) {
+        return;
+      }
+    }
+
+    const formData = new FormData();
+
+    for (let key in requestData) {
+      formData.append(key, requestData[key]);
+    }
+
+    addProductApi(formData);
+    setIsLoading(true)
+      .then((res) => {
+        toast.success(res.data.message);
+      })
+      .catch((error) => toast.error(error?.response?.data?.message))
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <form
       className="flex justify-center items-center container"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onsubmit)}
     >
       <div className="w-full md:w-2/3">
         {/* basic information */}
@@ -145,6 +179,12 @@ const AddProduct = () => {
             <div className="w-full">
               <label>Product Title</label>
               <Controller
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Product Title is required",
+                  },
+                }}
                 control={control}
                 name="title"
                 render={({ field: { onChange, value } }) => (
@@ -156,35 +196,36 @@ const AddProduct = () => {
                   />
                 )}
               />
+              {errors.title ? <p className="text-[12px] text-error">{errors?.title?.message}</p> : <p> </p>}
             </div>
             {/* product category */}
             <div className="w-full flex justify-center items-start flex-col">
               <label>Product Category</label>
-                <Controller
-                  control={control}
-                  name="category"
-                  render={({ field: { onChange, value } }) => (
-                    <Select
-                      className="h-11 w-full"
-                      placeholder="Product Category"
-                      onChange={onChange}
-                      value={value}
-                      options={[
-                        { value: "jack", label: "Jack" },
-                        { value: "lucy", label: "Lucy" },
-                        { value: "Yiminghe", label: "yiminghe" },
-                        {
-                          value: "disabled",
-                          label: "Disabled",
-                          disabled: true,
-                        },
-                      ]}
-                    />
-                  )}
-                />
+              <Controller
+                control={control}
+                name="category"
+                render={({ field: { onChange, value } }) => (
+                  <Select
+                    className="h-11 w-full"
+                    placeholder="Product Category"
+                    onChange={onChange}
+                    value={value}
+                    options={[
+                      { value: "jack", label: "Jack" },
+                      { value: "lucy", label: "Lucy" },
+                      { value: "Yiminghe", label: "yiminghe" },
+                      {
+                        value: "disabled",
+                        label: "Disabled",
+                        disabled: true,
+                      },
+                    ]}
+                  />
+                )}
+              />
             </div>
           </div>
-          <div className="w-full flex justify-center items-center">
+          <div className="w-full flex justify-center items-center gap-x-4">
             {/* brand */}
             <div className="w-full flex justify-center items-start flex-col">
               <label>Brand</label>
@@ -195,6 +236,22 @@ const AddProduct = () => {
                   <Input
                     placeholder="Brand"
                     className="h-11"
+                    onChange={onChange}
+                    value={value}
+                  />
+                )}
+              />
+            </div>
+            {/* count */}
+            <div className="w-full flex justify-center items-start flex-col">
+              <label>Count</label>
+              <Controller
+                control={control}
+                name="count"
+                render={({ field: { onChange, value } }) => (
+                  <InputNumber
+                    placeholder="count"
+                    className="h-11 w-full"
                     onChange={onChange}
                     value={value}
                   />
@@ -262,7 +319,7 @@ const AddProduct = () => {
                 control={control}
                 name="price"
                 render={({ field: { onChange, value } }) => (
-                  <Input
+                  <InputNumber
                     placeholder="Price..."
                     className="h-11 w-full"
                     onChange={onChange}
@@ -278,7 +335,7 @@ const AddProduct = () => {
                 control={control}
                 name="discount"
                 render={({ field: { onChange, value } }) => (
-                  <Input
+                  <InputNumber
                     placeholder="Discount"
                     className="h-11 w-full"
                     onChange={onChange}
@@ -292,7 +349,9 @@ const AddProduct = () => {
         {/* variation */}
         <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-4 mt-8 sm:p-14 md:p-10">
           <div className="flex justify-start items-center gap-x-4">
-            <span className="font-semibold text-[20px] md:text-[24px]">Variation</span>
+            <span className="font-semibold text-[20px] md:text-[24px]">
+              Variation
+            </span>
             <span>(sizes and colors)</span>
           </div>
           <div className="w-full border-t-[1px] border-neutral-300 pt-4">
@@ -323,7 +382,7 @@ const AddProduct = () => {
                             onChange={(e) => {
                               handleCheckboxSizeChange(
                                 e.target.checked,
-                                item.title
+                                item.id
                               );
                             }}
                           />
@@ -381,10 +440,15 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-end items-center gap-x-4 mt-4">
-          <Button type="primary" onClick={onSubmit}>
-            Product registration
-          </Button>
+        <div className="w-full flex justify-start items-center flex-row-reverse gap-x-4 mt-4">
+          <Spin
+            spinning={isLoading}
+            style={{ backgroundColor: "var(--color-primary)" }}
+          >
+            <Button type="primary" htmlType="submit" disabled={isLoading}>
+              Product registration
+            </Button>
+          </Spin>
           <Button className="hover:bg-primary-300">Clear All</Button>
         </div>
       </div>
