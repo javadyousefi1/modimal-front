@@ -37,8 +37,9 @@ const getBase64 = (file: FileType): Promise<string> =>
 const AddProduct = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [fileList, setFileList] = useState<UploadFile>();
+  const [fileList, setFileList] = useState<UploadFile[]>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [resetTrigger, setResetTrigger] = useState(0);
 
   const {
     handleSubmit,
@@ -46,6 +47,7 @@ const AddProduct = () => {
     getValues,
     setValue,
     formState: { errors },
+    reset,
   } = useForm();
 
   const sizeContent = [
@@ -132,6 +134,12 @@ const AddProduct = () => {
     setPreviewOpen(true);
   };
 
+  const handleClear = () => {
+    reset();
+    setFileList([]);
+    setResetTrigger((prev) => prev + 1);
+  };
+
   const onsubmit = () => {
     const data = getValues();
     const requestData = {
@@ -160,6 +168,7 @@ const AddProduct = () => {
     setIsLoading(true)
       .then((res) => {
         toast.success(res.data.message);
+        handleClear();
       })
       .catch((error) => toast.error(error?.response?.data?.message))
       .finally(() => setIsLoading(false));
@@ -169,6 +178,7 @@ const AddProduct = () => {
     <form
       className="flex justify-center items-center container"
       onSubmit={handleSubmit(onsubmit)}
+      key={resetTrigger}
     >
       <div className="w-full md:w-2/3">
         {/* basic information */}
@@ -189,19 +199,32 @@ const AddProduct = () => {
                 name="title"
                 render={({ field: { onChange, value } }) => (
                   <Input
-                    placeholder="Product Title"
+                    placeholder="Product Title ..."
                     className="h-11"
                     onChange={onChange}
                     value={value}
+                    maxLength={30}
                   />
                 )}
               />
-              {errors.title ? <p className="text-[12px] text-error">{errors?.title?.message}</p> : <p> </p>}
+              {errors.title ? (
+                <p className="text-[12px] text-error h-4">
+                  {errors?.title?.message}
+                </p>
+              ) : (
+                <p className="h-4"> </p>
+              )}
             </div>
             {/* product category */}
             <div className="w-full flex justify-center items-start flex-col">
               <label>Product Category</label>
               <Controller
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Product Category is required",
+                  },
+                }}
                 control={control}
                 name="category"
                 render={({ field: { onChange, value } }) => (
@@ -223,6 +246,13 @@ const AddProduct = () => {
                   />
                 )}
               />
+              {errors.category ? (
+                <p className="text-[12px] text-error h-4">
+                  {errors?.category?.message}
+                </p>
+              ) : (
+                <p className="h-4"> </p>
+              )}
             </div>
           </div>
           <div className="w-full flex justify-center items-center gap-x-4">
@@ -230,6 +260,12 @@ const AddProduct = () => {
             <div className="w-full flex justify-center items-start flex-col">
               <label>Brand</label>
               <Controller
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Brand is required",
+                  },
+                }}
                 control={control}
                 name="brand"
                 render={({ field: { onChange, value } }) => (
@@ -238,31 +274,59 @@ const AddProduct = () => {
                     className="h-11"
                     onChange={onChange}
                     value={value}
+                    maxLength={30}
                   />
                 )}
               />
+              {errors.brand ? (
+                <p className="text-[12px] text-error h-4">
+                  {errors?.brand?.message}
+                </p>
+              ) : (
+                <p className="h-4"> </p>
+              )}
             </div>
             {/* count */}
             <div className="w-full flex justify-center items-start flex-col">
               <label>Count</label>
               <Controller
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Count is required",
+                  },
+                }}
                 control={control}
                 name="count"
                 render={({ field: { onChange, value } }) => (
                   <InputNumber
                     placeholder="count"
+                    maxLength={5}
                     className="h-11 w-full"
                     onChange={onChange}
                     value={value}
                   />
                 )}
               />
+              {errors.count ? (
+                <p className="text-[12px] text-error h-4">
+                  {errors?.count?.message}
+                </p>
+              ) : (
+                <p className="h-4"> </p>
+              )}
             </div>
           </div>
           {/* description */}
           <div className="w-full">
             <label>Description</label>
             <Controller
+              rules={{
+                required: {
+                  value: true,
+                  message: "Description is required",
+                },
+              }}
               control={control}
               name="description"
               render={({ field: { onChange, value } }) => (
@@ -272,9 +336,17 @@ const AddProduct = () => {
                   className="h-44 w-full"
                   onChange={onChange}
                   value={value}
+                  maxLength={400}
                 />
               )}
             />
+            {errors.description ? (
+              <p className="text-[12px] text-error h-4">
+                {errors?.description?.message}
+              </p>
+            ) : (
+              <p className="h-4"> </p>
+            )}
           </div>
         </div>
         {/* upload image */}
@@ -282,6 +354,12 @@ const AddProduct = () => {
           <h2 className="font-semibold text-[24px]">Media</h2>
 
           <Controller
+            rules={{
+              required: {
+                value: true,
+                message: "Image of product is required",
+              },
+            }}
             control={control}
             name="uploadFile"
             render={() => (
@@ -308,6 +386,13 @@ const AddProduct = () => {
             />
           )}
         </div>
+        {errors.uploadFile ? (
+          <p className="text-[12px] text-error h-4">
+            {errors?.uploadFile?.message}
+          </p>
+        ) : (
+          <p className="h-4"> </p>
+        )}
         {/* sale information */}
         <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-4 mt-8 sm:p-14 md:p-10">
           <h2 className="font-semibold text-[24px]">Sale Information</h2>
@@ -316,22 +401,57 @@ const AddProduct = () => {
             <div className="w-full">
               <label>Price</label>
               <Controller
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Price is required",
+                  }
+                }}
                 control={control}
                 name="price"
                 render={({ field: { onChange, value } }) => (
                   <InputNumber
                     placeholder="Price..."
                     className="h-11 w-full"
+                    maxLength={8}
                     onChange={onChange}
                     value={value}
+                    formatter={(value) =>
+                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    }
+                    parser={(value) =>
+                      value?.replace(/\$\s?|(,*)/g, "") as unknown as number
+                    }
                   />
                 )}
               />
+              {errors.price ? (
+                <p className="text-[12px] text-error h-4">
+                  {errors?.price?.message}
+                </p>
+              ) : (
+                <p className="h-4"> </p>
+              )}
             </div>
             {/* discount */}
             <div className="w-full flex justify-center items-start flex-col">
               <label>Discount</label>
               <Controller
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Discount Price is required",
+                  },
+                  validate: value => {
+                    if (isNaN(value)) {
+                      return "Discount must be a number";
+                    }
+                    if (value >= getValues("price")) {
+                      return "Discount Price must be less than Price";
+                    }
+                    return true;
+                  }
+                }}
                 control={control}
                 name="discount"
                 render={({ field: { onChange, value } }) => (
@@ -339,10 +459,24 @@ const AddProduct = () => {
                     placeholder="Discount"
                     className="h-11 w-full"
                     onChange={onChange}
+                    maxLength={8}
                     value={value}
+                    formatter={(value) =>
+                      `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    }
+                    parser={(value) =>
+                      value?.replace(/\$\s?|(,*)/g, "") as unknown as number
+                    }
                   />
                 )}
               />
+              {errors.discount ? (
+                <p className="text-[12px] text-error h-4">
+                  {errors?.discount?.message}
+                </p>
+              ) : (
+                <p className="h-4"> </p>
+              )}
             </div>
           </div>
         </div>
@@ -361,9 +495,15 @@ const AddProduct = () => {
             </div>
             <div className="mt-4">
               <Controller
+                rules={{
+                  required: {
+                    value: true,
+                    message: "should be choose a Size",
+                  },
+                }}
                 control={control}
                 name="size"
-                render={({ field: { onChange } }) => (
+                render={() => (
                   <div className="flex justify-center items-center flex-wrap gap-y-4 lg:flex-row lg:gap-y-0 gap-x-2">
                     {sizeContent.map((item) => (
                       <div
@@ -401,6 +541,12 @@ const AddProduct = () => {
             </div>
             <div className="flex justify-center items-start">
               <Controller
+                rules={{
+                  required: {
+                    value: true,
+                    message: "should be choose a Color",
+                  },
+                }}
                 control={control}
                 name="color"
                 render={({ field: { onChange } }) => (
@@ -440,7 +586,17 @@ const AddProduct = () => {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-start items-center flex-row-reverse gap-x-4 mt-4">
+        {errors.color ? (
+          <p className="text-[12px] text-error h-4">{errors?.color?.message}</p>
+        ) : (
+          <p className="h-4"> </p>
+        )}
+        {errors.size ? (
+          <p className="text-[12px] text-error h-4">{errors?.size?.message}</p>
+        ) : (
+          <p className="h-4"> </p>
+        )}
+        <div className="w-full flex justify-start items-center flex-row-reverse gap-x-4 mt-8">
           <Spin
             spinning={isLoading}
             style={{ backgroundColor: "var(--color-primary)" }}
@@ -449,7 +605,9 @@ const AddProduct = () => {
               Product registration
             </Button>
           </Spin>
-          <Button className="hover:bg-primary-300">Clear All</Button>
+          <Button className="hover:bg-primary-300" onClick={handleClear}>
+            Clear All
+          </Button>
         </div>
       </div>
     </form>
