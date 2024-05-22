@@ -137,7 +137,7 @@ const Sidebar = () => {
         </div>
       </section>
       {/* mobile */}
-      <header className="fixed top-0 left-0 flex items-center justify-between w-full p-4 bg-primary-50 md:hidden ">
+      <header className="fixed top-0 left-0 flex items-center justify-between w-full p-4 bg-primary-50 md:hidden z-40">
         {/* profile section */}
         <div className="flex items-center gap-x-2">
           {/* user icon */}

@@ -176,11 +176,10 @@ const AddProduct = () => {
 
   return (
     <form
-      className="flex justify-center items-center container"
+      className=" w-full md:w-2/3 container"
       onSubmit={handleSubmit(onsubmit)}
       key={resetTrigger}
     >
-      <div className="w-full md:w-2/3">
         {/* basic information */}
         <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-4 sm:p-14 md:p-10">
           <h2 className="font-semibold text-[24px]">Basic Information</h2>
@@ -234,14 +233,11 @@ const AddProduct = () => {
                     onChange={onChange}
                     value={value}
                     options={[
-                      { value: "jack", label: "Jack" },
-                      { value: "lucy", label: "Lucy" },
-                      { value: "Yiminghe", label: "yiminghe" },
-                      {
-                        value: "disabled",
-                        label: "Disabled",
-                        disabled: true,
-                      },
+                      { value: "jacket", label: "jacket" },
+                      { value: "pants", label: "pants" },
+                      { value: "blouse", label: "blouse" },
+                      { value: "shorts", label: "shorts" },
+                      { value: "hat", label: "hat" },
                     ]}
                   />
                 )}
@@ -596,20 +592,19 @@ const AddProduct = () => {
         ) : (
           <p className="h-4"> </p>
         )}
-        <div className="w-full flex justify-start items-center flex-row-reverse gap-x-4 mt-8">
+        <div className="w-full flex justify-start items-center flex-row-reverse gap-x-4 mt-4">
           <Spin
             spinning={isLoading}
-            style={{ backgroundColor: "var(--color-primary)" }}
+            style={{ backgroundColor: "var(--color-primary)", borderRadius: "4px" }}
           >
             <Button type="primary" htmlType="submit" disabled={isLoading}>
-              Product registration
+              Create Product
             </Button>
           </Spin>
           <Button className="hover:bg-primary-300" onClick={handleClear}>
             Clear All
           </Button>
         </div>
-      </div>
     </form>
   );
 };
