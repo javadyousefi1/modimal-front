@@ -341,22 +341,20 @@ const AddProduct = () => {
           </div>
           <div className="w-full border-t-[1px] border-neutral-300 pt-4">
             {/* size */}
-            <div className="flex justify-around items-center border-b-[1px] border-neutral-300">
+            <div className="flex justify-start items-center">
               <h2 className="font-semibold text-[16px]">Size</h2>
-              <h2 className="font-semibold text-[16px]">Available</h2>
             </div>
             <div className="mt-4">
               <Controller
                 control={control}
                 name="size"
                 render={({ field: { onChange } }) => (
-                  <div className="flex justify-around items-center flex-col gap-y-2">
+                  <div className="flex justify-center items-center gap-x-2">
                     {sizeContent.map((item) => (
                       <div
                         key={item.id}
-                        className="w-full flex justify-around items-center"
+                        className="w-32 flex justify-start items-center"
                       >
-                        <div className="w-32 flex justify-end items-center flex-row-reverse gap-x-1">
                           <label
                             htmlFor={item.title}
                             className="w-full text-[16px] cursor-pointer"
@@ -373,15 +371,6 @@ const AddProduct = () => {
                                 );
                               }}
                             />
-                          </div>
-                        </div>
-                        <div>
-                          <InputNumber
-                            placeholder="Count..."
-                            min={1}
-                            className="h-11"
-                            onChange={(e) => handleAvailableSize(e ,item.id)}
-                          />
                         </div>
                       </div>
                     ))}
