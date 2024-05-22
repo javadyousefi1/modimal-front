@@ -1,48 +1,37 @@
 import {
   Button,
   Checkbox,
+  GetProp,
   Image,
   Input,
-  InputNumber,
   Select,
   SelectProps,
   Space,
   Tag,
   Upload,
+  UploadFile,
+  UploadProps,
 } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import { Controller, useForm } from "react-hook-form";
-import type { GetProp, UploadFile, UploadProps } from "antd";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
-const getBase64 = (img: FileType, callback: (url: string) => void) => {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result as string));
-  reader.readAsDataURL(img);
-};
-
-const beforeUpload = (file: FileType) => {
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-  if (!isJpgOrPng) {
-    toast.error("You can only upload JPG/PNG file!");
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    toast.error("Image must smaller than 2MB!");
-  }
-  return isJpgOrPng && isLt2M;
-};
+const getBase64 = (file: FileType): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
 
 const AddProduct = () => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
-  const [availableCount, setAvailableCount] = useState<{name: string, value: number}>([]);
+  const [fileList, setFileList] = useState<UploadFile[]>();
 
   const { handleSubmit, control, getValues, setValue } = useForm();
 
@@ -76,46 +65,6 @@ const AddProduct = () => {
     { value: "Underwear" },
   ];
 
-  const tagRender: TagRender = (props) => {
-    const { label, value, closable, onClose } = props;
-    const onPreventMouseDown = (event: React.MouseEvent<HTMLSpanElement>) => {
-      event.preventDefault();
-      event.stopPropagation();
-    };
-    return (
-      <Tag
-        color={value}
-        onMouseDown={onPreventMouseDown}
-        closable={closable}
-        onClose={onClose}
-        style={{ marginInlineEnd: 4 }}
-      >
-        {label}
-      </Tag>
-    );
-  };
-
-  const handleChange: UploadProps["onChange"] = (info) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj as FileType, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
-
-  const uploadButton = (
-    <button style={{ border: 0, background: "none" }} type="button">
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </button>
-  );
-
   const handleCheckboxSizeChange = (isChecked: Boolean, size: String) => {
     const currentSizes = getValues("size") || [];
     let updatedSizes;
@@ -140,37 +89,60 @@ const AddProduct = () => {
     setValue("color", updatedColors);
   };
 
-  const handleAvailableSize = (e: any, name) => {
-
-    console.log(e)
-    // Create a new array entry with the input's name and value
-    const newValue = {
-      name: name,
-      value: e,
-    };
-
-    // Update the state by adding the new value to the existing array
-    setAvailableCount(newValue);
+  const handleBeforeUpload = (file: FileType) => {
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    if (!isJpgOrPng) {
+      toast.error("You can only upload JPG/PNG file!");
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      toast.error("Image must smaller than 2MB!");
+    }
+    if (fileList && fileList.length > 0) {
+      toast.error("Only one image can be uploaded.");
+    }
+    return false;
   };
 
-  console.log(availableCount)
+  const handleChangeUpload: UploadProps["onChange"] = ({
+    fileList: newFileList,
+  }) => {
+    setFileList(newFileList);
+    setValue("uploadFile", newFileList.originFileObj);
+  };
+
+  const uploadButton = (
+    <button style={{ border: 0, background: "none" }} type="button">
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </button>
+  );
+
+  const handlePreview = async (file: UploadFile) => {
+    if (!file.url && !file.preview) {
+      file.preview = await getBase64(file.originFileObj as FileType);
+    }
+
+    setPreviewImage(file.url || (file.preview as string));
+    setPreviewOpen(true);
+  };
 
   const onSubmit = (data) => {
-    console.log(getValues())
+    console.log(getValues());
   };
 
   return (
     <form
-      className="flex justify-center items-center"
+      className="flex justify-center items-center container"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="w-2/3">
+      <div className="w-full md:w-2/3">
         {/* basic information */}
-        <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-10">
+        <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-4 sm:p-14 md:p-10">
           <h2 className="font-semibold text-[24px]">Basic Information</h2>
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex justify-between items-center flex-col gap-y-4 lg:flex-row lg:gap-y-0 lg:gap-x-4">
             {/* product title */}
-            <div>
+            <div className="w-full">
               <label>Product Title</label>
               <Controller
                 control={control}
@@ -186,15 +158,14 @@ const AddProduct = () => {
               />
             </div>
             {/* product category */}
-            <div className="flex justify-center items-start flex-col">
+            <div className="w-full flex justify-center items-start flex-col">
               <label>Product Category</label>
-              <Space wrap>
                 <Controller
                   control={control}
                   name="category"
                   render={({ field: { onChange, value } }) => (
                     <Select
-                      className="h-11 w-72"
+                      className="h-11 w-full"
                       placeholder="Product Category"
                       onChange={onChange}
                       value={value}
@@ -211,12 +182,11 @@ const AddProduct = () => {
                     />
                   )}
                 />
-              </Space>
             </div>
           </div>
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex justify-center items-center">
             {/* brand */}
-            <div className="flex justify-center items-start flex-col">
+            <div className="w-full flex justify-center items-start flex-col">
               <label>Brand</label>
               <Controller
                 control={control}
@@ -224,28 +194,9 @@ const AddProduct = () => {
                 render={({ field: { onChange, value } }) => (
                   <Input
                     placeholder="Brand"
-                    className="h-11 w-72"
+                    className="h-11"
                     onChange={onChange}
                     value={value}
-                  />
-                )}
-              />
-            </div>
-            {/* tags */}
-            <div className="flex justify-center items-start flex-col">
-              <label>Tags</label>
-              <Controller
-                control={control}
-                name="tag"
-                render={({ field: { onChange, value } }) => (
-                  <Select
-                    onChange={onChange}
-                    value={value}
-                    className="h-11 w-72"
-                    mode="multiple"
-                    tagRender={tagRender}
-                    defaultValue={["gold", "cyan"]}
-                    options={options}
                   />
                 )}
               />
@@ -270,7 +221,7 @@ const AddProduct = () => {
           </div>
         </div>
         {/* upload image */}
-        <div className="border border-white p-10 mt-8">
+        <div className="border border-white p-10 sm:p-14 mt-8 flex items-center justify-between">
           <h2 className="font-semibold text-[24px]">Media</h2>
 
           <Controller
@@ -278,29 +229,34 @@ const AddProduct = () => {
             name="uploadFile"
             render={() => (
               <Upload
-                name="uploadFile"
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={false}
-                action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-                beforeUpload={beforeUpload}
-                onChange={handleChange}
+                listType="picture-circle"
+                fileList={fileList}
+                beforeUpload={handleBeforeUpload}
+                onPreview={handlePreview}
+                onChange={handleChangeUpload}
               >
-                {imageUrl ? (
-                  <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
-                ) : (
-                  uploadButton
-                )}
+                {fileList && fileList.length >= 1 ? null : uploadButton}
               </Upload>
             )}
           />
+          {previewImage && (
+            <Image
+              wrapperStyle={{ display: "none" }}
+              preview={{
+                visible: previewOpen,
+                onVisibleChange: (visible) => setPreviewOpen(visible),
+                afterOpenChange: (visible) => !visible && setPreviewImage(""),
+              }}
+              src={previewImage}
+            />
+          )}
         </div>
         {/* sale information */}
-        <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-10 mt-8">
+        <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-4 mt-8 sm:p-14 md:p-10">
           <h2 className="font-semibold text-[24px]">Sale Information</h2>
-          <div className="w-full flex justify-between items-center">
+          <div className="w-full flex justify-between items-center flex-col gap-y-4 lg:flex-row lg:gap-y-0 lg:gap-x-4">
             {/* price */}
-            <div>
+            <div className="w-full">
               <label>Price</label>
               <Controller
                 control={control}
@@ -308,7 +264,7 @@ const AddProduct = () => {
                 render={({ field: { onChange, value } }) => (
                   <Input
                     placeholder="Price..."
-                    className="h-11"
+                    className="h-11 w-full"
                     onChange={onChange}
                     value={value}
                   />
@@ -316,7 +272,7 @@ const AddProduct = () => {
               />
             </div>
             {/* discount */}
-            <div className="flex justify-center items-start flex-col">
+            <div className="w-full flex justify-center items-start flex-col">
               <label>Discount</label>
               <Controller
                 control={control}
@@ -324,7 +280,7 @@ const AddProduct = () => {
                 render={({ field: { onChange, value } }) => (
                   <Input
                     placeholder="Discount"
-                    className="h-11 w-72"
+                    className="h-11 w-full"
                     onChange={onChange}
                     value={value}
                   />
@@ -334,14 +290,14 @@ const AddProduct = () => {
           </div>
         </div>
         {/* variation */}
-        <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-10 mt-8">
+        <div className="w-full border border-white flex justify-center items-start flex-col gap-y-4 p-4 mt-8 sm:p-14 md:p-10">
           <div className="flex justify-start items-center gap-x-4">
-            <span className="font-semibold text-[24px]">Variation</span>
+            <span className="font-semibold text-[20px] md:text-[24px]">Variation</span>
             <span>(sizes and colors)</span>
           </div>
           <div className="w-full border-t-[1px] border-neutral-300 pt-4">
             {/* size */}
-            <div className="flex justify-start items-center">
+            <div className="flex justify-start items-start flex-col lg:items-center lg:flex-row">
               <h2 className="font-semibold text-[16px]">Size</h2>
             </div>
             <div className="mt-4">
@@ -349,28 +305,28 @@ const AddProduct = () => {
                 control={control}
                 name="size"
                 render={({ field: { onChange } }) => (
-                  <div className="flex justify-center items-center gap-x-2">
+                  <div className="flex justify-center items-center flex-wrap gap-y-4 lg:flex-row lg:gap-y-0 gap-x-2">
                     {sizeContent.map((item) => (
                       <div
                         key={item.id}
                         className="w-32 flex justify-start items-center"
                       >
-                          <label
-                            htmlFor={item.title}
-                            className="w-full text-[16px] cursor-pointer"
-                          >
-                            {item.title}
-                          </label>
-                          <div className="w-5">
-                            <Checkbox
-                              id={item.title}
-                              onChange={(e) => {
-                                handleCheckboxSizeChange(
-                                  e.target.checked,
-                                  item.title
-                                );
-                              }}
-                            />
+                        <label
+                          htmlFor={item.title}
+                          className="w-full text-[16px] cursor-pointer"
+                        >
+                          {item.title}
+                        </label>
+                        <div className="w-5">
+                          <Checkbox
+                            id={item.title}
+                            onChange={(e) => {
+                              handleCheckboxSizeChange(
+                                e.target.checked,
+                                item.title
+                              );
+                            }}
+                          />
                         </div>
                       </div>
                     ))}
@@ -389,11 +345,11 @@ const AddProduct = () => {
                 control={control}
                 name="color"
                 render={({ field: { onChange } }) => (
-                  <div className="mt-4 flex justify-center flex-wrap gap-4">
+                  <div className="mt-4 flex justify-center items-center flex-wrap gap-4">
                     {colorContent.map((item) => (
                       <div
                         key={item.id}
-                        className="flex justify-end items-center flex-row-reverse gap-x-1"
+                        className="max-w-96 flex justify-end items-center flex-row-reverse gap-x-1"
                         onClick={(e) => e.stopPropagation()}
                       >
                         <label
