@@ -144,7 +144,7 @@ const AddProduct = () => {
     const data = getValues();
     const requestData = {
       banner: data.uploadFile[0].originFileObj,
-      describtion: data.description,
+      description: data.description,
       price: data.price,
       count: data.count,
       productName: data.title,
