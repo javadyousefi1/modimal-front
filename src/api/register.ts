@@ -5,3 +5,5 @@ export async function registerUser(userData: RegisterFormType): Promise<any> {
     return axios.post(`auth/register`, userData)
 }
 
+
+

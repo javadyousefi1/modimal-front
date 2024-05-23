@@ -59,8 +59,7 @@ const ColorComponent: React.FC = () => {
                     onChange={(e) => {
                       handleCheckboxChange(e.target.checked, item.color);
                     }}
-                  >
-                  </Checkbox>
+                  />
                 </div>
               </div>
             ))}

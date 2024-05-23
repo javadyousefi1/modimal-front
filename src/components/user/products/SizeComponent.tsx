@@ -1,5 +1,5 @@
 import Input from "@components/user/inputs/Input";
-import { Checkbox, Radio, Space } from "antd";
+import { Radio, Space } from "antd";
 import { Controller, useFormContext } from "react-hook-form";
 
 const SizeComponent: React.FC = () => {

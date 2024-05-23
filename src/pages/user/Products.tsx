@@ -7,8 +7,10 @@ import MobileBanner from "@/assets/images/productswiper3.png";
 import DesktopBanner from "@/assets/images/productswiper4.png";
 import product1 from "@/assets/images/productImg(1).png";
 import { useState } from "react";
+import ChildrenModal from "@/components/user/modal/ChildrenModal";
 const Products: React.FC = () => {
-  const [filterData, setFilterData] = useState([])
+  const [filterData, setFilterData] = useState([]);
+  const [isOpenFilter, setIsOpenFilter] = useState(false);
 
   let faqBreadcrumbs = [
     { id: 1, text: "Home", href: "/" },
@@ -85,12 +87,11 @@ const Products: React.FC = () => {
     },
   ];
 
-  const handleFilter = () => {
+  const handleOpenModalFilter = () => {
+    setIsOpenFilter(!isOpenFilter);
+  };
 
-    
-
-    
-  }
+  const handleFilter = () => {};
 
   return (
     <div className="w-full">
@@ -99,11 +100,20 @@ const Products: React.FC = () => {
       </div>
       {/* banner */}
       <div className="w-full flex justify-center items-center">
-        <img src={MobileBanner} className="w-full block customResolution:hidden" />
-        <img src={DesktopBanner} className="w-full hidden customResolution:block" />
+        <img
+          src={MobileBanner}
+          className="w-full block customResolution:hidden"
+        />
+        <img
+          src={DesktopBanner}
+          className="w-full hidden customResolution:block"
+        />
       </div>
       {/*mobile filter */}
-      <div className="w-full flex flex-row-reverse justify-center items-center gap-x-1 mt-6 md:hidden">
+      <div
+        className="w-full flex flex-row-reverse justify-center items-center gap-x-1 mt-6 md:hidden"
+        onClick={handleOpenModalFilter}
+      >
         <span className="text-[14px]">Filter</span>
         <span>
           <svg
@@ -120,13 +130,32 @@ const Products: React.FC = () => {
           </svg>
         </span>
       </div>
+      {isOpenFilter && (
+        <div className="w-full h-full overflow-y-auto overflow-x-hidden pt-4 px-10 sm:px-28 fixed top-0 z-50 bg-white">
+          <div onClick={handleOpenModalFilter} className="absolute top-8 right-10 sm:right-28">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
+                fill="#0C0C0C"
+              />
+            </svg>
+          </div>
+          <ProductFilter handleOpenModalFilter={handleOpenModalFilter}/>
+        </div>
+      )}
       {/* product */}
-      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-12 container">
+      <div className="sm:flex sm:justify-center sm:items-start sm:gap-x-6 mt-12 px-5 container">
         {/* desktop filter */}
         <div className="md:w-1/3 xl:w-1/3 hidden md:block">
-          <ProductFilter filterData={filterData} handleFilter={handleFilter}/>
+          <ProductFilter filterData={filterData} handleFilter={handleFilter} />
         </div>
-        <div className="md:w-2/3 xl:w-2/3">
+        <div className="md:w-2/3 xl:w-2/3 px-5">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-2 gap-x-4">
             {products.map((item, index) => (
               <div key={index}>

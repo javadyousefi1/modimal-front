@@ -58,7 +58,7 @@ const collection = {
   content: <CollectionComponent />,
 }
 
-const ProductFilter: React.FC = ({ filterData, handleFilter }) => {
+const ProductFilter: React.FC = ({ filterData, handleFilter,handleOpenModalFilter }) => {
   const [openFilter, setOpenFilter] = useState<{ [key: number]: boolean }>({});
   const [resetTrigger, setResetTrigger] = useState(0);
 
@@ -74,6 +74,7 @@ const ProductFilter: React.FC = ({ filterData, handleFilter }) => {
   const onSubmit = (data: any) => {
     console.log(methods.getValues());
     handleFilter();
+    handleOpenModalFilter()
   };
 
   const handleClear = () => {
@@ -195,14 +196,14 @@ const ProductFilter: React.FC = ({ filterData, handleFilter }) => {
       <div className="flex justify-center items-center mt-2 gap-x-2">
         <Button
           type="button"
-          className="min-w-max text-[14px] border-[1px] border-primary-600"
+          className="!min-w-max text-[14px] border-[1px] border-primary-600"
           onClick={handleClear}
         >
           Clear Filter
         </Button>
         <Button
           type="button"
-          className="min-w-max text-[14px]"
+          className="!min-w-max text-[14px]"
           theme="primary"
           onClick={onSubmit}
         >
