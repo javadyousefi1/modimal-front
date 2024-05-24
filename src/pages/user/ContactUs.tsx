@@ -1,4 +1,5 @@
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import CollapseContent from "@/components/user/contact-us/CollapseContent";
 import ContactUSCollapse from "@/components/user/contact-us/ContactUSCollapse";
 import WriteUS from "@/components/user/contact-us/WriteUS";
 import { Button, Drawer } from "antd";
@@ -40,13 +41,16 @@ const ContactUs: React.FC = () => {
           />
         </svg>
       ),
+      button: "Start Chat",
+      description: "We are here and ready to chat",
+      click: () => alert("biaaaaaaaa")
     },
     {
       id: 2,
       title: "Call Us",
       icon: (
         <svg
-          width="24"
+          width="21"
           height="18"
           viewBox="0 0 24 18"
           fill="none"
@@ -58,6 +62,9 @@ const ContactUs: React.FC = () => {
           />
         </svg>
       ),
+      button: "+1(929)460-3208",
+      description: "We're here to Talk to You",
+      click: () => alert("biaaaaaaaa")
     },
     {
       id: 3,
@@ -76,6 +83,9 @@ const ContactUs: React.FC = () => {
           />
         </svg>
       ),
+      button: "Send Email",
+      description: "You are welcome to send us an email",
+      click: () => alert("biaaaaaaaa")
     },
   ];
 
@@ -153,51 +163,28 @@ const ContactUs: React.FC = () => {
         <WriteUS desktop/>
       </div>
       </div>
-      <ContactUSCollapse
-        icon={collapseBox[0].icon}
-        title={collapseBox[0].title}
-      >
-        <div className="flex justify-center items-center flex-col gap-y-2 p-2">
-          <p className="text-[14px]">We Are Here And Ready To Chat</p>
-          <Button
-            className="w-64 !rounded-none text-primary-600 !border-[1px] border-primary-600"
-            onClick={handleChat}
-          >
-            Start Chat
-          </Button>
-        </div>
-      </ContactUSCollapse>
-      <ContactUSCollapse
-        icon={collapseBox[1].icon}
-        title={collapseBox[1].title}
-      >
-        <p className="p-4">
-          At our shop, we pride ourselves on providing exceptional service and
-          products that cater to the needs of our valued customers. We
-          understand that sometimes, reaching out through traditional means
-          might not be convenient for everyone. That's why we encourage our
-          customers to "call us" anytime they need assistance or have inquiries.
-          Our team is dedicated to ensuring that every interaction is smooth and
-          efficient, whether it's over the phone or in person. We're here to
-          support you, so don't hesitate to reach out to us. Remember, we're
-          just a call away
-        </p>
-      </ContactUSCollapse>
-      <ContactUSCollapse
-        icon={collapseBox[2].icon}
-        title={collapseBox[2].title}
-      >
-        <p className="p-4">
-          We encourage you to reach out to us via email if you have any
-          inquiries or need assistance with our products. Our team is dedicated
-          to providing excellent customer service and will respond promptly to
-          your message. Please note that due to high volumes of correspondence,
-          we kindly request that you refrain from using our contact form for
-          urgent matters. Instead, please send an email directly to our support
-          address. We appreciate your understanding and look forward to
-          assisting you soon.
-        </p>
-      </ContactUSCollapse>
+      {/* mobile design of collapses */}
+      <div className="md:hidden">
+      {collapseBox.map((item) => (
+    <ContactUSCollapse
+        icon={item.icon}
+        title={item.title}
+        key={item.id}
+    >
+        <CollapseContent button={item.button} description={item.description} onClick={item.click} />
+    </ContactUSCollapse>
+))}
+      </div>
+      {/* desktop design of boxes */}
+      <div className="hidden md:flex w-full justify-center items-center gap-x-6">
+      {collapseBox.map((item) => (
+    <div className="w-full flex justify-center items-center flex-col gap-y-4 bg-primary-25 p-4">
+    <div>{item.icon}</div>
+        <p className="text-[16px] font-bold">{item.title}</p>
+        <CollapseContent button={item.button} description={item.description} onClick={item.click} />
+    </div>
+))}
+      </div>
     </div>
   );
 };

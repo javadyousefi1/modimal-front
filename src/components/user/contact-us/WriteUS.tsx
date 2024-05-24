@@ -13,7 +13,7 @@ const WriteUS: React.FC<WriteUSPropType> = ({desktop}) => {
     control,
   } = useForm();
 
-  const onsubmit = (data) => {
+  const onsubmit = (data: object) => {
     console.log(data);
   };
 
@@ -67,7 +67,7 @@ const WriteUS: React.FC<WriteUSPropType> = ({desktop}) => {
         </div>
         {errors.fullName ? (
           <p className="text-[12px] text-error h-4">
-            {errors?.fullName?.message}
+            {!!errors?.fullName?.message}
           </p>
         ) : (
           <p className="h-4"> </p>
@@ -96,7 +96,7 @@ const WriteUS: React.FC<WriteUSPropType> = ({desktop}) => {
           />
         </div>
         {errors.email ? (
-          <p className="text-[12px] text-error h-4">{errors?.email?.message}</p>
+          <p className="text-[12px] text-error h-4">{!!errors?.email?.message }</p>
         ) : (
           <p className="h-4"> </p>
         )}
@@ -119,7 +119,7 @@ const WriteUS: React.FC<WriteUSPropType> = ({desktop}) => {
         </div>
         {errors.orderNumber ? (
           <p className="text-[12px] text-error h-4">
-            {errors?.orderNumber?.message}
+            {!!errors?.orderNumber?.message}
           </p>
         ) : (
           <p className="h-4"> </p>
@@ -149,7 +149,7 @@ const WriteUS: React.FC<WriteUSPropType> = ({desktop}) => {
         </div>
         {errors.message ? (
           <p className="text-[12px] text-error h-5">
-            {errors?.message?.message}
+            {!!errors?.message?.message}
           </p>
         ) : (
           <p className="h-4"> </p>
@@ -173,15 +173,13 @@ const WriteUS: React.FC<WriteUSPropType> = ({desktop}) => {
                 className="h-8"
                 onChange={onChange}
                 value={value}
-                maxLength={30}
-                variant="borderless"
               />
             )}
           />
         </div>
         {errors.privacy ? (
           <p className="text-[12px] text-error h-4">
-            {errors?.privacy?.message}
+            {!!errors?.privacy?.message}
           </p>
         ) : (
           <p className="h-4"> </p>

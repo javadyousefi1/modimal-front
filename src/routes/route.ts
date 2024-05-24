@@ -32,5 +32,5 @@ export const routes: RouteType[] = [
   { id: 8, path: "/products", title: "products", component: Products },
   { id: 9, path: "/profile", title: "profile", component: Profile },
   { id: 10, path: "/profile/verfiy-email", title: "profile", component: VerifyEmail },
-  { id: 11, path: "/contact-us", title: "Contact-Us", component: ContactUs },
+  { id: 11, path: "/contact-us", title: "Contact Us", component: ContactUs },
 ];
