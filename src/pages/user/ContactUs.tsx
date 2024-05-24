@@ -1,4 +1,5 @@
 import Breadcrumbs from "@/components/shared/Breadcrumbs";
+import ContactUSCollapse from "@/components/user/contact-us/ContactUSCollapse";
 import WriteUS from "@/components/user/contact-us/WriteUS";
 import { Button, Drawer } from "antd";
 import { useState } from "react";
@@ -21,8 +22,69 @@ const ContactUs: React.FC = () => {
   <br>
   We will aim to respond to you within 1-2 business days.`;
 
+  const collapseBox = [
+    {
+      id: 1,
+      title: "Chat With Us/Extend",
+      icon: (
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2 2H18V14H3.17L2 15.17V2ZM2 0C0.9 0 0.00999999 0.9 0.00999999 2L0 20L4 16H18C19.1 16 20 15.1 20 14V2C20 0.9 19.1 0 18 0H2ZM4 10H12V12H4V10ZM4 7H16V9H4V7ZM4 4H16V6H4V4Z"
+            fill="#0C0C0C"
+          />
+        </svg>
+      ),
+    },
+    {
+      id: 2,
+      title: "Call Us",
+      icon: (
+        <svg
+          width="24"
+          height="18"
+          viewBox="0 0 24 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M22 0H2C0.9 0 0 0.9 0 2V16C0 17.1 0.9 18 2 18H22C23.1 18 23.99 17.1 23.99 16L24 2C24 0.9 23.1 0 22 0ZM22 16H2V2H22V16ZM19.01 14.99L21 13L19.49 11H17.85C17.63 10.37 17.5 9.7 17.5 9C17.5 8.3 17.63 7.63 17.85 7H19.49L21 5L19.01 3.01C17.7 3.99 16.73 5.38 16.28 7C16.1 7.64 16 8.31 16 9C16 9.69 16.1 10.36 16.28 11C16.73 12.61 17.7 14.01 19.01 14.99ZM9 9C10.65 9 12 7.65 12 6C12 4.35 10.65 3 9 3C7.35 3 6 4.35 6 6C6 7.65 7.35 9 9 9ZM9 5C9.55 5 10 5.45 10 6C10 6.55 9.55 7 9 7C8.45 7 8 6.55 8 6C8 5.45 8.45 5 9 5ZM15 13.59C15 11.09 11.03 10.01 9 10.01C6.97 10.01 3 11.09 3 13.59V15H15V13.59ZM5.48 13C6.22 12.5 7.7 12 9 12C10.3 12 11.77 12.49 12.52 13H5.48Z"
+            fill="#0C0C0C"
+          />
+        </svg>
+      ),
+    },
+    {
+      id: 3,
+      title: "Email Us",
+      icon: (
+        <svg
+          width="20"
+          height="16"
+          viewBox="0 0 20 16"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 2C20 0.9 19.1 0 18 0H2C0.9 0 0 0.9 0 2V14C0 15.1 0.9 16 2 16H18C19.1 16 20 15.1 20 14V2ZM18 2L10 7L2 2H18ZM18 14H2V4L10 9L18 4V14Z"
+            fill="#0C0C0C"
+          />
+        </svg>
+      ),
+    },
+  ];
+
   const handleOpenDrawer = () => {
     setIsOpenDrawer(!isOpenDrawer);
+  };
+
+  const handleChat = () => {
+    alert("biaaaaaaaaaaaaaaaa");
   };
 
   return (
@@ -30,18 +92,21 @@ const ContactUs: React.FC = () => {
       <div className="my-6 ">
         <Breadcrumbs items={faqBreadcrumbs} />
       </div>
-      <div className="bg-primary-25 px-4 py-2">
+      <h1 className="text-[24px] font-bold">Contact US</h1>
+      <div className="bg-primary-25 px-4 py-2 mt-2">
         <p
           className="text-[14px]"
           dangerouslySetInnerHTML={{ __html: contactUsText }}
         ></p>
       </div>
+      {/* write us for mobile design */}
       <Button
-      type="text"
-        className="w-full mt-4 flex justify-between items-center"
+        type="text"
+        className="w-full mt-4 flex justify-between items-center !py-5 !px-2 !rounded-none md:hidden"
         onClick={handleOpenDrawer}
       >
         <div className="flex justify-start items-center gap-x-2">
+          {/* write us icon */}
           <div>
             <svg
               width="20"
@@ -58,6 +123,7 @@ const ContactUs: React.FC = () => {
           </div>
           <p className="text-[14px] font-semibold">Write Us</p>
         </div>
+        {/* arrow icon */}
         <div>
           <svg
             width="6"
@@ -70,15 +136,68 @@ const ContactUs: React.FC = () => {
           </svg>
         </div>
       </Button>
+      {/* drawer of write us for mobile design */}
       <Drawer
-      title="Write Us"
+        title="Write Us"
         placement="left"
         closable={true}
         onClose={handleOpenDrawer}
         open={isOpenDrawer}
       >
-        <WriteUS/>
+        <WriteUS />
       </Drawer>
+      {/* write us for desktop */}
+      <div className="w-full hidden mt-5 md:flex md:justify-center md:items-center">
+
+      <div className="w-3/4 pb-20">
+        <WriteUS desktop/>
+      </div>
+      </div>
+      <ContactUSCollapse
+        icon={collapseBox[0].icon}
+        title={collapseBox[0].title}
+      >
+        <div className="flex justify-center items-center flex-col gap-y-2 p-2">
+          <p className="text-[14px]">We Are Here And Ready To Chat</p>
+          <Button
+            className="w-64 !rounded-none text-primary-600 !border-[1px] border-primary-600"
+            onClick={handleChat}
+          >
+            Start Chat
+          </Button>
+        </div>
+      </ContactUSCollapse>
+      <ContactUSCollapse
+        icon={collapseBox[1].icon}
+        title={collapseBox[1].title}
+      >
+        <p className="p-4">
+          At our shop, we pride ourselves on providing exceptional service and
+          products that cater to the needs of our valued customers. We
+          understand that sometimes, reaching out through traditional means
+          might not be convenient for everyone. That's why we encourage our
+          customers to "call us" anytime they need assistance or have inquiries.
+          Our team is dedicated to ensuring that every interaction is smooth and
+          efficient, whether it's over the phone or in person. We're here to
+          support you, so don't hesitate to reach out to us. Remember, we're
+          just a call away
+        </p>
+      </ContactUSCollapse>
+      <ContactUSCollapse
+        icon={collapseBox[2].icon}
+        title={collapseBox[2].title}
+      >
+        <p className="p-4">
+          We encourage you to reach out to us via email if you have any
+          inquiries or need assistance with our products. Our team is dedicated
+          to providing excellent customer service and will respond promptly to
+          your message. Please note that due to high volumes of correspondence,
+          we kindly request that you refrain from using our contact form for
+          urgent matters. Instead, please send an email directly to our support
+          address. We appreciate your understanding and look forward to
+          assisting you soon.
+        </p>
+      </ContactUSCollapse>
     </div>
   );
 };
