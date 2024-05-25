@@ -86,7 +86,7 @@ const Footer = () => {
                 <a href="/faq" className={style.item}>
                   FAQs
                 </a>
-                <a href="#" className={style.item}>
+                <a href="/contact-us" className={style.item}>
                   Contact Us
                 </a>
               </div>

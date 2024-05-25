@@ -208,7 +208,7 @@ const AddProduct = () => {
               />
               {errors.title ? (
                 <p className="text-[12px] text-error h-4">
-                  {errors?.title?.message}
+                  {!!errors?.title?.message}
                 </p>
               ) : (
                 <p className="h-4"> </p>
@@ -244,7 +244,7 @@ const AddProduct = () => {
               />
               {errors.category ? (
                 <p className="text-[12px] text-error h-4">
-                  {errors?.category?.message}
+                  {!!errors?.category?.message}
                 </p>
               ) : (
                 <p className="h-4"> </p>
@@ -276,7 +276,7 @@ const AddProduct = () => {
               />
               {errors.brand ? (
                 <p className="text-[12px] text-error h-4">
-                  {errors?.brand?.message}
+                  {!!errors?.brand?.message}
                 </p>
               ) : (
                 <p className="h-4"> </p>
@@ -306,7 +306,7 @@ const AddProduct = () => {
               />
               {errors.count ? (
                 <p className="text-[12px] text-error h-4">
-                  {errors?.count?.message}
+                  {!!errors?.count?.message}
                 </p>
               ) : (
                 <p className="h-4"> </p>
@@ -338,7 +338,7 @@ const AddProduct = () => {
             />
             {errors.description ? (
               <p className="text-[12px] text-error h-4">
-                {errors?.description?.message}
+                {!!errors?.description?.message}
               </p>
             ) : (
               <p className="h-4"> </p>
@@ -384,7 +384,7 @@ const AddProduct = () => {
         </div>
         {errors.uploadFile ? (
           <p className="text-[12px] text-error h-4">
-            {errors?.uploadFile?.message}
+            {!!errors?.uploadFile?.message}
           </p>
         ) : (
           <p className="h-4"> </p>
@@ -423,7 +423,7 @@ const AddProduct = () => {
               />
               {errors.price ? (
                 <p className="text-[12px] text-error h-4">
-                  {errors?.price?.message}
+                  {!!errors?.price?.message}
                 </p>
               ) : (
                 <p className="h-4"> </p>
@@ -468,7 +468,7 @@ const AddProduct = () => {
               />
               {errors.discount ? (
                 <p className="text-[12px] text-error h-4">
-                  {errors?.discount?.message}
+                  {!!errors?.discount?.message}
                 </p>
               ) : (
                 <p className="h-4"> </p>
@@ -583,12 +583,12 @@ const AddProduct = () => {
           </div>
         </div>
         {errors.color ? (
-          <p className="text-[12px] text-error h-4">{errors?.color?.message}</p>
+          <p className="text-[12px] text-error h-4">{!!errors?.color?.message}</p>
         ) : (
           <p className="h-4"> </p>
         )}
         {errors.size ? (
-          <p className="text-[12px] text-error h-4">{errors?.size?.message}</p>
+          <p className="text-[12px] text-error h-4">{!!errors?.size?.message}</p>
         ) : (
           <p className="h-4"> </p>
         )}
