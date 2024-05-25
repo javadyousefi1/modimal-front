@@ -11,6 +11,7 @@ import Profile from "../pages/user/Profile";
 import VerifyEmail from "../pages/user/VerifyEmail";
 import AddProduct from "@/pages/admin/AddProduct";
 import ContactUs from "@/pages/user/ContactUs";
+import ProductOrder from "@/pages/user/ProductOrder";
 
 interface RouteType {
   id: number;
@@ -33,4 +34,5 @@ export const routes: RouteType[] = [
   { id: 9, path: "/profile", title: "profile", component: Profile },
   { id: 10, path: "/profile/verfiy-email", title: "profile", component: VerifyEmail },
   { id: 11, path: "/contact-us", title: "Contact Us", component: ContactUs },
+  { id: 11, path: "/products/id", title: "Product", component: ProductOrder },
 ];
