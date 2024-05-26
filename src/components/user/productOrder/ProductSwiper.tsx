@@ -18,28 +18,21 @@ const ProductSwiper: React.FC = () => {
   return (
     <div className="w-full mt-2 px-0">
       <Swiper
-        breakpoints={{
-          // when window width is >= 600px
-          600: {
-            slidesPerView: 3,
-          },
-        }}
         pagination={{ clickable: true }}
         modules={[Pagination, Autoplay]}
         autoplay={{
             delay: 2500,
             disableOnInteraction: false,
           }}
-        spaceBetween={50}
         slidesPerView={1}
         style={{
           "--swiper-pagination-color": "var(--color-primary)", //custome style for pagination bullet
 
         }}
       >
-          {images.map((item) => (
-        <SwiperSlide>
-                <img src={item.image} className="mb-8"/>
+          {images.map((item, index) => (
+        <SwiperSlide key={index}>
+                <img src={item.image} className="mb-8" />
         </SwiperSlide>
           ))}
       </Swiper>
