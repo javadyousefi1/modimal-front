@@ -307,7 +307,9 @@ const Header = () => {
         <div className="flex justify-between items-center flex-row-reverse px-5 bg-white py-2 border-b-[1px] border-neutral-2 md:hidden">
           <div className="flex flex-row-reverse items-center justify-center gap-x-2">
             {/* my shopping icon */}
-            <div>{myShoppingIcon}</div>
+            <div>
+              <Link to="/cart">{myShoppingIcon}</Link>
+            </div>
             {/* favorites icon */}
             <div>{favoriteIcon}</div>
           </div>
@@ -416,7 +418,7 @@ const Header = () => {
           </div>
           <div className="flex items-center justify-center gap-x-2 lg:gap-x-4">
             {/* my shopping icon */}
-            <Link to="#">{myShoppingIcon}</Link>
+            <Link to="/cart">{myShoppingIcon}</Link>
             {/* favorites icon */}
             <Link to="#">{favoriteIcon}</Link>
             {/* profile icon */}
