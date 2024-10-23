@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutPropType> = ({ children }) => {
 
   // change title of each page dynamic by route
   useEffect(() => {
-    // scroll to page first 
+    // scroll to page first
     window.scrollTo(0, 0);
     // set title of each page
     const currentRouteTitle = routes.find((r) => r.path === pathname);
@@ -28,7 +28,7 @@ const Layout: React.FC<LayoutPropType> = ({ children }) => {
     return (
       <>
         <Header />
-        {children}
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </>
     );
@@ -37,7 +37,7 @@ const Layout: React.FC<LayoutPropType> = ({ children }) => {
   return (
     <div className="flex flex-col w-full md:flex-row">
       <Sidebar />
-      <div className="w-full h-screen p-4 overflow-y-scroll md:p-8 bg-neutral-200 mt-[60px] md:mt-0">
+      <div className="w-full h-screen p-4  overflow-y-scroll md:p-8 bg-neutral-200 mt-[60px] md:mt-0">
         {children}
       </div>
     </div>
