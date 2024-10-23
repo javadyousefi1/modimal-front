@@ -12,6 +12,7 @@ import VerifyEmail from "../pages/user/VerifyEmail";
 import AddProduct from "@/pages/admin/AddProduct";
 import ContactUs from "@/pages/user/ContactUs";
 import Cart from "@/pages/user/Cart";
+import ProductOrder from "@/pages/user/ProductOrder";
 
 interface RouteType {
   id: number;
