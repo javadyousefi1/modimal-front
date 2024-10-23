@@ -93,10 +93,6 @@ const ContactUs: React.FC = () => {
     setIsOpenDrawer(!isOpenDrawer);
   };
 
-  const handleChat = () => {
-    alert("biaaaaaaaaaaaaaaaa");
-  };
-
   return (
     <div className="container px-5">
       <div className="my-6 ">
