@@ -10,13 +10,13 @@ import { yupResolver } from "@hookform/resolvers/yup";
 // toast
 import toast from "react-hot-toast";
 // api
-import { verifyUserEmail } from "../../../api/profile.ts";
+import { verifyUserEmail } from "../../../../api/profile.ts";
 // redux
 import { useDispatch, useSelector } from "react-redux";
 // store
-import { AppDispatch, RootState } from "../../../store/store.ts";
+import { AppDispatch, RootState } from "../../../../store/store.ts";
 // redux fundtion
-import { setUserData } from "../../../features/auth.ts";
+// import { setUserData } from "../../../../features/auth.ts";
 // rrd
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +39,7 @@ const VerifyEmailForm = () => {
     verifyUserEmail({ verifyCode: data.otp, email: userData?.email })
       .then(({ data }) => {
         toast.success("your account verified ");
-        dispatch(setUserData(data?.userData));
+        // dispatch(setUserData(data?.userData));
         setTimeout(() => {
           navigate("/profile");
         }, 2000);

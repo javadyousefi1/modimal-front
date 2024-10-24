@@ -1,7 +1,7 @@
 // Register page image
 import LoginImage from "@assets/images/register.jpg"
 // from
-import LoginForm from "@components/user/forms/LoginForm";
+import LoginForm from "@/app/auth/login/forms/LoginForm";
 
 const Login: React.FC = () => {
 

@@ -14,11 +14,11 @@ import { LoginFormType } from "@types";
 import { loginFormSchema } from "@lib/yupSchema";
 // rrd
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../../../api/index";
+import { loginUser } from "../../../../api/index";
 // toast
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setUserData } from "../../../features/auth";
+// import { setUserData } from "@/features/auth";
 import { AppDispatch } from "src/store/store";
 
 const LoginForm: React.FC = () => {
@@ -42,7 +42,7 @@ const LoginForm: React.FC = () => {
     loginUser(data)
       .then(({ data }) => {
         // save user data in redux
-        dispatch(setUserData(data.data));
+        // dispatch(setUserData(data.data));
         // show toast
         toast.success(data?.message);
         // redirect user

@@ -15,12 +15,12 @@ import { registerFormSchema } from "@lib/yupSchema";
 // rrd
 import { Link, useNavigate } from "react-router-dom";
 // api
-import { registerUser } from "../../../api/index";
+import { registerUser } from "../../../../api/index";
 // toast
 import toast from "react-hot-toast";
 // redux
 import { useDispatch } from "react-redux";
-import { setUserData } from "../../../features/auth";
+// import { setUserData } from "../../../../features/auth";
 import { AppDispatch } from "src/store/store";
 
 const RegisterForm: React.FC = () => {
@@ -44,7 +44,7 @@ const RegisterForm: React.FC = () => {
     registerUser(data)
       .then(({ data }) => {
         // save user data in redux
-        dispatch(setUserData(data.data));
+        // dispatch(setUserData(data.data));
         toast.success(data?.message);
         setTimeout(() => {
           navigate("/?register=ok");
