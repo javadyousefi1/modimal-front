@@ -28,11 +28,12 @@ const SortByComponent: React.FC = () => {
                 value={value}
               >
                 <Space direction="vertical">
-                  {content.map((item) => {
+                  {content.map((item, index) => {
                     return (
                       <Radio
                         value={item.title}
                         className="min-w-max font-normal text-[16px]"
+                        key={index}
                       >
                         {item.title}
                       </Radio>

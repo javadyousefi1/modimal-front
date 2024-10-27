@@ -37,7 +37,7 @@ const ColorComponent: React.FC = () => {
         name="color"
         render={({ field: { onChange } }) => (
           <div className="mt-4">
-            {content.map((item) => (
+            {content.map((item,index) => (
               <div
                 key={item.id}
                 className="flex justify-end items-center flex-row-reverse gap-x-1"

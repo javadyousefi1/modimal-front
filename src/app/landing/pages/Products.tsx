@@ -1,3 +1,5 @@
+// react
+import { useState } from "react";
 import Breadcrumbs from "@components/shared/Breadcrumbs";
 // componenet
 import CartBox from "@components/user/cart/CartBox";
@@ -5,9 +7,9 @@ import ProductFilter from "@components/user/products/ProductFilter";
 // SVG
 import MobileBanner from "@/assets/images/productswiper3.png";
 import DesktopBanner from "@/assets/images/productswiper4.png";
-import product1 from "@/assets/images/productImg(1).png";
-import { useState } from "react";
-import ChildrenModal from "@/components/user/modal/ChildrenModal";
+// hooks
+import useProducts from "@/components/user/products/hooks/useProducts";
+
 const Products: React.FC = () => {
   const [filterData, setFilterData] = useState([]);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
@@ -17,75 +19,77 @@ const Products: React.FC = () => {
     { id: 2, text: "shopAll", href: "/products" },
   ];
 
-  // product data
-  const products = [
-    {
-      id: 1,
-      image: product1,
-      title: "chill wrap top",
-      off: null,
-      newproduct: false,
-      color: ["#CA2929"],
-      price: 160,
-      oldPrice: null,
-      desc: "Turn it up Top ",
-    },
-    {
-      id: 2,
-      image: product1,
-      title: "Essential T-shirt",
-      off: "20%",
-      newproduct: true,
-      color: ["#0C0C0C", "#7DC3EB", "#748C70"],
-      price: 95,
-      oldPrice: 120,
-      desc: "Turn it up T-shirt",
-    },
-    {
-      id: 3,
-      image: product1,
-      title: "Shirt Dress",
-      off: null,
-      newproduct: true,
-      color: ["#0C0C0C", "#7DC3EB", "#748C70"],
-      price: 245,
-      oldPrice: null,
-      desc: "Turn it up Dress",
-    },
-    {
-      id: 4,
-      image: product1,
-      title: "Rule zip Jacket",
-      off: null,
-      newproduct: false,
-      color: ["#909225", "#CA6D29"],
-      price: 199,
-      oldPrice: null,
-      desc: "Turn it up Jacket",
-    },
-    {
-      id: 5,
-      image: product1,
-      title: "New Age Linen",
-      off: "30%",
-      newproduct: false,
-      color: ["#0C0C0C", "#19418E", "#748C70"],
-      price: 180,
-      oldPrice: 240,
-      desc: "Turn it up Pants",
-    },
-    {
-      id: 6,
-      image: product1,
-      title: "Boss Pullover",
-      off: null,
-      newproduct: false,
-      color: ["#0C0C0C", "#748C70"],
-      price: 280,
-      oldPrice: 350,
-      desc: "Turn it up Pullover",
-    },
-  ];
+  // products data
+  const {data : productsData} = useProducts()
+
+  // const products = [
+  //   {
+  //     id: 1,
+  //     image: product1,
+  //     title: "chill wrap top",
+  //     off: null,
+  //     newproduct: false,
+  //     color: ["#CA2929"],
+  //     price: 160,
+  //     oldPrice: null,
+  //     desc: "Turn it up Top ",
+  //   },
+  //   {
+  //     id: 2,
+  //     image: product1,
+  //     title: "Essential T-shirt",
+  //     off: "20%",
+  //     newproduct: true,
+  //     color: ["#0C0C0C", "#7DC3EB", "#748C70"],
+  //     price: 95,
+  //     oldPrice: 120,
+  //     desc: "Turn it up T-shirt",
+  //   },
+  //   {
+  //     id: 3,
+  //     image: product1,
+  //     title: "Shirt Dress",
+  //     off: null,
+  //     newproduct: true,
+  //     color: ["#0C0C0C", "#7DC3EB", "#748C70"],
+  //     price: 245,
+  //     oldPrice: null,
+  //     desc: "Turn it up Dress",
+  //   },
+  //   {
+  //     id: 4,
+  //     image: product1,
+  //     title: "Rule zip Jacket",
+  //     off: null,
+  //     newproduct: false,
+  //     color: ["#909225", "#CA6D29"],
+  //     price: 199,
+  //     oldPrice: null,
+  //     desc: "Turn it up Jacket",
+  //   },
+  //   {
+  //     id: 5,
+  //     image: product1,
+  //     title: "New Age Linen",
+  //     off: "30%",
+  //     newproduct: false,
+  //     color: ["#0C0C0C", "#19418E", "#748C70"],
+  //     price: 180,
+  //     oldPrice: 240,
+  //     desc: "Turn it up Pants",
+  //   },
+  //   {
+  //     id: 6,
+  //     image: product1,
+  //     title: "Boss Pullover",
+  //     off: null,
+  //     newproduct: false,
+  //     color: ["#0C0C0C", "#748C70"],
+  //     price: 280,
+  //     oldPrice: 350,
+  //     desc: "Turn it up Pullover",
+  //   },
+  // ];
 
   const handleOpenModalFilter = () => {
     setIsOpenFilter(!isOpenFilter);
@@ -157,18 +161,19 @@ const Products: React.FC = () => {
         </div>
         <div className="md:w-2/3 xl:w-2/3 px-5">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-2 gap-x-4">
-            {products.map((item, index) => (
+            {productsData?.map((item, index) => (
               <div key={index}>
                 <CartBox
                   title={item.title}
-                  desc={item.desc}
+                  desc={item.text}
                   price={item.price}
                   colors={item.color}
                   productImg={item.image}
                   alt={item.title}
                   newProduct={item.newproduct}
-                  oldPrice={item.oldPrice}
+                  oldPrice={item.offPrice}
                 />
+            
               </div>
             ))}
           </div>

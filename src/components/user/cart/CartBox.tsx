@@ -48,7 +48,7 @@ const CartBox: React.FC<CartBoxPropType> = ({
           </span>
         )}
         {/* cart image */}
-        <img src={productImg} alt={alt} className="object-cover " />
+        <img src={productImg?.path} alt={alt} className="object-cover " />
         {/* title */}
         <p className="min-w-max font-semibold text-black text-[14px]">
           {title}

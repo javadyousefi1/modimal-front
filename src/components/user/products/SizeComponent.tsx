@@ -30,11 +30,12 @@ const SizeComponent: React.FC = () => {
                   value={value}
                 >
                   <Space direction="vertical">
-                    {content.map((item) => {
+                    {content.map((item,index) => {
                       return (
                         <Radio
                           value={item.id}
                           className="min-w-max font-normal text-[16px]"
+                          key={index}
                         >
                           {item.title}
                         </Radio>
