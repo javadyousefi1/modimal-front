@@ -10,6 +10,10 @@ import { useEffect } from "react";
 import { getCurrentUserData } from "./features/auth";
 
 const App = () => {
+  const apiUrl = import.meta.env.VITE_APP_BASE_URL2342
+
+  console.log(apiUrl)
+
   const test = useSelector((state) => state);
   console.log(test);
   const dispatch = useDispatch<AppDispatch>();
