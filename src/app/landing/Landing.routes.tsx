@@ -51,19 +51,19 @@ export const landingRoutes = {
       element: <SuspenseWrapper component={Faq} />,
     },
     {
-      path: "Products",
+      path: "products",
       element: <SuspenseWrapper component={Products} />,
     },
     {
-      path: "Profile",
+      path: "profile",
       element: <SuspenseWrapper component={Profile} />,
     },
     {
-      path: "ContactUs",
+      path: "contact-us",
       element: <SuspenseWrapper component={ContactUs} />,
     },
     {
-      path: "Products/:id",
+      path: "products/:id",
       element: <SuspenseWrapper component={Product} />,
     },
     {

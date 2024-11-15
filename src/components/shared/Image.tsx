@@ -1,10 +1,15 @@
+import React from 'react';
 
-
-const Image = ({image}) => {
-    const baseUrl = import.meta.env.VITE_API_URL
-    return (
-    <img src={baseUrl}/>
-  )
+interface ImageProps {
+  image: string;
 }
 
-export default Image
+const Image: React.FC<ImageProps> = ({ image }) => {
+const baseUrl = import.meta.env.VITE_APP_BASE_URL
+
+return (
+    <img src={`${baseUrl}${image}`} alt={`Image: ${image}`} className='w-[392px] h-[498px]'/>
+  );
+};
+
+export default Image;

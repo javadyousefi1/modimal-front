@@ -9,10 +9,13 @@ import MobileBanner from "@/assets/images/productswiper3.png";
 import DesktopBanner from "@/assets/images/productswiper4.png";
 // hooks
 import useProducts from "@/components/user/products/hooks/useProducts";
+import { useNavigate } from "react-router-dom";
+import { Button } from "antd";
 
 const Products: React.FC = () => {
   const [filterData, setFilterData] = useState([]);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const navigate = useNavigate();
 
   let faqBreadcrumbs = [
     { id: 1, text: "Home", href: "/" },
@@ -20,76 +23,13 @@ const Products: React.FC = () => {
   ];
 
   // products data
-  const {data : productsData} = useProducts()
-
-  // const products = [
-  //   {
-  //     id: 1,
-  //     image: product1,
-  //     title: "chill wrap top",
-  //     off: null,
-  //     newproduct: false,
-  //     color: ["#CA2929"],
-  //     price: 160,
-  //     oldPrice: null,
-  //     desc: "Turn it up Top ",
-  //   },
-  //   {
-  //     id: 2,
-  //     image: product1,
-  //     title: "Essential T-shirt",
-  //     off: "20%",
-  //     newproduct: true,
-  //     color: ["#0C0C0C", "#7DC3EB", "#748C70"],
-  //     price: 95,
-  //     oldPrice: 120,
-  //     desc: "Turn it up T-shirt",
-  //   },
-  //   {
-  //     id: 3,
-  //     image: product1,
-  //     title: "Shirt Dress",
-  //     off: null,
-  //     newproduct: true,
-  //     color: ["#0C0C0C", "#7DC3EB", "#748C70"],
-  //     price: 245,
-  //     oldPrice: null,
-  //     desc: "Turn it up Dress",
-  //   },
-  //   {
-  //     id: 4,
-  //     image: product1,
-  //     title: "Rule zip Jacket",
-  //     off: null,
-  //     newproduct: false,
-  //     color: ["#909225", "#CA6D29"],
-  //     price: 199,
-  //     oldPrice: null,
-  //     desc: "Turn it up Jacket",
-  //   },
-  //   {
-  //     id: 5,
-  //     image: product1,
-  //     title: "New Age Linen",
-  //     off: "30%",
-  //     newproduct: false,
-  //     color: ["#0C0C0C", "#19418E", "#748C70"],
-  //     price: 180,
-  //     oldPrice: 240,
-  //     desc: "Turn it up Pants",
-  //   },
-  //   {
-  //     id: 6,
-  //     image: product1,
-  //     title: "Boss Pullover",
-  //     off: null,
-  //     newproduct: false,
-  //     color: ["#0C0C0C", "#748C70"],
-  //     price: 280,
-  //     oldPrice: 350,
-  //     desc: "Turn it up Pullover",
-  //   },
-  // ];
+  const {
+    data: productsData,
+    isLoading,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useProducts();
 
   const handleOpenModalFilter = () => {
     setIsOpenFilter(!isOpenFilter);
@@ -97,6 +37,18 @@ const Products: React.FC = () => {
 
   const handleFilter = () => {};
 
+  function handleClickProduct(id: string) {
+    navigate(`/products/${id}`);
+  }
+
+  function handleFetchMore() {
+    fetchNextPage();
+  }
+
+  if (isLoading) {
+    <div>loading ...</div>;
+  }
+  console.log(productsData);
   return (
     <div className="w-full">
       <div className="my-6 px-5">
@@ -136,7 +88,10 @@ const Products: React.FC = () => {
       </div>
       {isOpenFilter && (
         <div className="w-full h-full overflow-y-auto overflow-x-hidden pt-4 px-10 sm:px-28 fixed top-0 z-50 bg-white">
-          <div onClick={handleOpenModalFilter} className="absolute top-8 right-10 sm:right-28">
+          <div
+            onClick={handleOpenModalFilter}
+            className="absolute top-8 right-10 sm:right-28"
+          >
             <svg
               width="14"
               height="14"
@@ -150,7 +105,7 @@ const Products: React.FC = () => {
               />
             </svg>
           </div>
-          <ProductFilter handleOpenModalFilter={handleOpenModalFilter}/>
+          <ProductFilter handleOpenModalFilter={handleOpenModalFilter} />
         </div>
       )}
       {/* product */}
@@ -160,28 +115,41 @@ const Products: React.FC = () => {
           <ProductFilter filterData={filterData} handleFilter={handleFilter} />
         </div>
         <div className="md:w-2/3 xl:w-2/3 px-5">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-2 gap-x-4">
-            {productsData?.map((item, index) => (
-              <div key={index}>
-                <CartBox
-                  title={item.title}
-                  desc={item.text}
-                  price={item.price}
-                  colors={item.color}
-                  productImg={item.image}
-                  alt={item.title}
-                  newProduct={item.newproduct}
-                  oldPrice={item.offPrice}
-                />
-            
-              </div>
-            ))}
-          </div>
+          {productsData?.map((group, i) => (
+            <div
+              key={i}
+              className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-2 gap-x-4"
+            >
+              {group.data.data.map((item, index) => (
+                <div
+                  key={index}
+                  className="cursor-pointer"
+                  onClick={() => handleClickProduct(item._id)}
+                >
+                  <CartBox
+                    title={item.title}
+                    desc={item.text}
+                    price={item.price}
+                    colors={item.color}
+                    imageItem={item.image}
+                    alt={item.title}
+                    newProduct={item.newproduct}
+                    oldPrice={item.offPrice}
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
           {/* button */}
           <div className="w-full flex justify-center items-center">
-            <button className="min-w-max flex justify-center items-center py-5 px-10 h-4 border-[1px] border-primary-600 text-[14px] text-primary-600 transition ease-in-out duration-300 hover:bg-primary-600 hover:text-white">
-              Load More
-            </button>
+            <Button
+              onClick={handleFetchMore}
+              disabled={!hasNextPage || isFetchingNextPage}
+              className="min-w-max flex justify-center items-center py-5 px-10 h-4 hover:!bg-primary-600 disabled:!bg-neutral-2"
+              type="primary"
+            >
+              {isFetchingNextPage ? "Loading..." : "Load More"}
+            </Button>
           </div>
         </div>
       </div>
